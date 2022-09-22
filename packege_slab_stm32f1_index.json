@@ -9,46 +9,46 @@
         "online": "https://github.com/S-LABc/Arduino-STM32F1-Core/wiki"
       },
       "platforms": [        
-		{
+		    {
           "name": "STM32F1 Boards",
           "architecture": "stm32",
           "version": "0.1.2",
           "category": "Contributed",
-		  "url": "https://github.com/S-LABc/Arduino-STM32F1-Core/releases/download/v0.1.2/Arduino-STM32F1-Core-0.1.2.zip",
+		      "url": "https://github.com/S-LABc/Arduino-STM32F1-Core/releases/download/v0.1.2/Arduino-STM32F1-Core-0.1.2.zip",
           "archiveFileName": "Arduino-STM32F1-Core-0.1.2.zip",
           "checksum": "SHA-256:8911c3d150cb526f1f01ae3b243fbc564096327bcd745a0da11edbbebe7ace5f",
           "size": "8966652",
           "boards": [
             {"name": "Maple Mini"},
-			{"name": "Maple (Rev 3)"},
-			{"name": "Maple (RET6)"},
-			{"name": "Microduino Core STM32 to Flash"},
-			{"name": "STM Nucleo F103RB (STLink)"},
-			{"name": "Generic STM32F103C"},
-			{"name": "Generic STM32F103C6"},
-			{"name": "Generic STM32F103R"},
-			{"name": "Generic STM32F103T"},
-			{"name": "Generic STM32F103V"},
-			{"name": "Generic STM32F103Z"},
-			{"name": "HYTiny STM32F103T"},
-			{"name": "STM32VLD to FLASH"}
+			      {"name": "Maple (Rev 3)"},
+			      {"name": "Maple (RET6)"},
+			      {"name": "Microduino Core STM32 to Flash"},
+			      {"name": "STM Nucleo F103RB (STLink)"},
+			      {"name": "Generic STM32F103C"},
+			      {"name": "Generic STM32F103C6"},
+			      {"name": "Generic STM32F103R"},
+			      {"name": "Generic STM32F103T"},
+			      {"name": "Generic STM32F103V"},
+			      {"name": "Generic STM32F103Z"},
+			      {"name": "HYTiny STM32F103T"},
+			      {"name": "STM32VLD to FLASH"}
           ],
           "toolsDependencies": [
-			{
+			      {
               "packager": "STM32F1",
               "name": "arm-none-eabi-gcc",
               "version": "4.8.3-2014q1"
             },
-			{
+			      {
               "packager": "STM32F1",
               "name": "stm32-f1-tools",
               "version": "0.0.1"
             }
-		  ]
+		      ]
         }
       ],
       "tools": [
-		{
+		    {
           "name": "arm-none-eabi-gcc",
           "version": "4.8.3-2014q1",
           "systems": [
@@ -89,20 +89,41 @@
             }
           ]
         },
-		{
+		    {
           "name": "stm32-f1-tools",
           "version": "0.0.1",
           "systems": [
             {
               "host": "i686-mingw32",
-              "url": "https://github.com/S-LABc/Arduino-STM32F1-Core/releases/download/v0.1.2/stm32-f1-tools-0.0.1-windows.zip",
-              "archiveFileName": "stm32f1tools-0.0.1-windows.zip",
+              "url": "https://github.com/S-LABc/stm32-f1-tools/releases/download/v0.0.1/stm32-f1-tools-0.0.1-i686-mingw32.zip",
+              "archiveFileName": "stm32-f1-tools-0.0.1-i686-mingw32.zip",
               "checksum": "SHA-256:1b3e3a3d0f225c4fb0a8522a66c1fde4b570c5e7e06de75d29c99c7775bc783b",
               "size": "10387492"
+            },
+            {
+              "host": "x86_64-apple-darwin",
+              "url": "https://github.com/S-LABc/stm32-f1-tools/releases/download/v0.0.1/stm32-f1-tools-0.0.1-x86_64-apple-darwin.zip",
+              "archiveFileName": "stm32-f1-tools-0.0.1-x86_64-apple-darwin.zip",
+              "checksum": "SHA-256:5e3bc6430cdc39e34307f3c437d77e9cf280078262a57a89ec8222096d6564c6",
+              "size": "1123228"
+            },
+            {
+              "host": "i686-pc-linux-gnu",
+              "url": "https://github.com/S-LABc/stm32-f1-tools/releases/download/v0.0.1/stm32-f1-tools-0.0.1-i686-pc-linux-gnu.zip",
+              "archiveFileName": "stm32-f1-tools-0.0.1-i686-pc-linux-gnu.zip",
+              "checksum": "SHA-256:3b5ea55d6bcf1439a01d8cf906ca7a3d6639b994663cd6ba778b8cd73cf7d1db",
+              "size": "978216"
+            },
+            {
+              "host": "x86_64-pc-linux-gnu",
+              "url": "https://github.com/S-LABc/stm32-f1-tools/releases/download/v0.0.1/stm32-f1-tools-0.0.1-x86_64-pc-linux-gnu.zip",
+              "archiveFileName": "stm32-f1-tools-0.0.1-x86_64-pc-linux-gnu.zip",
+              "checksum": "SHA-256:9b302b7e825405b1e781f8552254e09ab7e35c90705c5ea4d4cbcf0cd8c04f2e",
+              "size": "1032987"
             }
           ]
         }
-	  ]
+	    ]
     }
   ]
 }
