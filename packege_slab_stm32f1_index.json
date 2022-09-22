@@ -14,41 +14,41 @@
           "architecture": "stm32",
           "version": "0.1.2",
           "category": "Contributed",
-		      "url": "https://github.com/S-LABc/Arduino-STM32F1-Core/releases/download/v0.1.2/Arduino-STM32F1-Core-0.1.2.zip",
+          "url": "https://github.com/S-LABc/Arduino-STM32F1-Core/releases/download/v0.1.2/Arduino-STM32F1-Core-0.1.2.zip",
           "archiveFileName": "Arduino-STM32F1-Core-0.1.2.zip",
           "checksum": "SHA-256:0375308885f0a84ee4aaa4faf42056d87b72bf0c73c34bd46e2090e15f9dcff0",
           "size": "8968757",
           "boards": [
             {"name": "Maple Mini"},
-			      {"name": "Maple (Rev 3)"},
-			      {"name": "Maple (RET6)"},
-			      {"name": "Microduino Core STM32 to Flash"},
-			      {"name": "STM Nucleo F103RB (STLink)"},
-			      {"name": "Generic STM32F103C"},
-			      {"name": "Generic STM32F103C6"},
-			      {"name": "Generic STM32F103R"},
-			      {"name": "Generic STM32F103T"},
-			      {"name": "Generic STM32F103V"},
-			      {"name": "Generic STM32F103Z"},
-			      {"name": "HYTiny STM32F103T"},
-			      {"name": "STM32VLD to FLASH"}
+            {"name": "Maple (Rev 3)"},
+            {"name": "Maple (RET6)"},
+            {"name": "Microduino Core STM32 to Flash"},
+            {"name": "STM Nucleo F103RB (STLink)"},
+            {"name": "Generic STM32F103C"},
+            {"name": "Generic STM32F103C6"},
+            {"name": "Generic STM32F103R"},
+            {"name": "Generic STM32F103T"},
+            {"name": "Generic STM32F103V"},
+            {"name": "Generic STM32F103Z"},
+            {"name": "HYTiny STM32F103T"},
+            {"name": "STM32VLD to FLASH"}
           ],
           "toolsDependencies": [
-			      {
+            {
               "packager": "STM32F1",
               "name": "arm-none-eabi-gcc",
               "version": "4.8.3-2014q1"
             },
-			      {
+            {
               "packager": "STM32F1",
               "name": "stm32-f1-tools",
               "version": "0.0.1"
             }
-		      ]
+          ]
         }
       ],
       "tools": [
-		    {
+        {
           "name": "arm-none-eabi-gcc",
           "version": "4.8.3-2014q1",
           "systems": [
@@ -89,7 +89,7 @@
             }
           ]
         },
-		    {
+        {
           "name": "stm32-f1-tools",
           "version": "0.0.1",
           "systems": [
@@ -123,7 +123,7 @@
             }
           ]
         }
-	    ]
+      ]
     }
   ]
 }
