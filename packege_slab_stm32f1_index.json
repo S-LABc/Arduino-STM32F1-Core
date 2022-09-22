@@ -9,7 +9,7 @@
         "online": "https://github.com/S-LABc/Arduino-STM32F1-Core/wiki"
       },
       "platforms": [        
-		    {
+        {
           "name": "STM32F1 Boards",
           "architecture": "stm32",
           "version": "0.1.2",
