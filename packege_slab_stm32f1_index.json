@@ -97,8 +97,8 @@
               "host": "i686-mingw32",
               "url": "https://github.com/S-LABc/stm32-f1-tools/releases/download/v0.0.1/stm32-f1-tools-0.0.1-i686-mingw32.zip",
               "archiveFileName": "stm32-f1-tools-0.0.1-i686-mingw32.zip",
-              "checksum": "SHA-256:1b3e3a3d0f225c4fb0a8522a66c1fde4b570c5e7e06de75d29c99c7775bc783b",
-              "size": "10387492"
+              "checksum": "SHA-256:7653563df70121a7eb92c327fd0c8d3496e3ef3a1dfece4d318143ce3271dce8",
+              "size": "32776390"
             },
             {
               "host": "x86_64-apple-darwin",
