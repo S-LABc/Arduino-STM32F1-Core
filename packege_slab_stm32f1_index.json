@@ -16,8 +16,8 @@
           "category": "Contributed",
 		      "url": "https://github.com/S-LABc/Arduino-STM32F1-Core/releases/download/v0.1.2/Arduino-STM32F1-Core-0.1.2.zip",
           "archiveFileName": "Arduino-STM32F1-Core-0.1.2.zip",
-          "checksum": "SHA-256:8911c3d150cb526f1f01ae3b243fbc564096327bcd745a0da11edbbebe7ace5f",
-          "size": "8966652",
+          "checksum": "SHA-256:0375308885f0a84ee4aaa4faf42056d87b72bf0c73c34bd46e2090e15f9dcff0",
+          "size": "8968757",
           "boards": [
             {"name": "Maple Mini"},
 			      {"name": "Maple (Rev 3)"},
