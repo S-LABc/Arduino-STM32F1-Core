@@ -1,10 +1,11 @@
-# STM32 Boards
+# STM32F1 Boards
 
 menu.device_variant=Variant
 menu.bootloader_version=Bootloader version
 menu.upload_method=Upload method
 menu.cpu_speed=CPU Speed(MHz)
 menu.opt=Optimize
+
 
 ##############################################################
 mapleMini.name=Maple Mini
@@ -134,6 +135,7 @@ maple.menu.opt.ogstd=Debug (-g)
 maple.menu.opt.ogstd.build.flags.optimize=-Og
 maple.menu.opt.ogstd.build.flags.ldspecs=
 
+
 ##############################################################
 mapleRET6.name=Maple (RET6)
 
@@ -167,7 +169,6 @@ mapleRET6.menu.cpu_speed.speed_48mhz.build.f_cpu=48000000L
 mapleRET6.menu.cpu_speed.speed_128mhz=Overclocked 128Mhz NO USB SERIAL. MANUAL RESET NEEDED TO UPLOAD
 mapleRET6.menu.cpu_speed.speed_128mhz.build.f_cpu=128000000L
 
-
 #-- Optimizations
 mapleRET6.menu.opt.osstd=Smallest (default)
 #mapleRET6.menu.opt.oslto=Smallest Code with LTO
@@ -195,8 +196,8 @@ mapleRET6.menu.opt.ogstd=Debug (-g)
 mapleRET6.menu.opt.ogstd.build.flags.optimize=-Og
 mapleRET6.menu.opt.ogstd.build.flags.ldspecs=
 
-##############################################################
 
+##############################################################
 microduino32_flash.name=Microduino Core STM32 to Flash
 
 microduino32_flash.vid.0=0x1EAF
@@ -263,6 +264,7 @@ microduino32_flash.menu.opt.ogstd=Debug (-g)
 microduino32_flash.menu.opt.ogstd.build.flags.optimize=-Og
 microduino32_flash.menu.opt.ogstd.build.flags.ldspecs=
 
+
 ##############################################################
 nucleo_f103rb.name=STM Nucleo F103RB (STLink)
 
@@ -327,6 +329,7 @@ nucleo_f103rb.menu.opt.ogstd=Debug (-g)
 nucleo_f103rb.menu.opt.ogstd.build.flags.optimize=-Og
 nucleo_f103rb.menu.opt.ogstd.build.flags.ldspecs=
 
+
 ###################### Generic STM32F103C ########################################
 
 genericSTM32F103C.name=Generic STM32F103C series
@@ -358,8 +361,7 @@ genericSTM32F103C.menu.device_variant.STM32F103CB.build.ldscript=ld/jtag.ld
 genericSTM32F103C.menu.device_variant.STM32F103CB.upload.maximum_size=131072
 genericSTM32F103C.menu.device_variant.STM32F103CB.upload.maximum_data_size=20480
 
-#---------------------------- UPLOAD METHODS ---------------------------
-
+#-- Opload Metods
 genericSTM32F103C.menu.upload_method.DFUUploadMethod=STM32duino bootloader
 genericSTM32F103C.menu.upload_method.DFUUploadMethod.upload.protocol=maple_dfu
 genericSTM32F103C.menu.upload_method.DFUUploadMethod.upload.tool=maple_upload
@@ -378,11 +380,6 @@ genericSTM32F103C.menu.upload_method.STLinkMethod=STLink
 genericSTM32F103C.menu.upload_method.STLinkMethod.upload.protocol=STLink
 genericSTM32F103C.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
 genericSTM32F103C.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
-
-genericSTM32F103C.menu.upload_method.BMPMethod=BMP (Black Magic Probe)
-genericSTM32F103C.menu.upload_method.BMPMethod.upload.protocol=gdb_bmp
-genericSTM32F103C.menu.upload_method.BMPMethod.upload.tool=bmp_upload
-genericSTM32F103C.menu.upload_method.BMPMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG
 
 genericSTM32F103C.menu.upload_method.jlinkMethod=JLink
 genericSTM32F103C.menu.upload_method.jlinkMethod.upload.protocol=jlink
@@ -474,11 +471,6 @@ genericSTM32F103C6.menu.upload_method.STLinkMethod=STLink
 genericSTM32F103C6.menu.upload_method.STLinkMethod.upload.protocol=STLink
 genericSTM32F103C6.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
 genericSTM32F103C6.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
-
-genericSTM32F103C6.menu.upload_method.BMPMethod=BMP (Black Magic Probe)
-genericSTM32F103C6.menu.upload_method.BMPMethod.upload.protocol=gdb_bmp
-genericSTM32F103C6.menu.upload_method.BMPMethod.upload.tool=bmp_upload
-genericSTM32F103C6.menu.upload_method.BMPMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG
 
 genericSTM32F103C6.menu.upload_method.jlinkMethod=JLink
 genericSTM32F103C6.menu.upload_method.jlinkMethod.upload.protocol=jlink
@@ -594,11 +586,6 @@ genericSTM32F103R.menu.upload_method.STLinkMethod.upload.protocol=STLink
 genericSTM32F103R.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
 genericSTM32F103R.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
 
-genericSTM32F103R.menu.upload_method.BMPMethod=BMP (Black Magic Probe)
-genericSTM32F103R.menu.upload_method.BMPMethod.upload.protocol=gdb_bmp
-genericSTM32F103R.menu.upload_method.BMPMethod.upload.tool=bmp_upload
-genericSTM32F103R.menu.upload_method.BMPMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG
-
 #-- CPU Clock frequency
 genericSTM32F103R.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
 genericSTM32F103R.menu.cpu_speed.speed_72mhz.build.f_cpu=72000000L
@@ -686,11 +673,6 @@ genericSTM32F103T.menu.upload_method.STLinkMethod=STLink
 genericSTM32F103T.menu.upload_method.STLinkMethod.upload.protocol=STLink
 genericSTM32F103T.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
 genericSTM32F103T.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
-
-genericSTM32F103T.menu.upload_method.BMPMethod=BMP (Black Magic Probe)
-genericSTM32F103T.menu.upload_method.BMPMethod.upload.protocol=gdb_bmp
-genericSTM32F103T.menu.upload_method.BMPMethod.upload.tool=bmp_upload
-genericSTM32F103T.menu.upload_method.BMPMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG
 
 #-- CPU Clock frequency
 genericSTM32F103T.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
@@ -796,11 +778,6 @@ genericSTM32F103V.menu.upload_method.STLinkMethod.upload.protocol=STLink
 genericSTM32F103V.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
 genericSTM32F103V.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
 
-genericSTM32F103V.menu.upload_method.BMPMethod=BMP (Black Magic Probe)
-genericSTM32F103V.menu.upload_method.BMPMethod.upload.protocol=gdb_bmp
-genericSTM32F103V.menu.upload_method.BMPMethod.upload.tool=bmp_upload
-genericSTM32F103V.menu.upload_method.BMPMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG
-
 #-- CPU Clock frequency
 genericSTM32F103V.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
 genericSTM32F103V.menu.cpu_speed.speed_72mhz.build.f_cpu=72000000L
@@ -892,11 +869,6 @@ genericSTM32F103Z.menu.upload_method.STLinkMethod.upload.protocol=STLink
 genericSTM32F103Z.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
 genericSTM32F103Z.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
 
-genericSTM32F103Z.menu.upload_method.BMPMethod=BMP (Black Magic Probe)
-genericSTM32F103Z.menu.upload_method.BMPMethod.upload.protocol=gdb_bmp
-genericSTM32F103Z.menu.upload_method.BMPMethod.upload.tool=bmp_upload
-genericSTM32F103Z.menu.upload_method.BMPMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG
-
 #-- CPU Clock frequency
 genericSTM32F103Z.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
 genericSTM32F103Z.menu.cpu_speed.speed_72mhz.build.f_cpu=72000000L
@@ -973,12 +945,6 @@ hytiny-stm32f103t.menu.upload_method.STLinkMethod=STLink
 hytiny-stm32f103t.menu.upload_method.STLinkMethod.upload.protocol=STLink
 hytiny-stm32f103t.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
 hytiny-stm32f103t.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
-
-hytiny-stm32f103t.menu.upload_method.BMPMethod=BMP (Black Magic Probe)
-hytiny-stm32f103t.menu.upload_method.BMPMethod.upload.protocol=gdb_bmp
-hytiny-stm32f103t.menu.upload_method.BMPMethod.upload.tool=bmp_upload
-hytiny-stm32f103t.menu.upload_method.BMPMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG
-
 
 hytiny-stm32f103t.menu.upload_method.jlinkMethod=JLink
 hytiny-stm32f103t.menu.upload_method.jlinkMethod.upload.protocol=jlink
