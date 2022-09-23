@@ -164,7 +164,7 @@ tools.jlink_upload.upload.params.verbose=-d
 tools.jlink_upload.upload.params.quiet=n
 tools.jlink_upload.upload.pattern="{path}/{cmd}" "{build.path}/{build.project_name}.bin"
 
-# HID upload 2.0
+# HID upload 2.2.2
 tools.hid_upload.cmd=hid_upload
 tools.hid_upload.cmd.windows=hid-flash.exe
 tools.hid_upload.cmd.macosx=hid_flash
