@@ -17,7 +17,7 @@
 MEMORY
 {
   ram (rwx) : ORIGIN = 0x20000000, LENGTH = 10K
-  rom (rx)  : ORIGIN = 0x08001000, LENGTH = 24K
+  rom (rx)  : ORIGIN = 0x08000800, LENGTH = 26K
 }
 
 /* Provide memory region aliases for common.inc */
