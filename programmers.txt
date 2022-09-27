@@ -1,0 +1,7 @@
+st-link.name=ST-Link
+st-link.program.tool=stlink
+st-link.program.tool.default=stlink
+
+j-link.name=J-Link
+j-link.program.tool=jlink
+j-link.program.tool.default=jlink
