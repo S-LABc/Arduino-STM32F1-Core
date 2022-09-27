@@ -10,6 +10,8 @@ menu.opt=Optimize
 
 mapleMini.name=Maple Mini
 
+mapleMini.hide=
+
 mapleMini.vid.0=0x1EAF
 mapleMini.pid.0=0x0004
 
@@ -54,6 +56,8 @@ mapleMini.menu.opt.ogstd.build.flags.ldspecs=
 ###################### Maple (Rev 3) ######################
 
 maple.name=Maple (Rev 3)
+
+maplei.hide=
 
 maple.vid.0=0x1EAF
 maple.pid.0=0x0004
@@ -104,6 +108,8 @@ maple.menu.opt.ogstd.build.flags.ldspecs=
 
 mapleRET6.name=Maple (RET6)
 
+mapleRET6.hide=
+
 mapleRET6.vid.0=0x1EAF
 mapleRET6.pid.0=0x0004
 
@@ -152,6 +158,8 @@ mapleRET6.menu.opt.ogstd.build.flags.ldspecs=
 ###################### Microduino Core STM32 to Flash ######################
 
 microduino32_flash.name=Microduino Core STM32 to Flash
+
+microduino32_flash.hide=
 
 microduino32_flash.vid.0=0x1EAF
 microduino32_flash.pid.0=0x0004
@@ -206,6 +214,8 @@ microduino32_flash.menu.opt.ogstd.build.flags.ldspecs=
 
 nucleo_f103rb.name=STM Nucleo F103RB (STLink)
 
+nucleo_f103rb.hide=
+
 nucleo_f103rb.upload.tool=stlink_upload
 nucleo_f103rb.upload.maximum_size=108000
 nucleo_f103rb.upload.maximum_data_size=17000
@@ -256,6 +266,8 @@ nucleo_f103rb.menu.opt.ogstd.build.flags.ldspecs=
 ###################### HYTiny STM32F103TB ######################
 
 hytiny-stm32f103t.name=HYTiny STM32F103TB
+
+hytiny-stm32f103t.hide=
 
 hytiny-stm32f103t.vid.0=0x1EAF
 hytiny-stm32f103t.pid.0=0x0004
@@ -321,6 +333,8 @@ hytiny-stm32f103t.menu.opt.ogstd.build.flags.ldspecs=
 ###################### STM32VLD to FLASH ######################
 
 STM32VLD.name=STM32VLD to FLASH
+
+STM32VLD-stm32f103t.hide=
 
 STM32VLD.build.vect=VECT_TAB_ADDR=0x8000000
 STM32VLD.build.core=maple
