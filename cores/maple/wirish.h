@@ -56,6 +56,7 @@
 #include <io.h>
 #include <bit_constants.h>
 #include <pwm.h>
+#include <itoa.h>
 
 #ifdef __cplusplus
 #include <ext_interrupts.h>
