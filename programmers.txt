@@ -1,7 +1,9 @@
 st-link.name=ST-Link
+st-link.protocol=STLINK
 st-link.program.tool=stlink
 st-link.program.tool.default=stlink
 
-j-link.name=J-Link
-j-link.program.tool=jlink
-j-link.program.tool.default=jlink
+com-port.name=Serial
+com-port.protocol=UART
+com-port.program.tool=uart
+com-port.program.tool.default=uart
