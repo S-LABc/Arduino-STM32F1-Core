@@ -57,7 +57,7 @@ mapleMini.menu.opt.ogstd.build.flags.ldspecs=
 
 maple.name=Maple (Rev 3)
 
-maplei.hide=
+maple.hide=
 
 maple.vid.0=0x1EAF
 maple.pid.0=0x0004
@@ -216,7 +216,7 @@ nucleo_f103rb.name=STM Nucleo F103RB (STLink)
 
 nucleo_f103rb.hide=
 
-nucleo_f103rb.upload.tool=stlink_upload
+nucleo_f103rb.upload.tool=stlink
 nucleo_f103rb.upload.maximum_size=108000
 nucleo_f103rb.upload.maximum_data_size=17000
 nucleo_f103rb.upload.use_1200bps_touch=false
@@ -286,19 +286,14 @@ hytiny-stm32f103t.upload.maximum_data_size=20480
 
 #-- Upload Metods
 hytiny-stm32f103t.menu.upload_method.serialMethod=Serial
-hytiny-stm32f103t.menu.upload_method.serialMethod.upload.protocol=maple_serial
-hytiny-stm32f103t.menu.upload_method.serialMethod.upload.tool=serial_upload
+hytiny-stm32f103t.menu.upload_method.serialMethod.upload.tool=uart
 hytiny-stm32f103t.menu.upload_method.serialMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 
+hytiny-stm32f103t.menu.upload_method.serialMethod.upload.protocol=UART
 
-hytiny-stm32f103t.menu.upload_method.STLinkMethod=STLink
-hytiny-stm32f103t.menu.upload_method.STLinkMethod.upload.protocol=STLink
-hytiny-stm32f103t.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+hytiny-stm32f103t.menu.upload_method.STLinkMethod=ST-Link
+hytiny-stm32f103t.menu.upload_method.STLinkMethod.upload.tool=stlink
 hytiny-stm32f103t.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
-
-hytiny-stm32f103t.menu.upload_method.jlinkMethod=JLink
-hytiny-stm32f103t.menu.upload_method.jlinkMethod.upload.protocol=jlink
-hytiny-stm32f103t.menu.upload_method.jlinkMethod.upload.tool=jlink_upload
-hytiny-stm32f103t.menu.upload_method.jlinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER 
+hytiny-stm32f103t.menu.upload_method.STLinkMethod.upload.protocol=STLINK
 
 #-- CPU Clock Frequency
 hytiny-stm32f103t.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
@@ -334,7 +329,7 @@ hytiny-stm32f103t.menu.opt.ogstd.build.flags.ldspecs=
 
 STM32VLD.name=STM32VLD to FLASH
 
-STM32VLD-stm32f103t.hide=
+STM32VLD.hide=
 
 STM32VLD.build.vect=VECT_TAB_ADDR=0x8000000
 STM32VLD.build.core=maple
@@ -350,9 +345,9 @@ STM32VLD.upload.file_type=bin
 STM32VLD.upload.params.quiet=no
 
 #-- Upload Metods
-STM32VLD.menu.upload_method.STLinkMethod=STLink
-STM32VLD.menu.upload_method.STLinkMethod.upload.protocol=STLink
-STM32VLD.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+STM32VLD.menu.upload_method.STLinkMethod=ST-Link
+STM32VLD.menu.upload_method.STLinkMethod.upload.tool=stlink
+STM32VLD.menu.upload_method.STLinkMethod.upload.protocol=STLINK
 STM32VLD.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG  
 
 #-- CPU Clock Frequency
@@ -422,21 +417,20 @@ genericSTM32F103C.menu.device_variant.STM32F103CB.upload.maximum_data_size=20480
 #-- Upload Metods
 genericSTM32F103C.menu.upload_method.serialMethod=Serial
 genericSTM32F103C.menu.upload_method.serialMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG
-genericSTM32F103C.menu.upload_method.serialMethod.upload.tool=serial_upload
+genericSTM32F103C.menu.upload_method.serialMethod.upload.tool=uart
+genericSTM32F103C.menu.upload_method.serialMethod.upload.protocol=UART
 
-genericSTM32F103C.menu.upload_method.STLinkMethod=STLink
+genericSTM32F103C.menu.upload_method.STLinkMethod=ST-Link
 genericSTM32F103C.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
-genericSTM32F103C.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
-
-genericSTM32F103C.menu.upload_method.jlinkMethod=JLink
-genericSTM32F103C.menu.upload_method.jlinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER 
-genericSTM32F103C.menu.upload_method.jlinkMethod.upload.tool=jlink_upload
+genericSTM32F103C.menu.upload_method.STLinkMethod.upload.tool=stlink
+genericSTM32F103C.menu.upload_method.STLinkMethod.upload.protocol=STLINK
 
 genericSTM32F103C.menu.upload_method.HIDUploadMethod=HID Bootloader 2.2.2
 genericSTM32F103C.menu.upload_method.HIDUploadMethod.build.upload_flags=-DSERIAL_USB -DGENERIC_BOOTLOADER
 genericSTM32F103C.menu.upload_method.HIDUploadMethod.build.vect=VECT_TAB_ADDR=0x8000800
 genericSTM32F103C.menu.upload_method.HIDUploadMethod.build.ldscript=ld/hid_bootloader.ld
-genericSTM32F103C.menu.upload_method.HIDUploadMethod.upload.tool=hid_upload
+genericSTM32F103C.menu.upload_method.HIDUploadMethod.upload.tool=hid
+genericSTM32F103C.menu.upload_method.HIDUploadMethod.upload.protocol=HID
 
 #-- CPU Clock Frequency
 genericSTM32F103C.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
@@ -468,9 +462,9 @@ genericSTM32F103C.menu.opt.ogstd.build.flags.optimize=-Og
 genericSTM32F103C.menu.opt.ogstd.build.flags.ldspecs=
 
 
-###################### Generic STM32F103R series ######################
+###################### Generic STM32F103R Series ######################
 
-genericSTM32F103R.name=Generic STM32F103R series
+genericSTM32F103R.name=Generic STM32F103R Series
 
 genericSTM32F103R.vid.0=0x1EAF
 genericSTM32F103R.pid.0=0x0004
@@ -516,13 +510,13 @@ genericSTM32F103R.menu.device_variant.STM32F103RE.upload.maximum_data_size=65536
 #-- Upload Metods
 genericSTM32F103R.menu.upload_method.serialMethod=Serial
 genericSTM32F103R.menu.upload_method.serialMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1
-genericSTM32F103R.menu.upload_method.serialMethod.upload.protocol=maple_serial
-genericSTM32F103R.menu.upload_method.serialMethod.upload.tool=serial_upload
+genericSTM32F103R.menu.upload_method.serialMethod.upload.tool=uart
+genericSTM32F103R.menu.upload_method.serialMethod.upload.protocol=UART
 
-genericSTM32F103R.menu.upload_method.STLinkMethod=STLink
+genericSTM32F103R.menu.upload_method.STLinkMethod=ST-Link
 genericSTM32F103R.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
-genericSTM32F103R.menu.upload_method.STLinkMethod.upload.protocol=STLink
-genericSTM32F103R.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+genericSTM32F103R.menu.upload_method.STLinkMethod.upload.tool=stlink
+genericSTM32F103R.menu.upload_method.STLinkMethod.upload.protocol=STLINK
 
 #-- CPU Clock Frequency
 genericSTM32F103R.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
@@ -554,9 +548,9 @@ genericSTM32F103R.menu.opt.ogstd.build.flags.optimize=-Og
 genericSTM32F103R.menu.opt.ogstd.build.flags.ldspecs=
 
 
-###################### Generic STM32F103T series ######################
+###################### Generic STM32F103T Series ######################
 
-genericSTM32F103T.name=Generic STM32F103T series
+genericSTM32F103T.name=Generic STM32F103T Series
 
 genericSTM32F103T.vid.0=0x1EAF
 genericSTM32F103T.pid.0=0x0004
@@ -585,13 +579,13 @@ genericSTM32F103T.menu.device_variant.STM32F103TB.upload.maximum_data_size=20480
 #-- Upload Metods
 genericSTM32F103T.menu.upload_method.serialMethod=Serial
 genericSTM32F103T.menu.upload_method.serialMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1
-genericSTM32F103T.menu.upload_method.serialMethod.upload.protocol=maple_serial
-genericSTM32F103T.menu.upload_method.serialMethod.upload.tool=serial_upload
+genericSTM32F103T.menu.upload_method.serialMethod.upload.tool=uart
+genericSTM32F103T.menu.upload_method.serialMethod.upload.protocol=UART
 
-genericSTM32F103T.menu.upload_method.STLinkMethod=STLink
+genericSTM32F103T.menu.upload_method.STLinkMethod=ST-Link
 genericSTM32F103T.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
-genericSTM32F103T.menu.upload_method.STLinkMethod.upload.protocol=STLink
-genericSTM32F103T.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+genericSTM32F103T.menu.upload_method.STLinkMethod.upload.tool=stlink
+genericSTM32F103T.menu.upload_method.STLinkMethod.upload.protocol=STLINK
 
 #-- CPU Clock Frequency
 genericSTM32F103T.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
@@ -669,13 +663,13 @@ genericSTM32F103V.menu.device_variant.STM32F103VE.upload.maximum_data_size=65536
 #-- Upload Metods
 genericSTM32F103V.menu.upload_method.serialMethod=Serial
 genericSTM32F103V.menu.upload_method.serialMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1
-genericSTM32F103V.menu.upload_method.serialMethod.upload.protocol=maple_serial
-genericSTM32F103V.menu.upload_method.serialMethod.upload.tool=serial_upload
+genericSTM32F103V.menu.upload_method.serialMethod.upload.tool=uart
+genericSTM32F103V.menu.upload_method.serialMethod.upload.protocol=UART
 
-genericSTM32F103V.menu.upload_method.STLinkMethod=STLink
+genericSTM32F103V.menu.upload_method.STLinkMethod=ST-Link
 genericSTM32F103V.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
-genericSTM32F103V.menu.upload_method.STLinkMethod.upload.protocol=STLink
-genericSTM32F103V.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+genericSTM32F103V.menu.upload_method.STLinkMethod.upload.tool=stlink
+genericSTM32F103V.menu.upload_method.STLinkMethod.upload.protocol=STLINK
 
 #-- CPU Clock Frequency
 genericSTM32F103V.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
@@ -707,9 +701,9 @@ genericSTM32F103V.menu.opt.ogstd.build.flags.optimize=-Og
 genericSTM32F103V.menu.opt.ogstd.build.flags.ldspecs=
 
 
-###################### Generic STM32F103Z series ######################
+###################### Generic STM32F103Z Series ######################
 
-genericSTM32F103Z.name=Generic STM32F103Z series
+genericSTM32F103Z.name=Generic STM32F103Z Series
 
 genericSTM32F103Z.vid.0=0x1EAF
 genericSTM32F103Z.pid.0=0x0004
@@ -744,13 +738,13 @@ genericSTM32F103Z.menu.device_variant.STM32F103ZE.upload.maximum_data_size=65536
 #-- Upload Metods
 genericSTM32F103Z.menu.upload_method.serialMethod=Serial
 genericSTM32F103Z.menu.upload_method.serialMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1
-genericSTM32F103Z.menu.upload_method.serialMethod.upload.protocol=maple_serial
-genericSTM32F103Z.menu.upload_method.serialMethod.upload.tool=serial_upload
+genericSTM32F103Z.menu.upload_method.serialMethod.upload.tool=uart
+genericSTM32F103Z.menu.upload_method.serialMethod.upload.protocol=UART
 
-genericSTM32F103Z.menu.upload_method.STLinkMethod=STLink
+genericSTM32F103Z.menu.upload_method.STLinkMethod=ST-Link
 genericSTM32F103Z.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
-genericSTM32F103Z.menu.upload_method.STLinkMethod.upload.protocol=STLink
-genericSTM32F103Z.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+genericSTM32F103Z.menu.upload_method.STLinkMethod.upload.tool=stlink
+genericSTM32F103Z.menu.upload_method.STLinkMethod.upload.protocol=STLINK
 
 #-- CPU Clock Frequency
 genericSTM32F103Z.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
