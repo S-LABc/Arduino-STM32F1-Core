@@ -118,3 +118,11 @@ PG12	LITERAL1
 PG13	LITERAL1
 PG14	LITERAL1
 PG15	LITERAL1
+
+digitalPinToPort	KEYWORD2
+digitalPinToBitMask	KEYWORD2
+portOutputRegister	KEYWORD2
+portInputRegister	KEYWORD2
+portSetRegister	KEYWORD2
+portClearRegister	KEYWORD2
+portConfigRegister	KEYWORD2
