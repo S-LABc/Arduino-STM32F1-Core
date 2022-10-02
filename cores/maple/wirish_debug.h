@@ -25,7 +25,7 @@
  *****************************************************************************/
 
 /**
- * @file wirish/include/wirish/wirish_debug.h
+ * @file core/maple/wirish_debug.h
  * @brief High level debug port configuration
  */
 
@@ -45,13 +45,24 @@
 void disableDebugPorts(void);
 
 /**
+ * @brief Enable the JTAG and Serial Wire (SW) debug ports (JTAG-DP disabled, SW-DP enabled).
+ *
+ * @see disableSWD()
+ */
+void enableSWD(void);
+
+/**
+ * @brief Enable the JTAG and Serial Wire (SW) debug ports (NJTRST disabled).
+ *
+ * @see enableSWDJTAGnoNJRST()
+ */
+void enableSWDJTAGnoNJRST(void);
+
+/**
  * @brief Enable the JTAG and Serial Wire (SW) debug ports.
  *
- * After you call this function, the JTAG and SW debug pins will no
- * longer be usable as GPIOs.
- *
- * @see disableDebugPorts()
+ * @see enableFullSWDJTAG()
  */
-void enableDebugPorts(void);
+void enableFullSWDJTAG(void);
 
 #endif
