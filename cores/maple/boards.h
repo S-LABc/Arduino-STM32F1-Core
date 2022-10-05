@@ -73,14 +73,6 @@ extern const uint8 boardPWMPins[];
 extern const uint8 boardADCPins[];
 
 /**
- * @brief Pins which are connected to external hardware.
- *
- * For example, on Maple boards, it always at least includes
- * PB1 for the LED.  Its length is BOARD_NR_USED_PINS.
- */
-extern const uint8 boardUsedPins[];
-
-/**
  * @brief Generic board initialization function.
  *
  * This function is called before main().  It ensures that the clocks
