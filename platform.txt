@@ -153,4 +153,4 @@ tools.hid.path.linux64={runtime.tools.stm32-f1-tools.path}/linux64
 
 tools.hid.upload.params.verbose=-d
 tools.hid.upload.params.quiet=n
-tools.hid.upload.pattern="{path}/{cmd}" "{build.path}/{build.project_name}.bin" {serial.port.file}
+tools.hid.upload.pattern="{path}/{cmd}" "{build.path}/{build.project_name}.bin"

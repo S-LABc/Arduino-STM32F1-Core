@@ -425,7 +425,7 @@ genericSTM32F103C.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MA
 genericSTM32F103C.menu.upload_method.STLinkMethod.upload.tool=stlink
 genericSTM32F103C.menu.upload_method.STLinkMethod.upload.protocol=STLINK
 
-genericSTM32F103C.menu.upload_method.HIDUploadMethod=HID Bootloader 2.2.2
+genericSTM32F103C.menu.upload_method.HIDUploadMethod=HID Bootloader v3
 genericSTM32F103C.menu.upload_method.HIDUploadMethod.build.upload_flags=-DSERIAL_USB -DGENERIC_BOOTLOADER
 genericSTM32F103C.menu.upload_method.HIDUploadMethod.build.vect=VECT_TAB_ADDR=0x8000800
 genericSTM32F103C.menu.upload_method.HIDUploadMethod.build.ldscript=ld/hid_bootloader.ld
