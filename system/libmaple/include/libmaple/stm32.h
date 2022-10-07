@@ -25,7 +25,6 @@
  *****************************************************************************/
 
 /**
- * @file libmaple/include/libmaple/stm32.h
  * @brief STM32 chip header
  *
  * This header supplies various chip-specific values for the current
@@ -50,12 +49,6 @@ extern "C" {
 
 /** STM32F1 series. */
 #define STM32_SERIES_F1 0
-/** STM32F2 series. */
-#define STM32_SERIES_F2 1
-/** STM32L1 series. */
-#define STM32_SERIES_L1 2
-/** STM32F4 series. */
-#define STM32_SERIES_F4 3
 
 /* The series header is responsible for defining:
  *
