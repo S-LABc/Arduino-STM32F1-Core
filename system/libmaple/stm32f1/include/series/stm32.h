@@ -25,7 +25,6 @@
  *****************************************************************************/
 
 /**
- * @file libmaple/stm32f1/include/series/stm32.h
  * @brief STM32F1 chip- and series-specific definitions.
  */
  /*
@@ -267,7 +266,7 @@ extern "C" {
  */
 
 #if !defined(STM32_F1_LINE)
-#error "Bad STM32F1 configuration. Check STM32F1 <series/stm32.h> header."
+#error "Bad STM32F1 configuration. Check STM32F1 <system/libmaple/stm32f1/include/series/stm32.h> header."
 #endif
 
 /*
