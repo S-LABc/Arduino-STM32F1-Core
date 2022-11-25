@@ -27,7 +27,6 @@
 /**
  *  @brief Wirish timer class.
  */
-
 #ifndef _WIRISH_HARDWARETIMER_H_
 #define _WIRISH_HARDWARETIMER_H_
 
@@ -35,17 +34,17 @@
 
 #include <libmaple/timer.h>
 
-/** Timer mode. */
+// Timer mode.
 typedef timer_mode TimerMode;
 
-//CARLOS
-//defines for the ENCODER mode.
-
+// CARLOS
+// defines for the ENCODER mode.
 
 /**
  * @brief Interface to one of the 16-bit timer peripherals.
  */
-class HardwareTimer {
+class HardwareTimer
+{
 private:
     timer_dev *dev;
 
@@ -56,7 +55,12 @@ public:
      */
     HardwareTimer(uint8 timerNum);
 
-    void init(void) { timer_init(this->dev); timer_pause(this->dev); }
+    void init(void)
+    {
+        timer_init(this->dev);
+        timer_pause(this->dev);
+    }
+
     /**
      * @brief Stop the counter, without affecting its configuration.
      *
@@ -212,62 +216,69 @@ public:
      */
     void refresh(void);
 
-	// SYFRE
+    // SYFRE
     /**
-     * @brief Set the Master mode TRGO signal 
-     *        These bits allow to select the information to be sent in master mode to slave timers for 
-     *        synchronization (TRGO). 
-	 *	mode:
-	 * 		TIMER_CR2_MMS_RESET
-	 * 		TIMER_CR2_MMS_ENABLE
-	 * 		TIMER_CR2_MMS_UPDATE
-	 * 		TIMER_CR2_MMS_COMPARE_PULSE
-	 * 		TIMER_CR2_MMS_COMPARE_OC1REF
-	 * 		TIMER_CR2_MMS_COMPARE_OC2REF
-	 * 		TIMER_CR2_MMS_COMPARE_OC3REF
-	 * 		TIMER_CR2_MMS_COMPARE_OC4REF
+     * @brief Set the Master mode TRGO signal
+     *        These bits allow to select the information to be sent in master mode to slave timers for
+     *        synchronization (TRGO).
+     *	mode:
+     * 		TIMER_CR2_MMS_RESET
+     * 		TIMER_CR2_MMS_ENABLE
+     * 		TIMER_CR2_MMS_UPDATE
+     * 		TIMER_CR2_MMS_COMPARE_PULSE
+     * 		TIMER_CR2_MMS_COMPARE_OC1REF
+     * 		TIMER_CR2_MMS_COMPARE_OC2REF
+     * 		TIMER_CR2_MMS_COMPARE_OC3REF
+     * 		TIMER_CR2_MMS_COMPARE_OC4REF
      */
-	void setMasterModeTrGo(uint32_t mode);
+    void setMasterModeTrGo(uint32_t mode);
 
-    void setSlaveFlags(uint32 flags) {
+    void setSlaveFlags(uint32 flags)
+    {
         ((this->dev)->regs).gen->SMCR = flags;
     }
 
-//CARLOS.
-/*
-    added these functions to make sense for the encoder mode. 
-*/
-//direction of movement. (to be better described). 
-    uint8 getDirection() {
+    // CARLOS.
+    /*
+        added these functions to make sense for the encoder mode.
+    */
+    // direction of movement. (to be better described).
+    uint8 getDirection()
+    {
         return get_direction(this->dev);
     }
 
-//set if the encoder will count edges on one, which or both channels. 
-    void setEdgeCounting(uint32 counting) {
+    // set if the encoder will count edges on one, which or both channels.
+    void setEdgeCounting(uint32 counting)
+    {
         setSlaveFlags(counting);
     }
 
-//set the polarity of counting... not sure how interesting this is.. 
-    void setPolarity(uint8 channel, uint8 pol) {
+    // set the polarity of counting... not sure how interesting this is..
+    void setPolarity(uint8 channel, uint8 pol)
+    {
         timer_cc_set_pol(this->dev, channel, pol);
     }
 
-    void setInputCaptureMode(uint8 channel, timer_ic_input_select input) {
+    void setInputCaptureMode(uint8 channel, timer_ic_input_select input)
+    {
         input_capture_mode(this->dev, channel, input);
     }
 
-    uint8_t getInputCaptureFlag(uint8 channel) {
-        return ( timer_get_status(this->dev) >> channel ) & 0x1;
+    uint8_t getInputCaptureFlag(uint8 channel)
+    {
+        return (timer_get_status(this->dev) >> channel) & 0x1;
     }
 
-    uint8_t getInputCaptureFlagOverflow(uint8 channel) {
-		uint8 ret = ( timer_get_status(this->dev) >> (8+channel) ) & 0x1;
-		if ( ret ) timer_reset_status_bit(this->dev, (8+channel)); // clear flag
+    uint8_t getInputCaptureFlagOverflow(uint8 channel)
+    {
+        uint8 ret = (timer_get_status(this->dev) >> (8 + channel)) & 0x1;
+        if (ret)
+            timer_reset_status_bit(this->dev, (8 + channel)); // clear flag
         return ret;
     }
 
-//add the filtering definition for the input channel.
-    
+    // add the filtering definition for the input channel.
 
     /**
      * @brief Enable/disable DMA request for the input channel.
@@ -279,127 +290,7 @@ public:
      * @brief Get a pointer to the underlying libmaple timer_dev for
      *        this HardwareTimer instance.
      */
-    timer_dev* c_dev(void) { return this->dev; }
-
-/* -- The rest of this file is deprecated. --------------------------------- */
-
-    /** @brief Deprecated; use setMode(channel, mode) instead. */
-    void setChannelMode(int channel, timer_mode mode) {
-        setMode(channel, mode);
-    }
-
-    /** @brief Deprecated; use setMode(TIMER_CH1, mode) instead. */
-    void setChannel1Mode(timer_mode mode) { setMode(TIMER_CH1, mode); }
-
-    /** @brief Deprecated; use setMode(TIMER_CH2, mode) instead. */
-    void setChannel2Mode(timer_mode mode) { setMode(TIMER_CH2, mode); }
-
-    /** @brief Deprecated; use setMode(TIMER_CH3, mode) instead. */
-    void setChannel3Mode(timer_mode mode) { setMode(TIMER_CH3, mode); }
-
-    /** @brief Deprecated; use setMode(TIMER_CH4, mode) instead. */
-    void setChannel4Mode(timer_mode mode) { setMode(TIMER_CH4, mode); }
-
-    /** @brief Deprecated; use return getCompare(TIMER_CH1) instead. */
-    uint16 getCompare1() { return getCompare(TIMER_CH1); }
-
-    /** @brief Deprecated; use return getCompare(TIMER_CH2) instead. */
-    uint16 getCompare2() { return getCompare(TIMER_CH2); }
-
-    /** @brief Deprecated; use return getCompare(TIMER_CH3) instead. */
-    uint16 getCompare3() { return getCompare(TIMER_CH3); }
-
-    /** @brief Deprecated; use return getCompare(TIMER_CH4) instead. */
-    uint16 getCompare4() { return getCompare(TIMER_CH4); }
-
-    /** @brief Deprecated; use setCompare(TIMER_CH1, compare) instead. */
-    void setCompare1(uint16 compare) { setCompare(TIMER_CH1, compare); }
-
-    /** @brief Deprecated; use setCompare(TIMER_CH2, compare) instead. */
-    void setCompare2(uint16 compare) { setCompare(TIMER_CH2, compare); }
-
-    /** @brief Deprecated; use setCompare(TIMER_CH3, compare) instead. */
-    void setCompare3(uint16 compare) { setCompare(TIMER_CH3, compare); }
-
-    /** @brief Deprecated; use setCompare(TIMER_CH4, compare) instead. */
-    void setCompare4(uint16 compare) { setCompare(TIMER_CH4, compare); }
-
-    /** @brief Deprecated; use attachInterrupt(TIMER_CH1, handler) instead. */
-    void attachCompare1Interrupt(voidFuncPtr handler) {
-        attachInterrupt(TIMER_CH1, handler);
-    }
-
-    /** @brief Deprecated; use attachInterrupt(TIMER_CH2, handler) instead. */
-    void attachCompare2Interrupt(voidFuncPtr handler) {
-        attachInterrupt(TIMER_CH2, handler);
-    }
-
-    /** @brief Deprecated; use attachInterrupt(TIMER_CH3, handler) instead. */
-    void attachCompare3Interrupt(voidFuncPtr handler) {
-        attachInterrupt(TIMER_CH3, handler);
-    }
-
-    /** @brief Deprecated; use attachInterrupt(TIMER_CH4, handler) instead. */
-    void attachCompare4Interrupt(voidFuncPtr handler) {
-        attachInterrupt(TIMER_CH4, handler);
-    }
-
-    /** @brief Deprecated; use detachInterrupt(TIMER_CH1) instead. */
-    void detachCompare1Interrupt(void) { detachInterrupt(TIMER_CH1); }
-
-    /** @brief Deprecated; use detachInterrupt(TIMER_CH2) instead. */
-    void detachCompare2Interrupt(void) { detachInterrupt(TIMER_CH2); }
-
-    /** @brief Deprecated; use detachInterrupt(TIMER_CH3) instead. */
-    void detachCompare3Interrupt(void) { detachInterrupt(TIMER_CH3); }
-
-    /** @brief Deprecated; use detachInterrupt(TIMER_CH4) instead. */
-    void detachCompare4Interrupt(void) { detachInterrupt(TIMER_CH4); }
-
-    /** @brief Deprecated; use refresh() instead. */
-    void generateUpdate(void) { refresh(); }
+    timer_dev *c_dev(void) { return this->dev; }
 };
-
-/** @brief Deprecated; use TIMER_OUTPUT_COMPARE instead. */
-#define TIMER_OUTPUTCOMPARE TIMER_OUTPUT_COMPARE
-
-/**
- * @brief Deprecated.
- *
- * Pre-instantiated timer.
- */
-extern HardwareTimer Timer1;
-/**
- * @brief Deprecated.
- *
- * Pre-instantiated timer.
- */
-extern HardwareTimer Timer2;
-/**
- * @brief Deprecated.
- *
- * Pre-instantiated timer.
- */
-extern HardwareTimer Timer3;
-/**
- * @brief Deprecated.
- *
- * Pre-instantiated timer.
- */
-extern HardwareTimer Timer4;
-#if (STM32_MCU_SERIES == STM32_SERIES_F1) && defined(STM32_HIGH_DENSITY)
-/**
- * @brief Deprecated.
- *
- * Pre-instantiated timer.
- */
-extern HardwareTimer Timer5;
-/**
- * @brief Deprecated.
- *
- * Pre-instantiated timer.
- */
-extern HardwareTimer Timer8;
-#endif
 
 #endif

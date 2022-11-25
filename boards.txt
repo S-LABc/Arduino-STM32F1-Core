@@ -1,779 +1,994 @@
 # STM32F1 Boards
 
 menu.device_variant=Variant
-menu.upload_method=Upload method
-menu.cpu_speed=CPU Speed(MHz)
-menu.opt=Optimize
+menu.usb_serial=USB Serial
+menu.upload_method=Upload Method
+menu.debug_ports=Debug Ports
+menu.cpu_speed=CPU Speed
+menu.opt=Optimization
 
 
 ###################### Maple Mini ######################
 
 mapleMini.name=Maple Mini
 
-mapleMini.hide=
-
 mapleMini.vid.0=0x1EAF
 mapleMini.pid.0=0x0004
 
-mapleMini.build.board=MAPLE_MINI
 mapleMini.build.core=maple
-mapleMini.build.cpu_flags=-DMCU_STM32F103CB -DSERIAL_USB
-mapleMini.build.variant=maple_mini
+mapleMini.build.variant=Generic_F103/c8_cb
+mapleMini.build.board=MAPLE_MINI
+mapleMini.build.vect=VECT_TAB_ADDR=0x8000800
+mapleMini.build.cpu_flags=-DMCU_STM32F103CB
+mapleMini.build.upload_flags=-DSERIAL_USB -DBOARD_USE_HID_BL_22 -DLED_BUILTIN=PB1 -DBOARD_USB_DISC_DEV=GPIOB -DBOARD_USB_DISC_BIT=9 -DBOARD_USB_BIT_VAL=0
+mapleMini.build.ldscript=hid_bootloader_cb.ld
 
 mapleMini.upload.use_1200bps_touch=false
 mapleMini.upload.file_type=bin
-
-#-- CPU Clock Frequency
-mapleMini.menu.cpu_speed.speed_72mhz=72MHz (Normal)
-mapleMini.menu.cpu_speed.speed_72mhz.build.f_cpu=72000000L
-
-mapleMini.menu.cpu_speed.speed_48mhz=48MHz (Slow - with USB)
-mapleMini.menu.cpu_speed.speed_48mhz.build.f_cpu=48000000L
-
-mapleMini.menu.cpu_speed.speed_128mhz=Overclocked 128MHz NO USB SERIAL. MANUAL RESET NEEDED TO UPLOAD
-mapleMini.menu.cpu_speed.speed_128mhz.build.f_cpu=128000000L
-
-#-- Optimizations
-mapleMini.menu.opt.osstd=Smallest (default)
-
-mapleMini.menu.opt.o1std=Fast (-O1)
-mapleMini.menu.opt.o1std.build.flags.optimize=-O1
-mapleMini.menu.opt.o1std.build.flags.ldspecs=
-
-mapleMini.menu.opt.o2std=Faster (-O2)
-mapleMini.menu.opt.o2std.build.flags.optimize=-O2
-mapleMini.menu.opt.o2std.build.flags.ldspecs=
-
-mapleMini.menu.opt.o3std=Fastest (-O3)
-mapleMini.menu.opt.o3std.build.flags.optimize=-O3
-mapleMini.menu.opt.o3std.build.flags.ldspecs=
-
-mapleMini.menu.opt.ogstd=Debug (-g)
-mapleMini.menu.opt.ogstd.build.flags.optimize=-Og
-mapleMini.menu.opt.ogstd.build.flags.ldspecs=
-
-
-###################### Maple (Rev 3) ######################
-
-maple.name=Maple (Rev 3)
-
-maple.hide=
-
-maple.vid.0=0x1EAF
-maple.pid.0=0x0004
-
-maple.upload.maximum_size=108000
-maple.upload.maximum_data_size=17000
-maple.upload.use_1200bps_touch=false
-maple.upload.file_type=bin
-
-maple.build.board=MAPLE_REV3
-maple.build.core=maple
-maple.build.cpu_flags=-DMCU_STM32F103RB -DSERIAL_USB
-maple.build.ldscript=ld/flash.ld
-maple.build.variant=maple
-maple.build.vect=VECT_TAB_ADDR=0x8005000
-
-#-- CPU Clock Frequency
-maple.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
-maple.menu.cpu_speed.speed_72mhz.build.f_cpu=72000000L
-
-maple.menu.cpu_speed.speed_48mhz=48Mhz (Slow - with USB)
-maple.menu.cpu_speed.speed_48mhz.build.f_cpu=48000000L
-
-maple.menu.cpu_speed.speed_128mhz=Overclocked 128Mhz NO USB SERIAL. MANUAL RESET NEEDED TO UPLOAD
-maple.menu.cpu_speed.speed_128mhz.build.f_cpu=128000000L
-
-#-- Optimizations
-maple.menu.opt.osstd=Smallest (default)
-
-maple.menu.opt.o1std=Fast (-O1)
-maple.menu.opt.o1std.build.flags.optimize=-O1
-maple.menu.opt.o1std.build.flags.ldspecs=
-
-maple.menu.opt.o2std=Faster (-O2)
-maple.menu.opt.o2std.build.flags.optimize=-O2
-maple.menu.opt.o2std.build.flags.ldspecs=
-
-maple.menu.opt.o3std=Fastest (-O3)
-maple.menu.opt.o3std.build.flags.optimize=-O3
-maple.menu.opt.o3std.build.flags.ldspecs=
-
-maple.menu.opt.ogstd=Debug (-g)
-maple.menu.opt.ogstd.build.flags.optimize=-Og
-maple.menu.opt.ogstd.build.flags.ldspecs=
-
-
-###################### Maple (RET6) ######################
-
-mapleRET6.name=Maple (RET6)
-
-mapleRET6.hide=
-
-mapleRET6.vid.0=0x1EAF
-mapleRET6.pid.0=0x0004
-
-mapleRET6.build.board=MAPLE_RET6
-mapleRET6.build.core=maple
-mapleRET6.build.cpu_flags=-DMCU_STM32F103RE -DSERIAL_USB
-mapleRET6.build.ldscript=ld/stm32f103re-bootloader.ld
-mapleRET6.build.variant=maple_ret6
-mapleRET6.build.vect=VECT_TAB_ADDR=0x8005000
-
-mapleRET6.upload.maximum_size=262144
-mapleRET6.upload.maximum_data_size=49152
-mapleRET6.upload.use_1200bps_touch=false
-mapleRET6.upload.file_type=bin
-
-#-- CPU Clock Frequency
-mapleRET6.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
-mapleRET6.menu.cpu_speed.speed_72mhz.build.f_cpu=72000000L
-
-mapleRET6.menu.cpu_speed.speed_48mhz=48Mhz (Slow - with USB)
-mapleRET6.menu.cpu_speed.speed_48mhz.build.f_cpu=48000000L
-
-mapleRET6.menu.cpu_speed.speed_128mhz=Overclocked 128Mhz NO USB SERIAL. MANUAL RESET NEEDED TO UPLOAD
-mapleRET6.menu.cpu_speed.speed_128mhz.build.f_cpu=128000000L
-
-#-- Optimizations
-mapleRET6.menu.opt.osstd=Smallest (default)
-
-mapleRET6.menu.opt.o1std=Fast (-O1)
-mapleRET6.menu.opt.o1std.build.flags.optimize=-O1
-mapleRET6.menu.opt.o1std.build.flags.ldspecs=
-
-mapleRET6.menu.opt.o2std=Faster (-O2)
-mapleRET6.menu.opt.o2std.build.flags.optimize=-O2
-mapleRET6.menu.opt.o2std.build.flags.ldspecs=
-
-mapleRET6.menu.opt.o3std=Fastest (-O3)
-mapleRET6.menu.opt.o3std.build.flags.optimize=-O3
-mapleRET6.menu.opt.o3std.build.flags.ldspecs=
-
-mapleRET6.menu.opt.ogstd=Debug (-g)
-mapleRET6.menu.opt.ogstd.build.flags.optimize=-Og
-mapleRET6.menu.opt.ogstd.build.flags.ldspecs=
-
-
-###################### Microduino Core STM32 to Flash ######################
-
-microduino32_flash.name=Microduino Core STM32 to Flash
-
-microduino32_flash.hide=
-
-microduino32_flash.vid.0=0x1EAF
-microduino32_flash.pid.0=0x0004
-
-microduino32_flash.upload.maximum_size=108000
-microduino32_flash.upload.maximum_data_size=17000
-microduino32_flash.upload.use_1200bps_touch=false
-microduino32_flash.upload.file_type=bin
-
-microduino32_flash.build.mcu=cortex-m3
-microduino32_flash.build.f_cpu=72000000L
-microduino32_flash.build.board=MICRODUINO_CORE_STM32
-microduino32_flash.build.core=maple
-microduino32_flash.build.extra_flags=-DMCU_STM32F103CB -mthumb -DSERIAL_USB -march=armv7-m -D__STM32F1__
-microduino32_flash.build.ldscript=ld/flash.ld
-microduino32_flash.build.variant=microduino
-microduino32_flash.build.variant_system_lib=libmaple.a
-microduino32_flash.build.vect=VECT_TAB_ADDR=0x8005000
-microduino32_flash.build.density=STM32_MEDIUM_DENSITY
-
-#-- CPU Clock Frequency
-microduino32_flash.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
-microduino32_flash.menu.cpu_speed.speed_72mhz.build.f_cpu=72000000L
-
-microduino32_flash.menu.cpu_speed.speed_48mhz=48Mhz (Slow - with USB)
-microduino32_flash.menu.cpu_speed.speed_48mhz.build.f_cpu=48000000L
-
-microduino32_flash.menu.cpu_speed.speed_128mhz=Overclocked 128Mhz NO USB SERIAL. MANUAL RESET NEEDED TO UPLOAD
-microduino32_flash.menu.cpu_speed.speed_128mhz.build.f_cpu=128000000L
-
-#-- Optimizations
-microduino32_flash.menu.opt.osstd=Smallest (default)
-
-microduino32_flash.menu.opt.o1std=Fast (-O1)
-microduino32_flash.menu.opt.o1std.build.flags.optimize=-O1
-microduino32_flash.menu.opt.o1std.build.flags.ldspecs=
-
-microduino32_flash.menu.opt.o2std=Faster (-O2)
-microduino32_flash.menu.opt.o2std.build.flags.optimize=-O2
-microduino32_flash.menu.opt.o2std.build.flags.ldspecs=
-
-microduino32_flash.menu.opt.o3std=Fastest (-O3)
-microduino32_flash.menu.opt.o3std.build.flags.optimize=-O3
-microduino32_flash.menu.opt.o3std.build.flags.ldspecs=
-
-microduino32_flash.menu.opt.ogstd=Debug (-g)
-microduino32_flash.menu.opt.ogstd.build.flags.optimize=-Og
-microduino32_flash.menu.opt.ogstd.build.flags.ldspecs=
-
-
-###################### STM Nucleo F103RB (STLink) ######################
-
-nucleo_f103rb.name=STM Nucleo F103RB (STLink)
-
-nucleo_f103rb.hide=
-
-nucleo_f103rb.upload.tool=stlink
-nucleo_f103rb.upload.maximum_size=108000
-nucleo_f103rb.upload.maximum_data_size=17000
-nucleo_f103rb.upload.use_1200bps_touch=false
-nucleo_f103rb.upload.file_type=bin
-nucleo_f103rb.upload.params.quiet=no
-
-nucleo_f103rb.build.mcu=cortex-m3
-nucleo_f103rb.build.board=STM_NUCLEO_F103RB
-nucleo_f103rb.build.core=maple
-nucleo_f103rb.build.ldscript=ld/jtag.ld
-nucleo_f103rb.build.variant=nucleo_f103rb
-nucleo_f103rb.build.variant_system_lib=libmaple.a
-nucleo_f103rb.build.density=STM32_MEDIUM_DENSITY
-nucleo_f103rb.build.gcc_ver=gcc-arm-none-eabi-4.8.3-2014q1
-nucleo_f103rb.build.vect=VECT_TAB_ADDR=0x8000000
-
-## internal oscillator (HSI), running at 64 MHz
-nucleo_f103rb.menu.device_variant.NucleoF103_HSI=Nucleo F103 @ 64 MHz
-nucleo_f103rb.menu.device_variant.NucleoF103_HSI.build.f_cpu=64000000L
-nucleo_f103rb.menu.device_variant.NucleoF103_HSI.build.extra_flags=-DMCU_STM32F103RB -mthumb -march=armv7-m -D__STM32F1__
-
-## external crystal (HSE), running at 72 MHz
-nucleo_f103rb.menu.device_variant.NucleoF103_HSE=Nucleo F103 @ 72 MHz w/ crystal
-nucleo_f103rb.menu.device_variant.NucleoF103_HSE.build.f_cpu=72000000L
-nucleo_f103rb.menu.device_variant.NucleoF103_HSE.build.extra_flags=-DNUCLEO_HSE_CRYSTAL -DMCU_STM32F103RB -mthumb -march=armv7-m -D__STM32F1__
-
-#-- Optimizations
-nucleo_f103rb.menu.opt.osstd=Smallest (default)
-
-nucleo_f103rb.menu.opt.o1std=Fast (-O1)
-nucleo_f103rb.menu.opt.o1std.build.flags.optimize=-O1
-nucleo_f103rb.menu.opt.o1std.build.flags.ldspecs=
-
-nucleo_f103rb.menu.opt.o2std=Faster (-O2)
-nucleo_f103rb.menu.opt.o2std.build.flags.optimize=-O2
-nucleo_f103rb.menu.opt.o2std.build.flags.ldspecs=
-
-nucleo_f103rb.menu.opt.o3std=Fastest (-O3)
-nucleo_f103rb.menu.opt.o3std.build.flags.optimize=-O3
-nucleo_f103rb.menu.opt.o3std.build.flags.ldspecs=
-
-nucleo_f103rb.menu.opt.ogstd=Debug (-g)
-nucleo_f103rb.menu.opt.ogstd.build.flags.optimize=-Og
-nucleo_f103rb.menu.opt.ogstd.build.flags.ldspecs=
-
-
-###################### HYTiny STM32F103TB ######################
-
-hytiny-stm32f103t.name=HYTiny STM32F103TB
-
-hytiny-stm32f103t.hide=
-
-hytiny-stm32f103t.vid.0=0x1EAF
-hytiny-stm32f103t.pid.0=0x0004
-
-hytiny-stm32f103t.build.variant=hytiny_stm32f103t
-hytiny-stm32f103t.build.vect=VECT_TAB_ADDR=0x8000000
-hytiny-stm32f103t.build.core=maple
-hytiny-stm32f103t.build.board=HYTINY_STM32F103T
-
-hytiny-stm32f103t.upload.use_1200bps_touch=false
-hytiny-stm32f103t.upload.file_type=bin
-hytiny-stm32f103t.build.cpu_flags=-DMCU_STM32F103CB
-hytiny-stm32f103t.build.ldscript=ld/jtag.ld
-hytiny-stm32f103t.upload.maximum_size=131072
-hytiny-stm32f103t.upload.maximum_data_size=20480
-
-#-- Upload Metods
-hytiny-stm32f103t.menu.upload_method.serialMethod=Serial
-hytiny-stm32f103t.menu.upload_method.serialMethod.upload.tool=uart
-hytiny-stm32f103t.menu.upload_method.serialMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 
-hytiny-stm32f103t.menu.upload_method.serialMethod.upload.protocol=UART
-
-hytiny-stm32f103t.menu.upload_method.STLinkMethod=ST-Link
-hytiny-stm32f103t.menu.upload_method.STLinkMethod.upload.tool=stlink
-hytiny-stm32f103t.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
-hytiny-stm32f103t.menu.upload_method.STLinkMethod.upload.protocol=STLINK
-
-#-- CPU Clock Frequency
-hytiny-stm32f103t.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
-hytiny-stm32f103t.menu.cpu_speed.speed_72mhz.build.f_cpu=72000000L
-
-hytiny-stm32f103t.menu.cpu_speed.speed_48mhz=48Mhz (Slow - with USB)
-hytiny-stm32f103t.menu.cpu_speed.speed_48mhz.build.f_cpu=48000000L
-
-hytiny-stm32f103t.menu.cpu_speed.speed_128mhz=Overclocked 128Mhz NO USB SERIAL. MANUAL RESET NEEDED TO UPLOAD
-hytiny-stm32f103t.menu.cpu_speed.speed_128mhz.build.f_cpu=128000000L
-
-#-- Optimizations
-hytiny-stm32f103t.menu.opt.osstd=Smallest (default)
-
-hytiny-stm32f103t.menu.opt.o1std=Fast (-O1)
-hytiny-stm32f103t.menu.opt.o1std.build.flags.optimize=-O1
-hytiny-stm32f103t.menu.opt.o1std.build.flags.ldspecs=
-
-hytiny-stm32f103t.menu.opt.o2std=Faster (-O2)
-hytiny-stm32f103t.menu.opt.o2std.build.flags.optimize=-O2
-hytiny-stm32f103t.menu.opt.o2std.build.flags.ldspecs=
-
-hytiny-stm32f103t.menu.opt.o3std=Fastest (-O3)
-hytiny-stm32f103t.menu.opt.o3std.build.flags.optimize=-O3
-hytiny-stm32f103t.menu.opt.o3std.build.flags.ldspecs=
-
-hytiny-stm32f103t.menu.opt.ogstd=Debug (-g)
-hytiny-stm32f103t.menu.opt.ogstd.build.flags.optimize=-Og
-hytiny-stm32f103t.menu.opt.ogstd.build.flags.ldspecs=
-
-
-###################### STM32VLD to FLASH ######################
-
-STM32VLD.name=STM32VLD to FLASH
-
-STM32VLD.hide=
-
-STM32VLD.build.vect=VECT_TAB_ADDR=0x8000000
-STM32VLD.build.core=maple
-STM32VLD.build.board=STM32VLD
-STM32VLD.build.variant=STM32VLD
-STM32VLD.build.ldscript=ld/jtag.ld
-STM32VLD.build.family=cortex-m3
-STM32VLD.build.f_cpu=24000000L
-STM32VLD.build.cpu_flags=-DMCU_STM32F100RB
-
-STM32VLD.upload.use_1200bps_touch=false
-STM32VLD.upload.file_type=bin
-STM32VLD.upload.params.quiet=no
-
-#-- Upload Metods
-STM32VLD.menu.upload_method.STLinkMethod=ST-Link
-STM32VLD.menu.upload_method.STLinkMethod.upload.tool=stlink
-STM32VLD.menu.upload_method.STLinkMethod.upload.protocol=STLINK
-STM32VLD.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG  
-
-#-- CPU Clock Frequency
-STM32VLD.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
-STM32VLD.menu.cpu_speed.speed_72mhz.build.f_cpu=72000000L
-
-STM32VLD.menu.cpu_speed.speed_48mhz=48Mhz (Slow - with USB)
-STM32VLD.menu.cpu_speed.speed_48mhz.build.f_cpu=48000000L
-
-STM32VLD.menu.cpu_speed.speed_128mhz=Overclocked 128Mhz NO USB SERIAL. MANUAL RESET NEEDED TO UPLOAD
-STM32VLD.menu.cpu_speed.speed_128mhz.build.f_cpu=128000000L
-
-#-- Optimizations
-STM32VLD.menu.opt.osstd=Smallest (default)
-
-STM32VLD.menu.opt.o1std=Fast (-O1)
-STM32VLD.menu.opt.o1std.build.flags.optimize=-O1
-STM32VLD.menu.opt.o1std.build.flags.ldspecs=
-
-STM32VLD.menu.opt.o2std=Faster (-O2)
-STM32VLD.menu.opt.o2std.build.flags.optimize=-O2
-STM32VLD.menu.opt.o2std.build.flags.ldspecs=
-
-STM32VLD.menu.opt.o3std=Fastest (-O3)
-STM32VLD.menu.opt.o3std.build.flags.optimize=-O3
-STM32VLD.menu.opt.o3std.build.flags.ldspecs=
-
-STM32VLD.menu.opt.ogstd=Debug (-g)
-STM32VLD.menu.opt.ogstd.build.flags.optimize=-Og
-STM32VLD.menu.opt.ogstd.build.flags.ldspecs=
-
-
-###################### Generic STM32F103C Series ######################
-
-genericSTM32F103C.name=Generic STM32F103C Series
-
-genericSTM32F103C.vid.0=0x1EAF
-genericSTM32F103C.pid.0=0x0004
-
-genericSTM32F103C.build.variant=generic_stm32f103c
-genericSTM32F103C.build.vect=VECT_TAB_ADDR=0x8000000
-genericSTM32F103C.build.core=maple
-genericSTM32F103C.build.board=GENERIC_STM32F103C
-
-genericSTM32F103C.upload.use_1200bps_touch=false
-genericSTM32F103C.upload.file_type=bin
-
-#-- Variants
-genericSTM32F103C.menu.device_variant.STM32F103C6=STM32F103C6 (10k RAM, 28k Flash)
-genericSTM32F103C.menu.device_variant.STM32F103C6.build.cpu_flags=-DMCU_STM32F103C6
-genericSTM32F103C.menu.device_variant.STM32F103C6.build.ldscript=ld/jtag_c6.ld
-genericSTM32F103C.menu.device_variant.STM32F103C6.upload.maximum_size=32768
-genericSTM32F103C.menu.device_variant.STM32F103C6.upload.maximum_data_size=10240
-
-genericSTM32F103C.menu.device_variant.STM32F103C8=STM32F103C8 (20k RAM, 64k Flash)
-genericSTM32F103C.menu.device_variant.STM32F103C8.build.cpu_flags=-DMCU_STM32F103C8
-genericSTM32F103C.menu.device_variant.STM32F103C8.build.ldscript=ld/jtag_c8.ld
-genericSTM32F103C.menu.device_variant.STM32F103C8.upload.maximum_size=65536
-genericSTM32F103C.menu.device_variant.STM32F103C8.upload.maximum_data_size=20480
-
-genericSTM32F103C.menu.device_variant.STM32F103CB=STM32F103CB (20k RAM, 128k Flash)
-genericSTM32F103C.menu.device_variant.STM32F103CB.build.cpu_flags=-DMCU_STM32F103CB
-genericSTM32F103C.menu.device_variant.STM32F103CB.build.ldscript=ld/jtag.ld
-genericSTM32F103C.menu.device_variant.STM32F103CB.upload.maximum_size=131072
-genericSTM32F103C.menu.device_variant.STM32F103CB.upload.maximum_data_size=20480
-
-#-- Upload Metods
-genericSTM32F103C.menu.upload_method.serialMethod=Serial
-genericSTM32F103C.menu.upload_method.serialMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG
-genericSTM32F103C.menu.upload_method.serialMethod.upload.tool=uart
-genericSTM32F103C.menu.upload_method.serialMethod.upload.protocol=UART
-
-genericSTM32F103C.menu.upload_method.STLinkMethod=ST-Link
-genericSTM32F103C.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
-genericSTM32F103C.menu.upload_method.STLinkMethod.upload.tool=stlink
-genericSTM32F103C.menu.upload_method.STLinkMethod.upload.protocol=STLINK
-
-genericSTM32F103C.menu.upload_method.HIDUploadMethod=HID Bootloader v3
-genericSTM32F103C.menu.upload_method.HIDUploadMethod.build.upload_flags=-DSERIAL_USB -DGENERIC_BOOTLOADER
-genericSTM32F103C.menu.upload_method.HIDUploadMethod.build.vect=VECT_TAB_ADDR=0x8000800
-genericSTM32F103C.menu.upload_method.HIDUploadMethod.build.ldscript=ld/hid_bootloader.ld
-genericSTM32F103C.menu.upload_method.HIDUploadMethod.upload.tool=hid
-genericSTM32F103C.menu.upload_method.HIDUploadMethod.upload.protocol=HID
-
-#-- CPU Clock Frequency
-genericSTM32F103C.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
-genericSTM32F103C.menu.cpu_speed.speed_72mhz.build.f_cpu=72000000L
-
-genericSTM32F103C.menu.cpu_speed.speed_48mhz=48Mhz (Slow - with USB)
-genericSTM32F103C.menu.cpu_speed.speed_48mhz.build.f_cpu=48000000L
-
-genericSTM32F103C.menu.cpu_speed.speed_128mhz=Overclocked 128Mhz NO USB SERIAL. MANUAL RESET NEEDED TO UPLOAD
-genericSTM32F103C.menu.cpu_speed.speed_128mhz.build.f_cpu=128000000L
-
-#-- Optimizations
-genericSTM32F103C.menu.opt.osstd=Smallest (default)
-
-genericSTM32F103C.menu.opt.o1std=Fast (-O1)
-genericSTM32F103C.menu.opt.o1std.build.flags.optimize=-O1
-genericSTM32F103C.menu.opt.o1std.build.flags.ldspecs=
-
-genericSTM32F103C.menu.opt.o2std=Faster (-O2)
-genericSTM32F103C.menu.opt.o2std.build.flags.optimize=-O2
-genericSTM32F103C.menu.opt.o2std.build.flags.ldspecs=
-
-genericSTM32F103C.menu.opt.o3std=Fastest (-O3)
-genericSTM32F103C.menu.opt.o3std.build.flags.optimize=-O3
-genericSTM32F103C.menu.opt.o3std.build.flags.ldspecs=
-
-genericSTM32F103C.menu.opt.ogstd=Debug (-g)
-genericSTM32F103C.menu.opt.ogstd.build.flags.optimize=-Og
-genericSTM32F103C.menu.opt.ogstd.build.flags.ldspecs=
-
-
-###################### Generic STM32F103R Series ######################
-
-genericSTM32F103R.name=Generic STM32F103R Series
-
-genericSTM32F103R.vid.0=0x1EAF
-genericSTM32F103R.pid.0=0x0004
-
-genericSTM32F103R.build.vect=VECT_TAB_ADDR=0x8000000
-genericSTM32F103R.build.core=maple
-genericSTM32F103R.build.board=GENERIC_STM32F103R
-
-genericSTM32F103R.upload.use_1200bps_touch=false
-genericSTM32F103R.upload.file_type=bin
-
-#-- Variants
-genericSTM32F103R.menu.device_variant.STM32F103R8=STM32F103R8 (20k RAM. 64k Flash)
-genericSTM32F103R.menu.device_variant.STM32F103R8.build.variant=generic_stm32f103r8
-genericSTM32F103R.menu.device_variant.STM32F103R8.build.cpu_flags=-DMCU_STM32F103R8
-genericSTM32F103R.menu.device_variant.STM32F103R8.build.ldscript=ld/stm32f103r8.ld
-genericSTM32F103R.menu.device_variant.STM32F103R8.upload.maximum_size=65536
-genericSTM32F103R.menu.device_variant.STM32F103R8.upload.maximum_data_size=20480
-
-genericSTM32F103R.menu.device_variant.STM32F103RB=STM32F103RB (20k RAM. 128k Flash)
-genericSTM32F103R.menu.device_variant.STM32F103RB.build.variant=generic_stm32f103r8
-genericSTM32F103R.menu.device_variant.STM32F103RB.build.cpu_flags=-DMCU_STM32F103RB
-genericSTM32F103R.menu.device_variant.STM32F103RB.build.ldscript=ld/stm32f103rb.ld
-genericSTM32F103R.menu.device_variant.STM32F103RB.upload.maximum_size=131072
-genericSTM32F103R.menu.device_variant.STM32F103RB.upload.maximum_data_size=20480
-
-genericSTM32F103R.menu.device_variant.STM32F103RC=STM32F103RC (48k RAM. 256k Flash)
-genericSTM32F103R.menu.device_variant.STM32F103RC.build.variant=generic_stm32f103r
-genericSTM32F103R.menu.device_variant.STM32F103RC.build.cpu_flags=-DMCU_STM32F103RC
-genericSTM32F103R.menu.device_variant.STM32F103RC.build.ldscript=ld/stm32f103rc.ld
-genericSTM32F103R.menu.device_variant.STM32F103RC.upload.maximum_size=262144
-genericSTM32F103R.menu.device_variant.STM32F103RC.upload.maximum_data_size=49152
-genericSTM32F103R.menu.device_variant.STM32F103RC.upload.ram.maximum_size=49152
-genericSTM32F103R.menu.device_variant.STM32F103RC.upload.flash.maximum_size=262144
-
-genericSTM32F103R.menu.device_variant.STM32F103RE=STM32F103RE (64k RAM. 512k Flash)
-genericSTM32F103R.menu.device_variant.STM32F103RE.build.variant=generic_stm32f103r
-genericSTM32F103R.menu.device_variant.STM32F103RE.build.cpu_flags=-DMCU_STM32F103RE
-genericSTM32F103R.menu.device_variant.STM32F103RE.build.ldscript=ld/stm32f103re.ld
-genericSTM32F103R.menu.device_variant.STM32F103RE.upload.maximum_size=524288
-genericSTM32F103R.menu.device_variant.STM32F103RE.upload.maximum_data_size=65536
-
-#-- Upload Metods
-genericSTM32F103R.menu.upload_method.serialMethod=Serial
-genericSTM32F103R.menu.upload_method.serialMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1
-genericSTM32F103R.menu.upload_method.serialMethod.upload.tool=uart
-genericSTM32F103R.menu.upload_method.serialMethod.upload.protocol=UART
-
-genericSTM32F103R.menu.upload_method.STLinkMethod=ST-Link
-genericSTM32F103R.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
-genericSTM32F103R.menu.upload_method.STLinkMethod.upload.tool=stlink
-genericSTM32F103R.menu.upload_method.STLinkMethod.upload.protocol=STLINK
-
-#-- CPU Clock Frequency
-genericSTM32F103R.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
-genericSTM32F103R.menu.cpu_speed.speed_72mhz.build.f_cpu=72000000L
-
-genericSTM32F103R.menu.cpu_speed.speed_48mhz=48Mhz (Slow - with USB)
-genericSTM32F103R.menu.cpu_speed.speed_48mhz.build.f_cpu=48000000L
-
-genericSTM32F103R.menu.cpu_speed.speed_128mhz=Overclocked 128Mhz NO USB SERIAL. MANUAL RESET NEEDED TO UPLOAD
-genericSTM32F103R.menu.cpu_speed.speed_128mhz.build.f_cpu=128000000L
-
-#-- Optimizations
-genericSTM32F103R.menu.opt.osstd=Smallest (default)
-
-genericSTM32F103R.menu.opt.o1std=Fast (-O1)
-genericSTM32F103R.menu.opt.o1std.build.flags.optimize=-O1
-genericSTM32F103R.menu.opt.o1std.build.flags.ldspecs=
-
-genericSTM32F103R.menu.opt.o2std=Faster (-O2)
-genericSTM32F103R.menu.opt.o2std.build.flags.optimize=-O2
-genericSTM32F103R.menu.opt.o2std.build.flags.ldspecs=
-
-genericSTM32F103R.menu.opt.o3std=Fastest (-O3)
-genericSTM32F103R.menu.opt.o3std.build.flags.optimize=-O3
-genericSTM32F103R.menu.opt.o3std.build.flags.ldspecs=
-
-genericSTM32F103R.menu.opt.ogstd=Debug (-g)
-genericSTM32F103R.menu.opt.ogstd.build.flags.optimize=-Og
-genericSTM32F103R.menu.opt.ogstd.build.flags.ldspecs=
-
-
-###################### Generic STM32F103T Series ######################
-
-genericSTM32F103T.name=Generic STM32F103T Series
-
-genericSTM32F103T.vid.0=0x1EAF
-genericSTM32F103T.pid.0=0x0004
-
-genericSTM32F103T.build.variant=generic_stm32f103t
-genericSTM32F103T.build.vect=VECT_TAB_ADDR=0x8000000
-genericSTM32F103T.build.core=maple
-genericSTM32F103T.build.board=GENERIC_STM32F103T
-
-genericSTM32F103T.upload.use_1200bps_touch=false
-genericSTM32F103T.upload.file_type=bin
-
-#-- Variants
-genericSTM32F103T.menu.device_variant.STM32F103T8=STM32F103T8 (20k RAM. 64k Flash)
-genericSTM32F103T.menu.device_variant.STM32F103T8.build.cpu_flags=-DMCU_STM32F103T8
-genericSTM32F103T.menu.device_variant.STM32F103T8.build.ldscript=ld/jtag_t8.ld
-genericSTM32F103T.menu.device_variant.STM32F103T8.upload.maximum_size=65536
-genericSTM32F103T.menu.device_variant.STM32F103T8.upload.maximum_data_size=20480
-
-genericSTM32F103T.menu.device_variant.STM32F103TB=STM32F103TB (20k RAM. 128k Flash)
-genericSTM32F103T.menu.device_variant.STM32F103TB.build.cpu_flags=-DMCU_STM32F103TB
-genericSTM32F103T.menu.device_variant.STM32F103TB.build.ldscript=ld/jtag.ld
-genericSTM32F103T.menu.device_variant.STM32F103TB.upload.maximum_size=131072
-genericSTM32F103T.menu.device_variant.STM32F103TB.upload.maximum_data_size=20480
-
-#-- Upload Metods
-genericSTM32F103T.menu.upload_method.serialMethod=Serial
-genericSTM32F103T.menu.upload_method.serialMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1
-genericSTM32F103T.menu.upload_method.serialMethod.upload.tool=uart
-genericSTM32F103T.menu.upload_method.serialMethod.upload.protocol=UART
-
-genericSTM32F103T.menu.upload_method.STLinkMethod=ST-Link
-genericSTM32F103T.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
-genericSTM32F103T.menu.upload_method.STLinkMethod.upload.tool=stlink
-genericSTM32F103T.menu.upload_method.STLinkMethod.upload.protocol=STLINK
-
-#-- CPU Clock Frequency
-genericSTM32F103T.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
-genericSTM32F103T.menu.cpu_speed.speed_72mhz.build.f_cpu=72000000L
-
-genericSTM32F103T.menu.cpu_speed.speed_48mhz=48Mhz (Slow - with USB)
-genericSTM32F103T.menu.cpu_speed.speed_48mhz.build.f_cpu=48000000L
-
-genericSTM32F103T.menu.cpu_speed.speed_128mhz=Overclocked 128Mhz NO USB SERIAL. MANUAL RESET NEEDED TO UPLOAD
-genericSTM32F103T.menu.cpu_speed.speed_128mhz.build.f_cpu=128000000L
-
-#-- Optimizations
-genericSTM32F103T.menu.opt.osstd=Smallest (default)
-
-genericSTM32F103T.menu.opt.o1std=Fast (-O1)
-genericSTM32F103T.menu.opt.o1std.build.flags.optimize=-O1
-genericSTM32F103T.menu.opt.o1std.build.flags.ldspecs=
-
-genericSTM32F103T.menu.opt.o2std=Faster (-O2)
-genericSTM32F103T.menu.opt.o2std.build.flags.optimize=-O2
-genericSTM32F103T.menu.opt.o2std.build.flags.ldspecs=
-
-genericSTM32F103T.menu.opt.o3std=Fastest (-O3)
-genericSTM32F103T.menu.opt.o3std.build.flags.optimize=-O3
-genericSTM32F103T.menu.opt.o3std.build.flags.ldspecs=
-
-genericSTM32F103T.menu.opt.ogstd=Debug (-g)
-genericSTM32F103T.menu.opt.ogstd.build.flags.optimize=-Og
-genericSTM32F103T.menu.opt.ogstd.build.flags.ldspecs=
-
-
-###################### Generic STM32F103V series ######################
-
-genericSTM32F103V.name=Generic STM32F103V series
-
-genericSTM32F103V.vid.0=0x1EAF
-genericSTM32F103V.pid.0=0x0004
-
-genericSTM32F103V.build.vect=VECT_TAB_ADDR=0x8000000
-genericSTM32F103V.build.core=maple
-genericSTM32F103V.build.board=GENERIC_STM32F103V
-
-genericSTM32F103V.upload.use_1200bps_touch=false
-genericSTM32F103V.upload.file_type=bin
-
-#-- Variants
-genericSTM32F103V.menu.device_variant.STM32F103VB=STM32F103VB
-genericSTM32F103V.menu.device_variant.STM32F103VB.build.variant=generic_stm32f103vb
-genericSTM32F103V.menu.device_variant.STM32F103VB.build.cpu_flags=-DMCU_STM32F103VB
-genericSTM32F103V.menu.device_variant.STM32F103VB.build.ldscript=ld/stm32f103vb.ld
-genericSTM32F103V.menu.device_variant.STM32F103VB.upload.maximum_size=131072
-genericSTM32F103V.menu.device_variant.STM32F103VB.upload.maximum_data_size=20480
-
-genericSTM32F103V.menu.device_variant.STM32F103VC=STM32F103VC
-genericSTM32F103V.menu.device_variant.STM32F103VC.build.variant=generic_stm32f103v
-genericSTM32F103V.menu.device_variant.STM32F103VC.build.cpu_flags=-DMCU_STM32F103VC
-genericSTM32F103V.menu.device_variant.STM32F103VC.build.ldscript=ld/stm32f103vc.ld
-genericSTM32F103V.menu.device_variant.STM32F103VC.upload.maximum_size=262144
-genericSTM32F103V.menu.device_variant.STM32F103VC.upload.maximum_data_size=49152
-
-genericSTM32F103V.menu.device_variant.STM32F103VD=STM32F103VD
-genericSTM32F103V.menu.device_variant.STM32F103VD.build.variant=generic_stm32f103v
-genericSTM32F103V.menu.device_variant.STM32F103VD.build.cpu_flags=-DMCU_STM32F103VD
-genericSTM32F103V.menu.device_variant.STM32F103VD.build.ldscript=ld/stm32f103vd.ld
-genericSTM32F103V.menu.device_variant.STM32F103VD.upload.maximum_size=393216
-genericSTM32F103V.menu.device_variant.STM32F103VD.upload.maximum_data_size=65536
-
-genericSTM32F103V.menu.device_variant.STM32F103VE=STM32F103VE
-genericSTM32F103V.menu.device_variant.STM32F103VE.build.variant=generic_stm32f103v
-genericSTM32F103V.menu.device_variant.STM32F103VE.build.cpu_flags=-DMCU_STM32F103VE
-genericSTM32F103V.menu.device_variant.STM32F103VE.build.ldscript=ld/stm32f103ve.ld
-genericSTM32F103V.menu.device_variant.STM32F103VE.upload.maximum_size=524288
-genericSTM32F103V.menu.device_variant.STM32F103VE.upload.maximum_data_size=65536
-
-#-- Upload Metods
-genericSTM32F103V.menu.upload_method.serialMethod=Serial
-genericSTM32F103V.menu.upload_method.serialMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1
-genericSTM32F103V.menu.upload_method.serialMethod.upload.tool=uart
-genericSTM32F103V.menu.upload_method.serialMethod.upload.protocol=UART
-
-genericSTM32F103V.menu.upload_method.STLinkMethod=ST-Link
-genericSTM32F103V.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
-genericSTM32F103V.menu.upload_method.STLinkMethod.upload.tool=stlink
-genericSTM32F103V.menu.upload_method.STLinkMethod.upload.protocol=STLINK
-
-#-- CPU Clock Frequency
-genericSTM32F103V.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
-genericSTM32F103V.menu.cpu_speed.speed_72mhz.build.f_cpu=72000000L
-
-genericSTM32F103V.menu.cpu_speed.speed_48mhz=48Mhz (Slow - with USB)
-genericSTM32F103V.menu.cpu_speed.speed_48mhz.build.f_cpu=48000000L
-
-genericSTM32F103V.menu.cpu_speed.speed_128mhz=Overclocked 128Mhz NO USB SERIAL. MANUAL RESET NEEDED TO UPLOAD
-genericSTM32F103V.menu.cpu_speed.speed_128mhz.build.f_cpu=128000000L
-
-#-- Optimizations
-genericSTM32F103V.menu.opt.osstd=Smallest (default)
-
-genericSTM32F103V.menu.opt.o1std=Fast (-O1)
-genericSTM32F103V.menu.opt.o1std.build.flags.optimize=-O1
-genericSTM32F103V.menu.opt.o1std.build.flags.ldspecs=
-
-genericSTM32F103V.menu.opt.o2std=Faster (-O2)
-genericSTM32F103V.menu.opt.o2std.build.flags.optimize=-O2
-genericSTM32F103V.menu.opt.o2std.build.flags.ldspecs=
-
-genericSTM32F103V.menu.opt.o3std=Fastest (-O3)
-genericSTM32F103V.menu.opt.o3std.build.flags.optimize=-O3
-genericSTM32F103V.menu.opt.o3std.build.flags.ldspecs=
-
-genericSTM32F103V.menu.opt.ogstd=Debug (-g)
-genericSTM32F103V.menu.opt.ogstd.build.flags.optimize=-Og
-genericSTM32F103V.menu.opt.ogstd.build.flags.ldspecs=
-
-
-###################### Generic STM32F103Z Series ######################
-
-genericSTM32F103Z.name=Generic STM32F103Z Series
-
-genericSTM32F103Z.vid.0=0x1EAF
-genericSTM32F103Z.pid.0=0x0004
-
-genericSTM32F103Z.build.variant=generic_stm32f103z
-genericSTM32F103Z.build.vect=VECT_TAB_ADDR=0x8000000
-genericSTM32F103Z.build.core=maple
-genericSTM32F103Z.build.board=GENERIC_STM32F103Z
-
-genericSTM32F103Z.upload.use_1200bps_touch=false
-genericSTM32F103Z.upload.file_type=bin
-
-#-- Variants
-genericSTM32F103Z.menu.device_variant.STM32F103ZC=STM32F103ZC
-genericSTM32F103Z.menu.device_variant.STM32F103ZC.build.cpu_flags=-DMCU_STM32F103ZC
-genericSTM32F103Z.menu.device_variant.STM32F103ZC.build.ldscript=ld/stm32f103zc.ld
-genericSTM32F103Z.menu.device_variant.STM32F103ZC.upload.maximum_size=262144
-genericSTM32F103Z.menu.device_variant.STM32F103ZC.upload.maximum_data_size=49152
-
-genericSTM32F103Z.menu.device_variant.STM32F103ZD=STM32F103ZD
-genericSTM32F103Z.menu.device_variant.STM32F103ZD.build.cpu_flags=-DMCU_STM32F103ZD
-genericSTM32F103Z.menu.device_variant.STM32F103ZD.build.ldscript=ld/stm32f103zd.ld
-genericSTM32F103Z.menu.device_variant.STM32F103ZD.upload.maximum_size=393216
-genericSTM32F103Z.menu.device_variant.STM32F103ZD.upload.maximum_data_size=65536
-
-genericSTM32F103Z.menu.device_variant.STM32F103ZE=STM32F103ZE
-genericSTM32F103Z.menu.device_variant.STM32F103ZE.build.cpu_flags=-DMCU_STM32F103ZE
-genericSTM32F103Z.menu.device_variant.STM32F103ZE.build.ldscript=ld/stm32f103ze.ld
-genericSTM32F103Z.menu.device_variant.STM32F103ZE.upload.maximum_size=524288
-genericSTM32F103Z.menu.device_variant.STM32F103ZE.upload.maximum_data_size=65536
-
-#-- Upload Metods
-genericSTM32F103Z.menu.upload_method.serialMethod=Serial
-genericSTM32F103Z.menu.upload_method.serialMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1
-genericSTM32F103Z.menu.upload_method.serialMethod.upload.tool=uart
-genericSTM32F103Z.menu.upload_method.serialMethod.upload.protocol=UART
-
-genericSTM32F103Z.menu.upload_method.STLinkMethod=ST-Link
-genericSTM32F103Z.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
-genericSTM32F103Z.menu.upload_method.STLinkMethod.upload.tool=stlink
-genericSTM32F103Z.menu.upload_method.STLinkMethod.upload.protocol=STLINK
-
-#-- CPU Clock Frequency
-genericSTM32F103Z.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
-genericSTM32F103Z.menu.cpu_speed.speed_72mhz.build.f_cpu=72000000L
-
-genericSTM32F103Z.menu.cpu_speed.speed_48mhz=48Mhz (Slow - with USB)
-genericSTM32F103Z.menu.cpu_speed.speed_48mhz.build.f_cpu=48000000L
-
-genericSTM32F103Z.menu.cpu_speed.speed_128mhz=Overclocked 128Mhz NO USB SERIAL. MANUAL RESET NEEDED TO UPLOAD
-genericSTM32F103Z.menu.cpu_speed.speed_128mhz.build.f_cpu=128000000L
-
-#-- Optimizations
-genericSTM32F103Z.menu.opt.osstd=Smallest (default)
-
-genericSTM32F103Z.menu.opt.o1std=Fast (-O1)
-genericSTM32F103Z.menu.opt.o1std.build.flags.optimize=-O1
-genericSTM32F103Z.menu.opt.o1std.build.flags.ldspecs=
-
-genericSTM32F103Z.menu.opt.o2std=Faster (-O2)
-genericSTM32F103Z.menu.opt.o2std.build.flags.optimize=-O2
-genericSTM32F103Z.menu.opt.o2std.build.flags.ldspecs=
-
-genericSTM32F103Z.menu.opt.o3std=Fastest (-O3)
-genericSTM32F103Z.menu.opt.o3std.build.flags.optimize=-O3
-genericSTM32F103Z.menu.opt.o3std.build.flags.ldspecs=
-
-genericSTM32F103Z.menu.opt.ogstd=Debug (-g)
-genericSTM32F103Z.menu.opt.ogstd.build.flags.optimize=-Og
-genericSTM32F103Z.menu.opt.ogstd.build.flags.ldspecs=
-
-
-##############################################################
+mapleMini.upload.maximum_size=129024
+mapleMini.upload.maximum_data_size=20480
+mapleMini.upload.tool=usb-hid
+mapleMini.upload.protocol=USBHID
+
+mapleMini.bootloader.tool=texane-stlink
+mapleMini.bootloader.tool.default=texane-stlink
+mapleMini.bootloader.file=hid_bootloader_maple_mini_pb1.bin
+
+#-- CPU Speed
+## HSE
+### 16 Mhz
+mapleMini.menu.cpu_speed.speed_hse_16mhz=16Mhz (External)
+mapleMini.menu.cpu_speed.speed_hse_16mhz.build.f_cpu=16000000L
+### 48 Mhz
+mapleMini.menu.cpu_speed.speed_hse_48mhz=48Mhz (External, USB)
+mapleMini.menu.cpu_speed.speed_hse_48mhz.build.f_cpu=48000000L
+### 72 Mhz
+mapleMini.menu.cpu_speed.speed_hse_72mhz=72Mhz (External, USB)
+mapleMini.menu.cpu_speed.speed_hse_72mhz.build.f_cpu=72000000L
+## HSI
+### 8 Mhz
+mapleMini.menu.cpu_speed.speed_hsi_8mhz=8Mhz (Internal)
+mapleMini.menu.cpu_speed.speed_hsi_8mhz.build.f_cpu=8000000L
+mapleMini.menu.cpu_speed.speed_hsi_8mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 48 Mhz
+mapleMini.menu.cpu_speed.speed_hsi_48mhz=48Mhz (Internal, USB)
+mapleMini.menu.cpu_speed.speed_hsi_48mhz.build.f_cpu=48000000L
+mapleMini.menu.cpu_speed.speed_hsi_48mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 64 Mhz
+mapleMini.menu.cpu_speed.speed_hsi_64mhz=64Mhz (Internal)
+mapleMini.menu.cpu_speed.speed_hsi_64mhz.build.f_cpu=64000000L
+mapleMini.menu.cpu_speed.speed_hsi_64mhz.build.hs_flag=-DUSE_HSI_CLOCK
+
+
+###################### Maple (R1, R3, R5) ######################
+
+mapleR.name=Maple (R1, R3, R5)
+
+mapleR.vid.0=0x1EAF
+mapleR.pid.0=0x0004
+
+mapleR.build.core=maple
+mapleR.build.variant=Generic_F103/r8_rb
+mapleR.build.board=MAPLE_R
+mapleR.build.vect=VECT_TAB_ADDR=0x8000800
+mapleR.build.cpu_flags=-DMCU_STM32F103RB
+mapleR.build.upload_flags=-DSERIAL_USB -DBOARD_USE_HID_BL_22 -DLED_BUILTIN=PA5 -DBUTTON_BUILTIN=PC9 -DBOARD_USB_DISC_DEV=GPIOC -DBOARD_USB_DISC_BIT=12 -DBOARD_USB_BIT_VAL=0
+mapleR.build.ldscript=hid_bootloader_rb.ld
+
+mapleR.upload.use_1200bps_touch=false
+mapleR.upload.file_type=bin
+mapleR.upload.maximum_size=129024
+mapleR.upload.maximum_data_size=20480
+mapleR.upload.tool=usb-hid
+mapleR.upload.protocol=USBHID
+
+#mapleR.bootloader.tool=texane-stlink
+#mapleR.bootloader.tool.default=texane-stlink
+#mapleR.bootloader.file=hid_bootloader_maple_r_pa5.bin
+
+#-- CPU Speed
+## HSE
+### 16 Mhz
+mapleR.menu.cpu_speed.speed_hse_16mhz=16Mhz (External)
+mapleR.menu.cpu_speed.speed_hse_16mhz.build.f_cpu=16000000L
+### 48 Mhz
+mapleR.menu.cpu_speed.speed_hse_48mhz=48Mhz (External, USB)
+mapleR.menu.cpu_speed.speed_hse_48mhz.build.f_cpu=48000000L
+### 72 Mhz
+mapleR.menu.cpu_speed.speed_hse_72mhz=72Mhz (External, USB)
+mapleR.menu.cpu_speed.speed_hse_72mhz.build.f_cpu=72000000L
+## HSI
+### 8 Mhz
+mapleR.menu.cpu_speed.speed_hsi_8mhz=8Mhz (Internal)
+mapleR.menu.cpu_speed.speed_hsi_8mhz.build.f_cpu=8000000L
+mapleR.menu.cpu_speed.speed_hsi_8mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 48 Mhz
+mapleR.menu.cpu_speed.speed_hsi_48mhz=48Mhz (Internal, USB)
+mapleR.menu.cpu_speed.speed_hsi_48mhz.build.f_cpu=48000000L
+mapleR.menu.cpu_speed.speed_hsi_48mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 64 Mhz
+mapleR.menu.cpu_speed.speed_hsi_64mhz=64Mhz (Internal)
+mapleR.menu.cpu_speed.speed_hsi_64mhz.build.f_cpu=64000000L
+mapleR.menu.cpu_speed.speed_hsi_64mhz.build.hs_flag=-DUSE_HSI_CLOCK
+
+
+###################### HY-Tiny STM32F103TB ######################
+
+hytinyTB.name=HY-Tiny F103TB
+
+hytinyTB.vid.0=0x1EAF
+hytinyTB.pid.0=0x0004
+
+hytinyTB.build.core=maple
+hytinyTB.build.variant=Generic_F103/t8_tb
+hytinyTB.build.board=HYTINY_STM32F103TB
+hytinyTB.build.vect=VECT_TAB_ADDR=0x8000800
+hytinyTB.build.cpu_flags=-DMCU_STM32F103TB
+hytinyTB.build.upload_flags=-DSERIAL_USB -DBOARD_USE_HID_BL_22 -DLED_BUILTIN=PA1
+hytinyTB.build.ldscript=hid_bootloader_tb.ld
+
+hytinyTB.upload.use_1200bps_touch=false
+hytinyTB.upload.file_type=bin
+hytinyTB.upload.maximum_size=129024
+hytinyTB.upload.maximum_data_size=20480
+hytinyTB.upload.tool=usb-hid
+hytinyTB.upload.protocol=USBHID
+
+hytinyTB.bootloader.tool=texane-stlink
+hytinyTB.bootloader.tool.default=texane-stlink
+hytinyTB.bootloader.file=hid_bootloader_hytiny_f103tb_pa1.bin
+
+#-- CPU Speed
+## HSE
+### 16 Mhz
+hytinyTB.menu.cpu_speed.speed_hse_16mhz=16Mhz (External)
+hytinyTB.menu.cpu_speed.speed_hse_16mhz.build.f_cpu=16000000L
+### 48 Mhz
+hytinyTB.menu.cpu_speed.speed_hse_48mhz=48Mhz (External, USB)
+hytinyTB.menu.cpu_speed.speed_hse_48mhz.build.f_cpu=48000000L
+### 72 Mhz
+hytinyTB.menu.cpu_speed.speed_hse_72mhz=72Mhz (External, USB)
+hytinyTB.menu.cpu_speed.speed_hse_72mhz.build.f_cpu=72000000L
+## HSI
+### 8 Mhz
+hytinyTB.menu.cpu_speed.speed_hsi_8mhz=8Mhz (Internal)
+hytinyTB.menu.cpu_speed.speed_hsi_8mhz.build.f_cpu=8000000L
+hytinyTB.menu.cpu_speed.speed_hsi_8mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 48 Mhz
+hytinyTB.menu.cpu_speed.speed_hsi_48mhz=48Mhz (Internal, USB)
+hytinyTB.menu.cpu_speed.speed_hsi_48mhz.build.f_cpu=48000000L
+hytinyTB.menu.cpu_speed.speed_hsi_48mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 64 Mhz
+hytinyTB.menu.cpu_speed.speed_hsi_64mhz=64Mhz (Internal)
+hytinyTB.menu.cpu_speed.speed_hsi_64mhz.build.f_cpu=64000000L
+hytinyTB.menu.cpu_speed.speed_hsi_64mhz.build.hs_flag=-DUSE_HSI_CLOCK
+
+
+###################### NUCLEO-F103RB ######################
+
+nucleoF103RB.name=NUCLEO-F103RB
+
+nucleoF103RB.vid.0=0x1EAF
+nucleoF103RB.pid.0=0x0004
+
+nucleoF103RB.build.core=maple
+nucleoF103RB.build.variant=nucleo_f103rb
+nucleoF103RB.build.board=NUCLEO_F103TB
+nucleoF103RB.build.density=STM32_MEDIUM_DENSITY
+nucleoF103RB.build.vect=VECT_TAB_ADDR=0x8000000
+nucleoF103RB.build.cpu_flags=-DMCU_STM32F103TB
+nucleoF103RB.build.ldscript=jtag.ld
+
+nucleoF103RB.upload.use_1200bps_touch=false
+nucleoF103RB.upload.file_type=bin
+nucleoF103RB.upload.maximum_size=131072
+nucleoF103RB.upload.maximum_data_size=20480
+nucleoF103RB.upload.tool=texane-stlink
+nucleoF103RB.upload.protocol=TEXANESTLINK
+
+#-- CPU Speed
+## HSE
+### 16 Mhz
+nucleoF103RB.menu.cpu_speed.speed_hse_16mhz=16Mhz (External)
+nucleoF103RB.menu.cpu_speed.speed_hse_16mhz.build.f_cpu=16000000L
+### 48 Mhz
+nucleoF103RB.menu.cpu_speed.speed_hse_48mhz=48Mhz (External, USB)
+nucleoF103RB.menu.cpu_speed.speed_hse_48mhz.build.f_cpu=48000000L
+### 72 Mhz
+nucleoF103RB.menu.cpu_speed.speed_hse_72mhz=72Mhz (External, USB)
+nucleoF103RB.menu.cpu_speed.speed_hse_72mhz.build.f_cpu=72000000L
+## HSI
+### 8 Mhz
+nucleoF103RB.menu.cpu_speed.speed_hsi_8mhz=8Mhz (Internal)
+nucleoF103RB.menu.cpu_speed.speed_hsi_8mhz.build.f_cpu=8000000L
+nucleoF103RB.menu.cpu_speed.speed_hsi_8mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 48 Mhz
+nucleoF103RB.menu.cpu_speed.speed_hsi_48mhz=48Mhz (Internal, USB)
+nucleoF103RB.menu.cpu_speed.speed_hsi_48mhz.build.f_cpu=48000000L
+nucleoF103RB.menu.cpu_speed.speed_hsi_48mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 64 Mhz
+nucleoF103RB.menu.cpu_speed.speed_hsi_64mhz=64Mhz (Internal)
+nucleoF103RB.menu.cpu_speed.speed_hsi_64mhz.build.f_cpu=64000000L
+nucleoF103RB.menu.cpu_speed.speed_hsi_64mhz.build.hs_flag=-DUSE_HSI_CLOCK
+
+
+###################### BluePill STM32F103C6 ######################
+
+bluepillC6.name=BluePill F103C6
+
+bluepillC6.vid.0=0x1EAF
+bluepillC6.pid.0=0x0004
+
+bluepillC6.build.core=maple
+bluepillC6.build.variant=Generic_F103/c4_c6
+bluepillC6.build.board=BLUEPILL_C6
+bluepillC6.build.vect=VECT_TAB_ADDR=0x8000800
+bluepillC6.build.cpu_flags=-DMCU_STM32F103C6
+bluepillC6.build.upload_flags=-DSERIAL_USB -DBOARD_USE_HID_BL_22 -DLED_BUILTIN=PC13
+bluepillC6.build.ldscript=hid_bootloader_c6.ld
+
+bluepillC6.upload.use_1200bps_touch=false
+bluepillC6.upload.file_type=bin
+bluepillC6.upload.maximum_size=30720
+bluepillC6.upload.maximum_data_size=10240
+bluepillC6.upload.tool=usb-hid
+bluepillC6.upload.protocol=USBHID
+
+bluepillC6.bootloader.tool=texane-stlink
+bluepillC6.bootloader.tool.default=texane-stlink
+bluepillC6.bootloader.file=hid_bootloader_bluepill_pc13.bin
+
+#-- CPU Speed
+## HSE
+### 16 Mhz
+bluepillC6.menu.cpu_speed.speed_hse_16mhz=16Mhz (External)
+bluepillC6.menu.cpu_speed.speed_hse_16mhz.build.f_cpu=16000000L
+### 48 Mhz
+bluepillC6.menu.cpu_speed.speed_hse_48mhz=48Mhz (External, USB)
+bluepillC6.menu.cpu_speed.speed_hse_48mhz.build.f_cpu=48000000L
+### 72 Mhz
+bluepillC6.menu.cpu_speed.speed_hse_72mhz=72Mhz (External, USB)
+bluepillC6.menu.cpu_speed.speed_hse_72mhz.build.f_cpu=72000000L
+## HSI
+### 8 Mhz
+bluepillC6.menu.cpu_speed.speed_hsi_8mhz=8Mhz (Internal)
+bluepillC6.menu.cpu_speed.speed_hsi_8mhz.build.f_cpu=8000000L
+bluepillC6.menu.cpu_speed.speed_hsi_8mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 48 Mhz
+bluepillC6.menu.cpu_speed.speed_hsi_48mhz=48Mhz (Internal) USB
+bluepillC6.menu.cpu_speed.speed_hsi_48mhz.build.f_cpu=48000000L
+bluepillC6.menu.cpu_speed.speed_hsi_48mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 64 Mhz
+bluepillC6.menu.cpu_speed.speed_hsi_64mhz=64Mhz (Internal)
+bluepillC6.menu.cpu_speed.speed_hsi_64mhz.build.f_cpu=64000000L
+bluepillC6.menu.cpu_speed.speed_hsi_64mhz.build.hs_flag=-DUSE_HSI_CLOCK
+
+
+###################### BluePill STM32F103C8 ######################
+
+bluepillC8.name=BluePill F103C8
+
+bluepillC8.vid.0=0x1EAF
+bluepillC8.pid.0=0x0004
+
+bluepillC8.build.core=maple
+bluepillC8.build.variant=Generic_F103/c8_cb
+bluepillC8.build.board=BLUEPILL_C8
+bluepillC8.build.vect=VECT_TAB_ADDR=0x8000800
+bluepillC8.build.cpu_flags=-DMCU_STM32F103C8
+bluepillC8.build.upload_flags=-DSERIAL_USB -DBOARD_USE_HID_BL_22 -DLED_BUILTIN=PC13
+bluepillC8.build.ldscript=hid_bootloader_c8.ld
+
+bluepillC8.upload.use_1200bps_touch=false
+bluepillC8.upload.file_type=bin
+bluepillC8.upload.maximum_size=63488
+bluepillC8.upload.maximum_data_size=20480
+bluepillC8.upload.tool=usb-hid
+bluepillC8.upload.protocol=USBHID
+
+bluepillC8.bootloader.tool=texane-stlink
+bluepillC8.bootloader.tool.default=texane-stlink
+bluepillC8.bootloader.file=hid_bootloader_bluepill_pc13.bin
+
+#-- CPU Speed
+## HSE
+### 16 Mhz
+bluepillC8.menu.cpu_speed.speed_hse_16mhz=16Mhz (External)
+bluepillC8.menu.cpu_speed.speed_hse_16mhz.build.f_cpu=16000000L
+### 48 Mhz
+bluepillC8.menu.cpu_speed.speed_hse_48mhz=48Mhz (External, USB)
+bluepillC8.menu.cpu_speed.speed_hse_48mhz.build.f_cpu=48000000L
+### 72 Mhz
+bluepillC8.menu.cpu_speed.speed_hse_72mhz=72Mhz (External, USB)
+bluepillC8.menu.cpu_speed.speed_hse_72mhz.build.f_cpu=72000000L
+## HSI
+### 8 Mhz
+bluepillC8.menu.cpu_speed.speed_hsi_8mhz=8Mhz (Internal)
+bluepillC8.menu.cpu_speed.speed_hsi_8mhz.build.f_cpu=8000000L
+bluepillC8.menu.cpu_speed.speed_hsi_8mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 48 Mhz
+bluepillC8.menu.cpu_speed.speed_hsi_48mhz=48Mhz (Internal, USB)
+bluepillC8.menu.cpu_speed.speed_hsi_48mhz.build.f_cpu=48000000L
+bluepillC8.menu.cpu_speed.speed_hsi_48mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 64 Mhz
+bluepillC8.menu.cpu_speed.speed_hsi_64mhz=64Mhz (Internal)
+bluepillC8.menu.cpu_speed.speed_hsi_64mhz.build.f_cpu=64000000L
+bluepillC8.menu.cpu_speed.speed_hsi_64mhz.build.hs_flag=-DUSE_HSI_CLOCK
+
+
+###################### BluePill STM32F103CB ######################
+
+bluepillCB.name=BluePill F103CB
+
+bluepillCB.vid.0=0x1EAF
+bluepillCB.pid.0=0x0004
+
+bluepillCB.build.core=maple
+bluepillCB.build.variant=Generic_F103/c8_cb
+bluepillCB.build.board=BLUEPILL_CB
+bluepillCB.build.vect=VECT_TAB_ADDR=0x8000800
+bluepillCB.build.cpu_flags=-DMCU_STM32F103CB
+bluepillCB.build.upload_flags=-DSERIAL_USB -DBOARD_USE_HID_BL_22 -DLED_BUILTIN=PC13
+bluepillCB.build.ldscript=hid_bootloader_cb.ld
+
+bluepillCB.upload.use_1200bps_touch=false
+bluepillCB.upload.file_type=bin
+bluepillCB.upload.maximum_size=129024
+bluepillCB.upload.maximum_data_size=20480
+bluepillCB.upload.tool=usb-hid
+bluepillCB.upload.protocol=USBHID
+
+bluepillCB.bootloader.tool=texane-stlink
+bluepillCB.bootloader.tool.default=texane-stlink
+bluepillCB.bootloader.file=hid_bootloader_bluepill_pc13.bin
+
+#-- CPU Speed
+## HSE
+### 16 Mhz
+bluepillCB.menu.cpu_speed.speed_hse_16mhz=16Mhz (External)
+bluepillCB.menu.cpu_speed.speed_hse_16mhz.build.f_cpu=16000000L
+### 48 Mhz
+bluepillCB.menu.cpu_speed.speed_hse_48mhz=48Mhz (External, USB)
+bluepillCB.menu.cpu_speed.speed_hse_48mhz.build.f_cpu=48000000L
+### 72 Mhz
+bluepillCB.menu.cpu_speed.speed_hse_72mhz=72Mhz (External, USB)
+bluepillCB.menu.cpu_speed.speed_hse_72mhz.build.f_cpu=72000000L
+## HSI
+### 8 Mhz
+bluepillCB.menu.cpu_speed.speed_hsi_8mhz=8Mhz (Internal)
+bluepillCB.menu.cpu_speed.speed_hsi_8mhz.build.f_cpu=8000000L
+bluepillCB.menu.cpu_speed.speed_hsi_8mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 48 Mhz
+bluepillCB.menu.cpu_speed.speed_hsi_48mhz=48Mhz (Internal, USB)
+bluepillCB.menu.cpu_speed.speed_hsi_48mhz.build.f_cpu=48000000L
+bluepillCB.menu.cpu_speed.speed_hsi_48mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 64 Mhz
+bluepillCB.menu.cpu_speed.speed_hsi_64mhz=64Mhz (Internal)
+bluepillCB.menu.cpu_speed.speed_hsi_64mhz.build.f_cpu=64000000L
+bluepillCB.menu.cpu_speed.speed_hsi_64mhz.build.hs_flag=-DUSE_HSI_CLOCK
+
+
+###################### BlackPill STM32F103C8 ######################
+
+blackpillC8.name=BlackPill F103C8
+
+blackpillC8.vid.0=0x1EAF
+blackpillC8.pid.0=0x0004
+
+blackpillC8.build.core=maple
+blackpillC8.build.variant=Generic_F103/c8_cb
+blackpillC8.build.board=BLACKPILL_C8
+blackpillC8.build.vect=VECT_TAB_ADDR=0x8000800
+blackpillC8.build.cpu_flags=-DMCU_STM32F103C8
+blackpillC8.build.upload_flags=-DSERIAL_USB -DBOARD_USE_HID_BL_22 -DLED_BUILTIN=PB12
+blackpillC8.build.ldscript=hid_bootloader_c8.ld
+
+blackpillC8.upload.use_1200bps_touch=false
+blackpillC8.upload.file_type=bin
+blackpillC8.upload.maximum_size=63488
+blackpillC8.upload.maximum_data_size=20480
+blackpillC8.upload.tool=usb-hid
+blackpillC8.upload.protocol=USBHID
+
+blackpillC8.bootloader.tool=texane-stlink
+blackpillC8.bootloader.tool.default=texane-stlink
+blackpillC8.bootloader.file=hid_bootloader_blackpill_pb12.bin
+
+#-- CPU Speed
+## HSE
+### 16 Mhz
+blackpillC8.menu.cpu_speed.speed_hse_16mhz=16Mhz (External)
+blackpillC8.menu.cpu_speed.speed_hse_16mhz.build.f_cpu=16000000L
+### 48 Mhz
+blackpillC8.menu.cpu_speed.speed_hse_48mhz=48Mhz (External, USB)
+blackpillC8.menu.cpu_speed.speed_hse_48mhz.build.f_cpu=48000000L
+### 72 Mhz
+blackpillC8.menu.cpu_speed.speed_hse_72mhz=72Mhz (External, USB)
+blackpillC8.menu.cpu_speed.speed_hse_72mhz.build.f_cpu=72000000L
+## HSI
+### 8 Mhz
+blackpillC8.menu.cpu_speed.speed_hsi_8mhz=8Mhz (Internal)
+blackpillC8.menu.cpu_speed.speed_hsi_8mhz.build.f_cpu=8000000L
+blackpillC8.menu.cpu_speed.speed_hsi_8mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 48 Mhz
+blackpillC8.menu.cpu_speed.speed_hsi_48mhz=48Mhz (Internal, USB)
+blackpillC8.menu.cpu_speed.speed_hsi_48mhz.build.f_cpu=48000000L
+blackpillC8.menu.cpu_speed.speed_hsi_48mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 64 Mhz
+blackpillC8.menu.cpu_speed.speed_hsi_64mhz=64Mhz (Internal)
+blackpillC8.menu.cpu_speed.speed_hsi_64mhz.build.f_cpu=64000000L
+blackpillC8.menu.cpu_speed.speed_hsi_64mhz.build.hs_flag=-DUSE_HSI_CLOCKL
+
+
+###################### BlackPill STM32F103CB ######################
+
+blackpillCB.name=BlackPill F103CB
+
+blackpillCB.vid.0=0x1EAF
+blackpillCB.pid.0=0x0004
+
+blackpillCB.build.core=maple
+blackpillCB.build.variant=Generic_F103/c8_cb
+blackpillCB.build.board=BLACKPILL_CB
+blackpillCB.build.vect=VECT_TAB_ADDR=0x8000800
+blackpillCB.build.cpu_flags=-DMCU_STM32F103CB
+blackpillCB.build.upload_flags=-DSERIAL_USB -DBOARD_USE_HID_BL_22 -DLED_BUILTIN=PB12
+blackpillCB.build.ldscript=hid_bootloader_cb.ld
+
+blackpillCB.upload.use_1200bps_touch=false
+blackpillCB.upload.file_type=bin
+blackpillCB.upload.maximum_size=129024
+blackpillCB.upload.maximum_data_size=20480
+blackpillCB.upload.tool=usb-hid
+blackpillCB.upload.protocol=USBHID
+
+blackpillCB.bootloader.tool=texane-stlink
+blackpillCB.bootloader.tool.default=texane-stlink
+blackpillCB.bootloader.file=hid_bootloader_blackpill_pb12.bin
+
+#-- CPU Speed
+## HSE
+### 16 Mhz
+blackpillCB.menu.cpu_speed.speed_hse_16mhz=16Mhz (External)
+blackpillCB.menu.cpu_speed.speed_hse_16mhz.build.f_cpu=16000000L
+### 48 Mhz
+blackpillCB.menu.cpu_speed.speed_hse_48mhz=48Mhz (External, USB)
+blackpillCB.menu.cpu_speed.speed_hse_48mhz.build.f_cpu=48000000L
+### 72 Mhz
+blackpillCB.menu.cpu_speed.speed_hse_72mhz=72Mhz (External, USB)
+blackpillCB.menu.cpu_speed.speed_hse_72mhz.build.f_cpu=72000000L
+## HSI
+### 8 Mhz
+blackpillCB.menu.cpu_speed.speed_hsi_8mhz=8Mhz (Internal)
+blackpillCB.menu.cpu_speed.speed_hsi_8mhz.build.f_cpu=8000000L
+blackpillCB.menu.cpu_speed.speed_hsi_8mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 48 Mhz
+blackpillCB.menu.cpu_speed.speed_hsi_48mhz=48Mhz (Internal, USB)
+blackpillCB.menu.cpu_speed.speed_hsi_48mhz.build.f_cpu=48000000L
+blackpillCB.menu.cpu_speed.speed_hsi_48mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 64 Mhz
+blackpillCB.menu.cpu_speed.speed_hsi_64mhz=64Mhz (Internal)
+blackpillCB.menu.cpu_speed.speed_hsi_64mhz.build.f_cpu=64000000L
+blackpillCB.menu.cpu_speed.speed_hsi_64mhz.build.hs_flag=-DUSE_HSI_CLOCK
+
+
+###################### Generic F100 Series ######################
+
+genericF100.name=Generic F100 Series
+
+genericF100.build.core=maple
+genericF100.build.board=GENERIC_STM32F100C
+genericF100.build.vect=VECT_TAB_ADDR=0x8000000
+
+genericF100.upload.use_1200bps_touch=false
+genericF100.upload.file_type=bin
+
+#-- Variant
+## RB
+genericF100.menu.device_variant.STM32F100RB=STM32F100RB (8k RAM, 128k FLASH)
+genericF100.menu.device_variant.STM32F100RB.build.variant=Generic_F100/r8_rb
+genericF100.menu.device_variant.STM32F100RB.build.board=GENERIC_STM32F100RB
+genericF100.menu.device_variant.STM32F100RB.build.cpu_flags=-DMCU_STM32F100RB
+genericF100.menu.device_variant.STM32F100RB.build.ldscript=jtag_rb.ld
+genericF100.menu.device_variant.STM32F100RB.upload.maximum_size=131072
+genericF100.menu.device_variant.STM32F100RB.upload.maximum_data_size=8192
+
+#-- Upload Metod
+## Texane ST-Link (SWD)
+genericF100.menu.upload_method.TexaneSTLinkMethod=Texane ST-Link (SWD)
+genericF100.menu.upload_method.TexaneSTLinkMethod.upload.tool=texane-stlink
+genericF100.menu.upload_method.TexaneSTLinkMethod.upload.protocol=TEXANESTLINK
+## STM ST-Link (SWD)
+genericF100.menu.upload_method.STLinkMethod=STM ST-Link (SWD)
+genericF100.menu.upload_method.STLinkMethod.upload.tool=stm-stlink
+genericF100.menu.upload_method.STLinkMethod.upload.protocol=STMSTLINK
+## STM32CubeProgrammer (SWD)
+genericF100.menu.upload_method.CubeProgSWDMethod=CubeProgrammer (SWD)
+genericF100.menu.upload_method.CubeProgSWDMethod.upload.tool=cube-prog
+genericF100.menu.upload_method.CubeProgSWDMethod.upload.protocol=0
+genericF100.menu.upload_method.CubeProgSWDMethod.upload.options=-g
+## STM32CubeProgrammer (UART)
+genericF100.menu.upload_method.CubeProgSerialMethod=CubeProgrammer (UART)
+genericF100.menu.upload_method.CubeProgSerialMethod.upload.tool=cube-prog
+genericF100.menu.upload_method.CubeProgSerialMethod.upload.protocol=1
+genericF100.menu.upload_method.CubeProgSerialMethod.upload.options={serial.port.file} -s
+## Serial (UART)
+genericF100.menu.upload_method.SerialMethod=Serial (UART)
+genericF100.menu.upload_method.SerialMethod.upload.tool=uart
+genericF100.menu.upload_method.SerialMethod.upload.protocol=UART
+## Blackmagic Probe
+genericF100.menu.upload_method.BMPMethod=Blackmagic Probe
+genericF100.menu.upload_method.BMPMethod.upload.tool=bmp
+genericF100.menu.upload_method.BMPMethod.upload.protocol=BMP
+
+#-- Debug Ports
+## Only SWD
+genericF100.menu.debug_ports.debug_swd=Only SWD
+genericF100.menu.debug_ports.debug_swd.build.upload_flags=-DENABLE_DEBUG_ONLY_SWD
+## Disable
+genericF100.menu.debug_ports.debug_disable=Disable
+genericF100.menu.debug_ports.debug_disable.build.upload_flags=
+## SWD and JTAG
+genericF100.menu.debug_ports.debug_swd_jtag=SWD and JTAG
+genericF100.menu.debug_ports.debug_swd_jtag.build.upload_flags=-DENABLE_DEBUG_FULL_SWD_JTAG
+## SWD and JTAG no JNRST
+genericF100.menu.debug_ports.debug_swd_jtag_no_jnrst=SWD and JTAG no JNRST
+genericF100.menu.debug_ports.debug_swd_jtag_no_jnrst.build.upload_flags=-DENABLE_DEBUG_SWD_JTAG_NO_JNRST
+
+#-- CPU Speed
+## HSE
+### 16 Mhz
+genericF100.menu.cpu_speed.speed_hse_16mhz=16Mhz (External)
+genericF100.menu.cpu_speed.speed_hse_16mhz.build.f_cpu=16000000L
+### 24 Mhz
+genericF100.menu.cpu_speed.speed_hse_24mhz=24Mhz (External)
+genericF100.menu.cpu_speed.speed_hse_24mhz.build.f_cpu=24000000L
+## HSI
+### 8 Mhz
+genericF100.menu.cpu_speed.speed_hsi_8mhz=8Mhz (Internal)
+genericF100.menu.cpu_speed.speed_hsi_8mhz.build.f_cpu=8000000L
+genericF100.menu.cpu_speed.speed_hsi_8mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 16 Mhz
+genericF100.menu.cpu_speed.speed_hsi_16mhz=16Mhz (Internal)
+genericF100.menu.cpu_speed.speed_hsi_16mhz.build.f_cpu=16000000L
+genericF100.menu.cpu_speed.speed_hsi_16mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 20 Mhz
+genericF100.menu.cpu_speed.speed_hsi_20mhz=20Mhz (Internal)
+genericF100.menu.cpu_speed.speed_hsi_20mhz.build.f_cpu=20000000L
+genericF100.menu.cpu_speed.speed_hsi_20mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 24 Mhz
+genericF100.menu.cpu_speed.speed_hsi_24mhz=24Mhz (Internal)
+genericF100.menu.cpu_speed.speed_hsi_24mhz.build.f_cpu=24000000L
+genericF100.menu.cpu_speed.speed_hsi_24mhz.build.hs_flag=-DUSE_HSI_CLOCK
+
+#-- Optimization
+genericF100.menu.opt.osstd=Smallest (default)
+genericF100.menu.opt.o1std=Fast (-O1)
+genericF100.menu.opt.o1std.build.flags.optimize=-O1
+genericF100.menu.opt.o1std.build.flags.ldspecs=
+genericF100.menu.opt.o2std=Faster (-O2)
+genericF100.menu.opt.o2std.build.flags.optimize=-O2
+genericF100.menu.opt.o2std.build.flags.ldspecs=
+genericF100.menu.opt.o3std=Fastest (-O3)
+genericF100.menu.opt.o3std.build.flags.optimize=-O3
+genericF100.menu.opt.o3std.build.flags.ldspecs=
+genericF100.menu.opt.ogstd=Debug (-g)
+genericF100.menu.opt.ogstd.build.flags.optimize=-Og
+genericF100.menu.opt.ogstd.build.flags.ldspecs=
+
+
+###################### Generic F103 Series ######################
+
+genericF103.name=Generic F103 Series
+
+genericF103.vid.0=0x1EAF
+genericF103.pid.0=0x0004
+
+genericF103.build.core=maple
+genericF103.build.board=GENERIC_STM32F103C
+genericF103.build.vect=VECT_TAB_ADDR=0x8000000
+genericF103.build.upload_flags={build.debug_flag} {build.usb_flag} {build.bootloader_flag}
+
+genericF103.upload.use_1200bps_touch=false
+genericF103.upload.file_type=bin
+
+#-- Variant
+## T4
+genericF103.menu.device_variant.STM32F103T4=STM32F103T4 (6k RAM, 16k FLASH)
+genericF103.menu.device_variant.STM32F103T4.build.variant=Generic_F103/t4_t6
+genericF103.menu.device_variant.STM32F103T4.build.board=GENERIC_STM32F103T4
+genericF103.menu.device_variant.STM32F103T4.build.cpu_flags=-DMCU_STM32F103T4
+genericF103.menu.device_variant.STM32F103T4.build.ldscript=jtag_t4.ld
+genericF103.menu.device_variant.STM32F103T4.upload.maximum_size=16384
+genericF103.menu.device_variant.STM32F103T4.upload.maximum_data_size=6144
+## T6
+genericF103.menu.device_variant.STM32F103T6=STM32F103T6 (10k RAM, 32k FLASH)
+genericF103.menu.device_variant.STM32F103T6.build.variant=Generic_F103/t4_t6
+genericF103.menu.device_variant.STM32F103T6.build.board=GENERIC_STM32F103T6
+genericF103.menu.device_variant.STM32F103T6.build.cpu_flags=-DMCU_STM32F103T6
+genericF103.menu.device_variant.STM32F103T6.build.ldscript=jtag_t6.ld
+genericF103.menu.device_variant.STM32F103T6.upload.maximum_size=32768
+genericF103.menu.device_variant.STM32F103T6.upload.maximum_data_size=10240
+## T8
+genericF103.menu.device_variant.STM32F103T8=STM32F103T8 (20k RAM, 64k FLASH)
+genericF103.menu.device_variant.STM32F103T8.build.variant=Generic_F103/t8_tb
+genericF103.menu.device_variant.STM32F103T8.build.board=GENERIC_STM32F103T8
+genericF103.menu.device_variant.STM32F103T8.build.cpu_flags=-DMCU_STM32F103T8
+genericF103.menu.device_variant.STM32F103T8.build.ldscript=jtag_t8.ld
+genericF103.menu.device_variant.STM32F103T8.upload.maximum_size=65536
+genericF103.menu.device_variant.STM32F103T8.upload.maximum_data_size=20480
+## TB
+genericF103.menu.device_variant.STM32F103TB=STM32F103TB (20k RAM, 128k FLASH)
+genericF103.menu.device_variant.STM32F103TB.build.variant=Generic_F103/t8_tb
+genericF103.menu.device_variant.STM32F103TB.build.board=GENERIC_STM32F103TB
+genericF103.menu.device_variant.STM32F103TB.build.cpu_flags=-DMCU_STM32F103TB
+genericF103.menu.device_variant.STM32F103TB.build.ldscript=jtag_tb.ld
+genericF103.menu.device_variant.STM32F103TB.upload.maximum_size=131072
+genericF103.menu.device_variant.STM32F103TB.upload.maximum_data_size=20480
+## C4
+genericF103.menu.device_variant.STM32F103C4=STM32F103C4 (6k RAM, 16k FLASH)
+genericF103.menu.device_variant.STM32F103C4.build.variant=Generic_F103/c4_c6
+genericF103.menu.device_variant.STM32F103C4.build.board=GENERIC_STM32F103C4
+genericF103.menu.device_variant.STM32F103C4.build.cpu_flags=-DMCU_STM32F103C4
+genericF103.menu.device_variant.STM32F103C4.build.ldscript=jtag_c4.ld
+genericF103.menu.device_variant.STM32F103C4.upload.maximum_size=16384
+genericF103.menu.device_variant.STM32F103C4.upload.maximum_data_size=6144
+## C6
+genericF103.menu.device_variant.STM32F103C6=STM32F103C6 (10k RAM, 32k FLASH)
+genericF103.menu.device_variant.STM32F103C6.build.variant=Generic_F103/c4_c6
+genericF103.menu.device_variant.STM32F103C6.build.board=GENERIC_STM32F103C6
+genericF103.menu.device_variant.STM32F103C6.build.cpu_flags=-DMCU_STM32F103C6
+genericF103.menu.device_variant.STM32F103C6.build.ldscript=jtag_c6.ld
+genericF103.menu.device_variant.STM32F103C6.upload.maximum_size=32768
+genericF103.menu.device_variant.STM32F103C6.upload.maximum_data_size=10240
+## C8
+genericF103.menu.device_variant.STM32F103C8=STM32F103C8 (20k RAM, 64k FLASH)
+genericF103.menu.device_variant.STM32F103C8.build.variant=Generic_F103/c8_cb
+genericF103.menu.device_variant.STM32F103C8.build.board=GENERIC_STM32F103C8
+genericF103.menu.device_variant.STM32F103C8.build.cpu_flags=-DMCU_STM32F103C8
+genericF103.menu.device_variant.STM32F103C8.build.ldscript=jtag_c8.ld
+genericF103.menu.device_variant.STM32F103C8.upload.maximum_size=65536
+genericF103.menu.device_variant.STM32F103C8.upload.maximum_data_size=20480
+## CB
+genericF103.menu.device_variant.STM32F103CB=STM32F103CB (20k RAM, 128k FLASH)
+genericF103.menu.device_variant.STM32F103CB.build.variant=Generic_F103/c8_cb
+genericF103.menu.device_variant.STM32F103CB.build.board=GENERIC_STM32F103B
+genericF103.menu.device_variant.STM32F103CB.build.cpu_flags=-DMCU_STM32F103CB
+genericF103.menu.device_variant.STM32F103CB.build.ldscript=jtag_cb.ld
+genericF103.menu.device_variant.STM32F103CB.upload.maximum_size=131072
+genericF103.menu.device_variant.STM32F103CB.upload.maximum_data_size=20480
+## R4
+genericF103.menu.device_variant.STM32F103R4=STM32F103R4 (6k RAM, 16k FLASH)
+genericF103.menu.device_variant.STM32F103R4.build.variant=Generic_F103/r4_r6
+genericF103.menu.device_variant.STM32F103R4.build.board=GENERIC_STM32F103R
+genericF103.menu.device_variant.STM32F103R4.build.cpu_flags=-DMCU_STM32F103R4
+genericF103.menu.device_variant.STM32F103R4.build.ldscript=jtag_r4.ld
+genericF103.menu.device_variant.STM32F103R4.upload.maximum_size=16384
+genericF103.menu.device_variant.STM32F103R4.upload.maximum_data_size=6144
+## R6
+genericF103.menu.device_variant.STM32F103R6=STM32F103R6 (10k RAM, 32k FLASH)
+genericF103.menu.device_variant.STM32F103R6.build.variant=Generic_F103/r4_r6
+genericF103.menu.device_variant.STM32F103R6.build.board=GENERIC_STM32F103R
+genericF103.menu.device_variant.STM32F103R6.build.cpu_flags=-DMCU_STM32F103R6
+genericF103.menu.device_variant.STM32F103R6.build.ldscript=jtag_r6.ld
+genericF103.menu.device_variant.STM32F103R6.upload.maximum_size=32768
+genericF103.menu.device_variant.STM32F103R6.upload.maximum_data_size=10240
+## R8
+genericF103.menu.device_variant.STM32F103R8=STM32F103R8 (20k RAM, 64k FLASH)
+genericF103.menu.device_variant.STM32F103R8.build.variant=Generic_F103/r8_rb
+genericF103.menu.device_variant.STM32F103R8.build.board=GENERIC_STM32F103R
+genericF103.menu.device_variant.STM32F103R8.build.cpu_flags=-DMCU_STM32F103R8
+genericF103.menu.device_variant.STM32F103R8.build.ldscript=jtag_r8.ld
+genericF103.menu.device_variant.STM32F103R8.upload.maximum_size=65536
+genericF103.menu.device_variant.STM32F103R8.upload.maximum_data_size=20480
+## RB
+genericF103.menu.device_variant.STM32F103RB=STM32F103RB (20k RAM, 128k FLASH)
+genericF103.menu.device_variant.STM32F103RB.build.variant=Generic_F103/r8_rb
+genericF103.menu.device_variant.STM32F103RB.build.board=GENERIC_STM32F103R
+genericF103.menu.device_variant.STM32F103RB.build.cpu_flags=-DMCU_STM32F103RB
+genericF103.menu.device_variant.STM32F103RB.build.ldscript=jtag_rb.ld
+genericF103.menu.device_variant.STM32F103RB.upload.maximum_size=131072
+genericF103.menu.device_variant.STM32F103RB.upload.maximum_data_size=20480
+## RC
+genericF103.menu.device_variant.STM32F103RC=STM32F103RC (48k RAM, 256k FLASH)
+genericF103.menu.device_variant.STM32F103RC.build.variant=Generic_F103/generic_stm32f103r
+genericF103.menu.device_variant.STM32F103RC.build.board=GENERIC_STM32F103R
+genericF103.menu.device_variant.STM32F103RC.build.cpu_flags=-DMCU_STM32F103RC
+genericF103.menu.device_variant.STM32F103RC.build.ldscript=jtag_rc.ld
+genericF103.menu.device_variant.STM32F103RC.upload.maximum_size=262144
+genericF103.menu.device_variant.STM32F103RC.upload.maximum_data_size=49152
+## RE
+genericF103.menu.device_variant.STM32F103RE=STM32F103RE (64k RAM, 512k FLASH)
+genericF103.menu.device_variant.STM32F103RE.build.variant=Generic_F103/generic_stm32f103r
+genericF103.menu.device_variant.STM32F103RE.build.board=GENERIC_STM32F103R
+genericF103.menu.device_variant.STM32F103RE.build.cpu_flags=-DMCU_STM32F103RE
+genericF103.menu.device_variant.STM32F103RE.build.ldscript=jtag_re.ld
+genericF103.menu.device_variant.STM32F103RE.upload.maximum_size=524288
+genericF103.menu.device_variant.STM32F103RE.upload.maximum_data_size=65536
+## RF
+genericF103.menu.device_variant.STM32F103RF=STM32F103RF (96k RAM, 768k FLASH)
+genericF103.menu.device_variant.STM32F103RF.build.variant=Generic_F103/generic_stm32f103r
+genericF103.menu.device_variant.STM32F103RF.build.board=GENERIC_STM32F103R
+genericF103.menu.device_variant.STM32F103RF.build.cpu_flags=-DMCU_STM32F103RF
+genericF103.menu.device_variant.STM32F103RF.build.ldscript=jtag_rf.ld
+genericF103.menu.device_variant.STM32F103RF.upload.maximum_size=786432
+genericF103.menu.device_variant.STM32F103RF.upload.maximum_data_size=98304
+## RG
+genericF103.menu.device_variant.STM32F103RG=STM32F103RG (96k RAM, 1024k FLASH)
+genericF103.menu.device_variant.STM32F103RG.build.variant=Generic_F103/generic_stm32f103r
+genericF103.menu.device_variant.STM32F103RG.build.board=GENERIC_STM32F103R
+genericF103.menu.device_variant.STM32F103RG.build.cpu_flags=-DMCU_STM32F103RG
+genericF103.menu.device_variant.STM32F103RG.build.ldscript=jtag_rg.ld
+genericF103.menu.device_variant.STM32F103RG.upload.maximum_size=1048576
+genericF103.menu.device_variant.STM32F103RG.upload.maximum_data_size=98304
+## VB
+genericF103.menu.device_variant.STM32F103VB=STM32F103VB (20k RAM, 128k FLASH)
+genericF103.menu.device_variant.STM32F103VB.build.variant=Generic_F103/generic_stm32f103vb
+genericF103.menu.device_variant.STM32F103TB.build.board=GENERIC_STM32F103V
+genericF103.menu.device_variant.STM32F103VB.build.cpu_flags=-DMCU_STM32F103VB
+genericF103.menu.device_variant.STM32F103VB.build.ldscript=jtag_vb.ld
+genericF103.menu.device_variant.STM32F103VB.upload.maximum_size=131072
+genericF103.menu.device_variant.STM32F103VB.upload.maximum_data_size=20480
+## VC
+genericF103.menu.device_variant.STM32F103VC=STM32F103VC (48k RAM, 256k FLASH)
+genericF103.menu.device_variant.STM32F103VC.build.variant=Generic_F103/generic_stm32f103v
+genericF103.menu.device_variant.STM32F103VC.build.board=GENERIC_STM32F103V
+genericF103.menu.device_variant.STM32F103VC.build.cpu_flags=-DMCU_STM32F103VC
+genericF103.menu.device_variant.STM32F103VC.build.ldscript=jtag_vc.ld
+genericF103.menu.device_variant.STM32F103VC.upload.maximum_size=262144
+genericF103.menu.device_variant.STM32F103VC.upload.maximum_data_size=49152
+## VD
+genericF103.menu.device_variant.STM32F103VD=STM32F103VD (64k RAM, 384k FLASH)
+genericF103.menu.device_variant.STM32F103VD.build.variant=Generic_F103/generic_stm32f103v
+genericF103.menu.device_variant.STM32F103VD.build.board=GENERIC_STM32F103V
+genericF103.menu.device_variant.STM32F103VD.build.cpu_flags=-DMCU_STM32F103VD
+genericF103.menu.device_variant.STM32F103VD.build.ldscript=jtag_vd.ld
+genericF103.menu.device_variant.STM32F103VD.upload.maximum_size=393216
+genericF103.menu.device_variant.STM32F103VD.upload.maximum_data_size=65536
+## VE
+genericF103.menu.device_variant.STM32F103VE=STM32F103VE (64k RAM, 512k FLASH)
+genericF103.menu.device_variant.STM32F103VE.build.variant=Generic_F103/generic_stm32f103v
+genericF103.menu.device_variant.STM32F103VE.build.board=GENERIC_STM32F103V
+genericF103.menu.device_variant.STM32F103VE.build.cpu_flags=-DMCU_STM32F103VE
+genericF103.menu.device_variant.STM32F103VE.build.ldscript=jtag_ve.ld
+genericF103.menu.device_variant.STM32F103VE.upload.maximum_size=524288
+genericF103.menu.device_variant.STM32F103VE.upload.maximum_data_size=65536
+## VF
+genericF103.menu.device_variant.STM32F103VF=STM32F103VF (96k RAM, 768k FLASH)
+genericF103.menu.device_variant.STM32F103VF.build.variant=Generic_F103/generic_stm32f103v
+genericF103.menu.device_variant.STM32F103VF.build.board=GENERIC_STM32F103V
+genericF103.menu.device_variant.STM32F103VF.build.cpu_flags=-DMCU_STM32F103VF
+genericF103.menu.device_variant.STM32F103VF.build.ldscript=jtag_vf.ld
+genericF103.menu.device_variant.STM32F103VF.upload.maximum_size=786432
+genericF103.menu.device_variant.STM32F103VF.upload.maximum_data_size=98304
+## VG
+genericF103.menu.device_variant.STM32F103VG=STM32F103VG (96k RAM, 1024k FLASH)
+genericF103.menu.device_variant.STM32F103VG.build.variant=Generic_F103/generic_stm32f103v
+genericF103.menu.device_variant.STM32F103VG.build.board=GENERIC_STM32F103V
+genericF103.menu.device_variant.STM32F103VG.build.cpu_flags=-DMCU_STM32F103VG
+genericF103.menu.device_variant.STM32F103VG.build.ldscript=jtag_vg.ld
+genericF103.menu.device_variant.STM32F103VG.upload.maximum_size=1048576
+genericF103.menu.device_variant.STM32F103VG.upload.maximum_data_size=98304
+## ZC
+genericF103.menu.device_variant.STM32F103ZC=STM32F103ZC (48k RAM, 256k FLASH)
+genericF103.menu.device_variant.STM32F103ZC.build.variant=Generic_F103/generic_stm32f103z
+genericF103.menu.device_variant.STM32F103ZC.build.board=GENERIC_STM32F103Z
+genericF103.menu.device_variant.STM32F103ZC.build.cpu_flags=-DMCU_STM32F103ZC
+genericF103.menu.device_variant.STM32F103ZC.build.ldscript=jtag_zc.ld
+genericF103.menu.device_variant.STM32F103ZC.upload.maximum_size=262144
+genericF103.menu.device_variant.STM32F103ZC.upload.maximum_data_size=49152
+## ZD
+genericF103.menu.device_variant.STM32F103ZD=STM32F103ZD (64k RAM, 384k FLASH)
+genericF103.menu.device_variant.STM32F103ZD.build.variant=Generic_F103/generic_stm32f103z
+genericF103.menu.device_variant.STM32F103ZD.build.board=GENERIC_STM32F103Z
+genericF103.menu.device_variant.STM32F103ZD.build.cpu_flags=-DMCU_STM32F103ZD
+genericF103.menu.device_variant.STM32F103ZD.build.ldscript=jtag_zd.ld
+genericF103.menu.device_variant.STM32F103ZD.upload.maximum_size=393216
+genericF103.menu.device_variant.STM32F103ZD.upload.maximum_data_size=65536
+## ZE
+genericF103.menu.device_variant.STM32F103ZE=STM32F103ZE (64k RAM, 512k FLASH)
+genericF103.menu.device_variant.STM32F103ZE.build.variant=Generic_F103/generic_stm32f103z
+genericF103.menu.device_variant.STM32F103ZE.build.board=GENERIC_STM32F103Z
+genericF103.menu.device_variant.STM32F103ZE.build.cpu_flags=-DMCU_STM32F103ZE
+genericF103.menu.device_variant.STM32F103ZE.build.ldscript=jtag_ze.ld
+genericF103.menu.device_variant.STM32F103ZE.upload.maximum_size=524288
+genericF103.menu.device_variant.STM32F103ZE.upload.maximum_data_size=65536
+## ZF
+genericF103.menu.device_variant.STM32F103ZF=STM32F103ZF (96k RAM, 768k FLASH)
+genericF103.menu.device_variant.STM32F103ZF.build.variant=Generic_F103/generic_stm32f103z
+genericF103.menu.device_variant.STM32F103ZF.build.board=GENERIC_STM32F103Z
+genericF103.menu.device_variant.STM32F103ZF.build.cpu_flags=-DMCU_STM32F103ZF
+genericF103.menu.device_variant.STM32F103ZF.build.ldscript=jtag_zf.ld
+genericF103.menu.device_variant.STM32F103ZF.upload.maximum_size=786432
+genericF103.menu.device_variant.STM32F103ZF.upload.maximum_data_size=98304
+## ZG
+genericF103.menu.device_variant.STM32F103ZG=STM32F103ZG (96k RAM, 1024k FLASH)
+genericF103.menu.device_variant.STM32F103ZG.build.variant=Generic_F103/generic_stm32f103z
+genericF103.menu.device_variant.STM32F103ZG.build.board=GENERIC_STM32F103Z
+genericF103.menu.device_variant.STM32F103ZG.build.cpu_flags=-DMCU_STM32F103ZG
+genericF103.menu.device_variant.STM32F103ZG.build.ldscript=jtag_zg.ld
+genericF103.menu.device_variant.STM32F103ZG.upload.maximum_size=1048576
+genericF103.menu.device_variant.STM32F103ZG.upload.maximum_data_size=98304
+
+#-- USB Serial
+## Disable
+genericF103.menu.usb_serial.USB_disable=Disable
+genericF103.menu.usb_serial.USB_disable.build.usb_flag=
+## Enable
+genericF103.menu.usb_serial.USB_enable=Enable
+genericF103.menu.usb_serial.USB_enable.build.usb_flag=-DSERIAL_USB
+
+#-- Upload Metod
+## Texane ST-Link (SWD)
+genericF103.menu.upload_method.TexaneSTLinkMethod=Texane ST-Link (SWD)
+genericF103.menu.upload_method.TexaneSTLinkMethod.build.bootloader_flag=
+genericF103.menu.upload_method.TexaneSTLinkMethod.upload.tool=texane-stlink
+genericF103.menu.upload_method.TexaneSTLinkMethod.upload.protocol=TEXANESTLINK
+## STM ST-Link (SWD)
+genericF103.menu.upload_method.STLinkMethod=STM ST-Link (SWD)
+genericF103.menu.upload_method.STLinkMethod.build.bootloader_flag=
+genericF103.menu.upload_method.STLinkMethod.upload.tool=stm-stlink
+genericF103.menu.upload_method.STLinkMethod.upload.protocol=STMSTLINK
+## STM32CubeProgrammer (SWD)
+genericF103.menu.upload_method.CubeProgSWDMethod=CubeProgrammer (SWD)
+genericF103.menu.upload_method.CubeProgSWDMethod.build.bootloader_flag=
+genericF103.menu.upload_method.CubeProgSWDMethod.upload.tool=cube-prog
+genericF103.menu.upload_method.CubeProgSWDMethod.upload.protocol=0
+genericF103.menu.upload_method.CubeProgSWDMethod.upload.options=-g
+## STM32CubeProgrammer (UART)
+genericF103.menu.upload_method.CubeProgSerialMethod=CubeProgrammer (UART)
+genericF103.menu.upload_method.CubeProgSerialMethod.build.bootloader_flag=
+genericF103.menu.upload_method.CubeProgSerialMethod.upload.tool=cube-prog
+genericF103.menu.upload_method.CubeProgSerialMethod.upload.protocol=1
+genericF103.menu.upload_method.CubeProgSerialMethod.upload.options={serial.port.file} -s
+## HID Bootloader (USB)
+genericF103.menu.upload_method.HIDMethod=HID Bootloader 2.2 (USB)
+genericF103.menu.upload_method.HIDMethod.build.vect=VECT_TAB_ADDR=0x8000800
+genericF103.menu.upload_method.HIDMethod.build.ldscript=hid_bootloader_c8.ld
+genericF103.menu.upload_method.HIDMethod.build.bootloader_flag=-DBOARD_USE_HID_BL_22
+genericF103.menu.upload_method.HIDMethod.upload.tool=usb-hid
+genericF103.menu.upload_method.HIDMethod.upload.protocol=USBHID
+## Serial (UART)
+genericF103.menu.upload_method.SerialMethod=Serial (UART)
+genericF103.menu.upload_method.SerialMethod.build.bootloader_flag=
+genericF103.menu.upload_method.SerialMethod.upload.tool=uart
+genericF103.menu.upload_method.SerialMethod.upload.protocol=UART
+## Blackmagic Probe
+genericF103.menu.upload_method.BMPMethod=Blackmagic Probe
+genericF103.menu.upload_method.BMPMethod.build.bootloader_flag=
+genericF103.menu.upload_method.BMPMethod.upload.tool=bmp
+genericF103.menu.upload_method.BMPMethod.upload.protocol=BMP
+
+#-- Debug Ports
+## Only SWD
+genericF103.menu.debug_ports.debug_swd=Only SWD
+genericF103.menu.debug_ports.debug_swd.build.debug_flag=-DENABLE_DEBUG_ONLY_SWD
+## Disable
+genericF103.menu.debug_ports.debug_disable=Disable
+genericF103.menu.debug_ports.debug_disable.build.debug_flag=
+## SWD and JTAG
+genericF103.menu.debug_ports.debug_swd_jtag=SWD and JTAG
+genericF103.menu.debug_ports.debug_swd_jtag.build.debug_flag=-DENABLE_DEBUG_FULL_SWD_JTAG
+## SWD and JTAG no JNRST
+genericF103.menu.debug_ports.debug_swd_jtag_no_jnrst=SWD and JTAG no JNRST
+genericF103.menu.debug_ports.debug_swd_jtag_no_jnrst.build.debug_flag=-DENABLE_DEBUG_SWD_JTAG_NO_JNRST
+
+#-- CPU Speed
+## HSE
+### 16 Mhz
+genericF103.menu.cpu_speed.speed_hse_16mhz=16Mhz (External)
+genericF103.menu.cpu_speed.speed_hse_16mhz.build.f_cpu=16000000L
+### 24 Mhz
+genericF103.menu.cpu_speed.speed_hse_24mhz=24Mhz (External)
+genericF103.menu.cpu_speed.speed_hse_24mhz.build.f_cpu=24000000L
+### 32 Mhz
+genericF103.menu.cpu_speed.speed_hse_32mhz=32Mhz (External)
+genericF103.menu.cpu_speed.speed_hse_32mhz.build.f_cpu=32000000L
+### 40 Mhz
+genericF103.menu.cpu_speed.speed_hse_40mhz=40Mhz (External)
+genericF103.menu.cpu_speed.speed_hse_40mhz.build.f_cpu=40000000L
+### 48 Mhz
+genericF103.menu.cpu_speed.speed_hse_48mhz=48Mhz (External, USB)
+genericF103.menu.cpu_speed.speed_hse_48mhz.build.f_cpu=48000000L
+### 56 Mhz
+genericF103.menu.cpu_speed.speed_hse_56mhz=56Mhz (External)
+genericF103.menu.cpu_speed.speed_hse_56mhz.build.f_cpu=56000000L
+### 64 Mhz
+genericF103.menu.cpu_speed.speed_hse_64mhz=64Mhz (External)
+genericF103.menu.cpu_speed.speed_hse_64mhz.build.f_cpu=64000000L
+### 72 Mhz
+genericF103.menu.cpu_speed.speed_hse_72mhz=72Mhz (External, USB)
+genericF103.menu.cpu_speed.speed_hse_72mhz.build.f_cpu=72000000L
+### 80 Mhz
+genericF103.menu.cpu_speed.speed_hse_80mhz=80Mhz (External, Overclocked)
+genericF103.menu.cpu_speed.speed_hse_80mhz.build.f_cpu=80000000L
+### 88 Mhz
+genericF103.menu.cpu_speed.speed_hse_88mhz=88Mhz (External, Overclocked)
+genericF103.menu.cpu_speed.speed_hse_88mhz.build.f_cpu=88000000L
+### 96 Mhz
+genericF103.menu.cpu_speed.speed_hse_96mhz=96Mhz (External, Overclocked)
+genericF103.menu.cpu_speed.speed_hse_96mhz.build.f_cpu=96000000L
+### 112 Mhz
+genericF103.menu.cpu_speed.speed_hse_112mhz=112Mhz (External, Overclocked)
+genericF103.menu.cpu_speed.speed_hse_112mhz.build.f_cpu=112000000L
+### 120 Mhz
+genericF103.menu.cpu_speed.speed_hse_120mhz=120Mhz (External, Overclocked)
+genericF103.menu.cpu_speed.speed_hse_120mhz.build.f_cpu=120000000L
+### 128 Mhz
+genericF103.menu.cpu_speed.speed_hse_128mhz=128Mhz (External, Overclocked)
+genericF103.menu.cpu_speed.speed_hse_128mhz.build.f_cpu=128000000L
+## HSI
+### 8 Mhz
+genericF103.menu.cpu_speed.speed_hsi_8mhz=8Mhz (Internal)
+genericF103.menu.cpu_speed.speed_hsi_8mhz.build.f_cpu=8000000L
+genericF103.menu.cpu_speed.speed_hsi_8mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 16 Mhz
+genericF103.menu.cpu_speed.speed_hsi_16mhz=16Mhz (Internal)
+genericF103.menu.cpu_speed.speed_hsi_16mhz.build.f_cpu=16000000L
+genericF103.menu.cpu_speed.speed_hsi_16mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 20 Mhz
+genericF103.menu.cpu_speed.speed_hsi_20mhz=20Mhz (Internal)
+genericF103.menu.cpu_speed.speed_hsi_20mhz.build.f_cpu=20000000L
+genericF103.menu.cpu_speed.speed_hsi_20mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 24 Mhz
+genericF103.menu.cpu_speed.speed_hsi_24mhz=24Mhz (Internal)
+genericF103.menu.cpu_speed.speed_hsi_24mhz.build.f_cpu=24000000L
+genericF103.menu.cpu_speed.speed_hsi_24mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 28 Mhz
+genericF103.menu.cpu_speed.speed_hsi_28mhz=28Mhz (Internal)
+genericF103.menu.cpu_speed.speed_hsi_28mhz.build.f_cpu=28000000L
+genericF103.menu.cpu_speed.speed_hsi_28mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 32 Mhz
+genericF103.menu.cpu_speed.speed_hsi_32mhz=32Mhz (Internal)
+genericF103.menu.cpu_speed.speed_hsi_32mhz.build.f_cpu=32000000L
+genericF103.menu.cpu_speed.speed_hsi_32mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 36 Mhz
+genericF103.menu.cpu_speed.speed_hsi_36mhz=36Mhz (Internal)
+genericF103.menu.cpu_speed.speed_hsi_36mhz.build.f_cpu=36000000L
+genericF103.menu.cpu_speed.speed_hsi_36mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 40 Mhz
+genericF103.menu.cpu_speed.speed_hsi_40mhz=10Mhz (Internal)
+genericF103.menu.cpu_speed.speed_hsi_40mhz.build.f_cpu=40000000L
+genericF103.menu.cpu_speed.speed_hsi_40mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 44 Mhz
+genericF103.menu.cpu_speed.speed_hsi_44mhz=44Mhz (Internal)
+genericF103.menu.cpu_speed.speed_hsi_44mhz.build.f_cpu=44000000L
+genericF103.menu.cpu_speed.speed_hsi_44mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 48 Mhz
+genericF103.menu.cpu_speed.speed_hsi_48mhz=48Mhz (Internal, USB)
+genericF103.menu.cpu_speed.speed_hsi_48mhz.build.f_cpu=48000000L
+genericF103.menu.cpu_speed.speed_hsi_48mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 52 Mhz
+genericF103.menu.cpu_speed.speed_hsi_52mhz=52Mhz (Internal)
+genericF103.menu.cpu_speed.speed_hsi_52mhz.build.f_cpu=52000000L
+genericF103.menu.cpu_speed.speed_hsi_52mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 56 Mhz
+genericF103.menu.cpu_speed.speed_hsi_56mhz=56Mhz (Internal)
+genericF103.menu.cpu_speed.speed_hsi_56mhz.build.f_cpu=56000000L
+genericF103.menu.cpu_speed.speed_hsi_56mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 60 Mhz
+genericF103.menu.cpu_speed.speed_hsi_60mhz=60Mhz (Internal)
+genericF103.menu.cpu_speed.speed_hsi_60mhz.build.f_cpu=60000000L
+genericF103.menu.cpu_speed.speed_hsi_60mhz.build.hs_flag=-DUSE_HSI_CLOCK
+### 64 Mhz
+genericF103.menu.cpu_speed.speed_hsi_64mhz=64Mhz (Internal)
+genericF103.menu.cpu_speed.speed_hsi_64mhz.build.f_cpu=64000000L
+genericF103.menu.cpu_speed.speed_hsi_64mhz.build.hs_flag=-DUSE_HSI_CLOCK
+
+#-- Optimization
+genericF103.menu.opt.osstd=Smallest (default)
+genericF103.menu.opt.o1std=Fast (-O1)
+genericF103.menu.opt.o1std.build.flags.optimize=-O1
+genericF103.menu.opt.o1std.build.flags.ldspecs=
+genericF103.menu.opt.o2std=Faster (-O2)
+genericF103.menu.opt.o2std.build.flags.optimize=-O2
+genericF103.menu.opt.o2std.build.flags.ldspecs=
+genericF103.menu.opt.o3std=Fastest (-O3)
+genericF103.menu.opt.o3std.build.flags.optimize=-O3
+genericF103.menu.opt.o3std.build.flags.ldspecs=
+genericF103.menu.opt.ogstd=Debug (-g)
+genericF103.menu.opt.ogstd.build.flags.optimize=-Og
+genericF103.menu.opt.ogstd.build.flags.ldspecs=
+
+
+###################### *** ######################

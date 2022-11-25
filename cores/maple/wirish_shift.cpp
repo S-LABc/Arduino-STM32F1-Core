@@ -29,34 +29,29 @@
 void shiftOut(uint8 dataPin, uint8 clockPin, uint8 bitOrder, uint8 value) {
     digitalWrite(clockPin, LOW);
     for (int i = 0; i < 8; i++) {
-        int bit = bitOrder == LSBFIRST ? i : (7 - i);
-        digitalWrite(dataPin, (value >> bit) & 0x1);
-		gpio_toggle_bit(PIN_MAP[clockPin].gpio_device, PIN_MAP[clockPin].gpio_bit);// togglePin(clockPin);
-		gpio_toggle_bit(PIN_MAP[clockPin].gpio_device, PIN_MAP[clockPin].gpio_bit);// togglePin(clockPin);  
+      int bit = bitOrder == LSBFIRST ? i : (7 - i);
+      digitalWrite(dataPin, (value >> bit) & 0x1);
+		  gpio_toggle_bit(PIN_MAP[clockPin].gpio_device, PIN_MAP[clockPin].gpio_bit);// togglePin(clockPin);
+		  gpio_toggle_bit(PIN_MAP[clockPin].gpio_device, PIN_MAP[clockPin].gpio_bit);// togglePin(clockPin);  
     }
 }
 
-uint32_t shiftIn( uint32_t ulDataPin, uint32_t ulClockPin, uint32_t ulBitOrder )
-{
-  uint8_t value = 0 ;
-  uint8_t i ;
+uint32_t shiftIn( uint32_t ulDataPin, uint32_t ulClockPin, uint32_t ulBitOrder ) {
+  uint8_t value = 0;
+  uint8_t i;
 
-  
-  for ( i=0 ; i < 8 ; ++i )
-  {
-    digitalWrite( ulClockPin, HIGH ) ;
+  for (i = 0; i < 8; ++i) {
+    digitalWrite(ulClockPin, HIGH);
 
-    if ( ulBitOrder == LSBFIRST )
-    {
-      value |= digitalRead( ulDataPin ) << i ;
+    if (ulBitOrder == LSBFIRST) {
+      value |= digitalRead(ulDataPin) << i;
     }
-    else
-    {
-      value |= digitalRead( ulDataPin ) << (7 - i) ;
+    else {
+      value |= digitalRead(ulDataPin) << (7 - i);
     }
 
-    digitalWrite( ulClockPin, LOW ) ;
+    digitalWrite(ulClockPin, LOW);
   }
 
-  return value ;
+  return value;
 }

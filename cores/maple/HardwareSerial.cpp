@@ -26,12 +26,9 @@
  *****************************************************************************/
 
 /**
- * @file wirish/HardwareSerial.cpp
  * @brief Wirish serial port implementation.
  */
-
 #include "HardwareSerial.h"
-
 #include <libmaple/libmaple.h>
 #include <libmaple/gpio.h>
 #include <libmaple/timer.h>
@@ -39,47 +36,38 @@
 
 HardwareSerial::HardwareSerial(usart_dev *usart_device,
                                uint8 tx_pin,
-                               uint8 rx_pin) {
+                               uint8 rx_pin)
+{
     this->usart_device = usart_device;
     this->tx_pin = tx_pin;
     this->rx_pin = rx_pin;
 }
 
-/*
- * Set up/tear down
- */
-
-#if STM32_MCU_SERIES == STM32_SERIES_F1
-/* F1 MCUs have no GPIO_AFR[HL], so turn off PWM if there's a conflict
- * on this GPIO bit. */
-static void disable_timer_if_necessary(timer_dev *dev, uint8 ch) {
-    if (dev != NULL) {
+// Set up/tear down
+// F1 MCUs have no GPIO_AFR[HL], so turn off PWM if there's a conflict on this GPIO bit.
+static void disable_timer_if_necessary(timer_dev *dev, uint8 ch)
+{
+    if (dev != NULL)
+    {
         timer_set_mode(dev, ch, TIMER_DISABLED);
     }
 }
-#elif (STM32_MCU_SERIES == STM32_SERIES_F2) ||    \
-      (STM32_MCU_SERIES == STM32_SERIES_F4)
-#define disable_timer_if_necessary(dev, ch) ((void)0)
-#else
-#warning "Unsupported STM32 series; timer conflicts are possible"
-#endif
 
-void HardwareSerial::begin(uint32 baud) 
+void HardwareSerial::begin(uint32 baud)
 {
-	begin(baud,SERIAL_8N1);
+    begin(baud, SERIAL_8N1);
 }
+
 /*
  * Roger Clark.
- * Note. The config parameter is not currently used. This is a work in progress.  
+ * Note. The config parameter is not currently used. This is a work in progress.
  * Code needs to be written to set the config of the hardware serial control register in question.
  *
-*/
-
-void HardwareSerial::begin(uint32 baud, uint8_t config) 
+ */
+void HardwareSerial::begin(uint32 baud, uint8_t config)
 {
- //   ASSERT(baud <= this->usart_device->max_baud);// Roger Clark. Assert doesn't do anything useful, we may as well save the space in flash and ram etc
-
-    if (baud > this->usart_device->max_baud) {
+    if (baud > this->usart_device->max_baud)
+    {
         return;
     }
 
@@ -97,28 +85,30 @@ void HardwareSerial::begin(uint32 baud, uint8_t config)
     usart_enable(this->usart_device);
 }
 
-void HardwareSerial::end(void) {
+void HardwareSerial::end(void)
+{
     usart_disable(this->usart_device);
 }
 
-/*
- * I/O
- */
-
-int HardwareSerial::read(void) {
-	if(usart_data_available(usart_device) > 0) {
-		return usart_getc(usart_device);
-	} else {
-		return -1;
-	}
+// I/O
+int HardwareSerial::read(void)
+{
+    if (usart_data_available(usart_device) > 0)
+    {
+        return usart_getc(usart_device);
+    }
+    else
+    {
+        return -1;
+    }
 }
 
-int HardwareSerial::available(void) {
+int HardwareSerial::available(void)
+{
     return usart_data_available(this->usart_device);
 }
 
-/* Roger Clark. Added function missing from LibMaple code */
-
+// Roger Clark. Added function missing from LibMaple code
 int HardwareSerial::peek(void)
 {
     return usart_peek(this->usart_device);
@@ -126,17 +116,21 @@ int HardwareSerial::peek(void)
 
 int HardwareSerial::availableForWrite(void)
 {
-    return this->usart_device->wb->size-rb_full_count(this->usart_device->wb);
+    return this->usart_device->wb->size - rb_full_count(this->usart_device->wb);
 }
 
-size_t HardwareSerial::write(unsigned char ch) {
+size_t HardwareSerial::write(unsigned char ch)
+{
 
     usart_putc(this->usart_device, ch);
-	return 1;
+    return 1;
 }
 
-/* edogaldo: Waits for the transmission of outgoing serial data to complete (Arduino 1.0 api specs) */
-void HardwareSerial::flush(void) {
-    while(!rb_is_empty(this->usart_device->wb)); // wait for TX buffer empty
-    while(!((this->usart_device->regs->SR) & (1<<USART_SR_TC_BIT))); // wait for TC (Transmission Complete) flag set 
+// edogaldo: Waits for the transmission of outgoing serial data to complete (Arduino 1.0 api specs)
+void HardwareSerial::flush(void)
+{
+    while (!rb_is_empty(this->usart_device->wb))
+        ; // wait for TX buffer empty
+    while (!((this->usart_device->regs->SR) & (1 << USART_SR_TC_BIT)))
+        ; // wait for TC (Transmission Complete) flag set
 }

@@ -28,23 +28,23 @@
 /*
  * STM32F1 implementations for basic GPIO functionality.
  */
-
 #include <io.h>
-
 #include <libmaple/gpio.h>
 #include <libmaple/timer.h>
-
 #include <boards.h>
 
-void pinMode(uint8 pin, WiringPinMode mode) {
+void pinMode(uint8 pin, WiringPinMode mode)
+{
     gpio_pin_mode outputMode;
     bool pwm = false;
 
-    if (pin >= BOARD_NR_GPIO_PINS) {
+    if (pin >= BOARD_NR_GPIO_PINS)
+    {
         return;
     }
 
-    switch(mode) {
+    switch (mode)
+    {
     case OUTPUT:
         outputMode = GPIO_OUTPUT_PP;
         break;
@@ -79,14 +79,18 @@ void pinMode(uint8 pin, WiringPinMode mode) {
 
     gpio_set_mode(PIN_MAP[pin].gpio_device, PIN_MAP[pin].gpio_bit, outputMode);
 
-    if (PIN_MAP[pin].timer_device != NULL) {
-        if ( pwm ) { // we're switching into PWM, enable timer channels
-        timer_set_mode(PIN_MAP[pin].timer_device,
-                       PIN_MAP[pin].timer_channel,
-                       TIMER_PWM );
-        } else {  // disable channel output in non pwm-Mode             
-            timer_cc_disable(PIN_MAP[pin].timer_device, 
-                            PIN_MAP[pin].timer_channel); 
+    if (PIN_MAP[pin].timer_device != NULL)
+    {
+        if (pwm)
+        { // we're switching into PWM, enable timer channels
+            timer_set_mode(PIN_MAP[pin].timer_device,
+                           PIN_MAP[pin].timer_channel,
+                           TIMER_PWM);
+        }
+        else
+        { // disable channel output in non pwm-Mode
+            timer_cc_disable(PIN_MAP[pin].timer_device,
+                             PIN_MAP[pin].timer_channel);
         }
     }
 }

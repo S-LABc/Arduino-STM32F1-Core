@@ -25,10 +25,8 @@
  *****************************************************************************/
 
 /**
- * @file wirish/include/wirish/pwm.h
  * @brief Wiring-style PWM interface.
  */
-
 #ifndef _WIRISH_PWM_H_
 #define _WIRISH_PWM_H_
 
@@ -47,7 +45,7 @@ void pwmWrite(uint8 pin, uint16 duty_cycle16);
 
 /**
  * Roger Clark. 20140103
- * Added function to replicate the Arduino PWM functionality or range 0 to 255 
+ * Added function to replicate the Arduino PWM functionality or range 0 to 255
  * User code is expected to determine and honor the maximum value
  * (based on the configured period).
  *
@@ -55,5 +53,5 @@ void pwmWrite(uint8 pin, uint16 duty_cycle16);
  * @param duty_cycle Duty cycle to set. (Range is 0 to 255)
  */
 void analogWrite(uint8 pin, int duty_cycle8);
-#endif
 
+#endif

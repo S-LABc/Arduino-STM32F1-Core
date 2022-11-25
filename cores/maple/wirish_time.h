@@ -25,16 +25,13 @@
  *****************************************************************************/
 
 /**
- * @file wirish/include/wirish/wirish_time.h
  * @brief Timing and delay functions.
  */
-
 #ifndef _WIRISH_WIRISH_TIME_H_
 #define _WIRISH_WIRISH_TIME_H_
 
 #include <libmaple/libmaple_types.h>
 #include <libmaple/systick.h>
-
 #include <boards.h>
 
 #ifdef __cplusplus
@@ -66,11 +63,10 @@ static inline uint32 micros(void) {
         asm volatile("nop");
     } while (ms != millis());
 
-#define US_PER_MS               1000
+#define US_PER_MS 1000
     /* SYSTICK_RELOAD_VAL is 1 less than the number of cycles it
      * actually takes to complete a SysTick reload */
-    return ((ms * US_PER_MS) +
-            (SYSTICK_RELOAD_VAL + 1 - cycle_cnt) / CYCLES_PER_MICROSECOND);
+    return ((ms * US_PER_MS) + (SYSTICK_RELOAD_VAL + 1 - cycle_cnt) / CYCLES_PER_MICROSECOND);
 #undef US_PER_MS
 }
 

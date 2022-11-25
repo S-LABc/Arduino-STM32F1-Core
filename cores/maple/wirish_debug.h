@@ -52,11 +52,11 @@ void disableDebugPorts(void);
 void enableSWD(void);
 
 /**
- * @brief Enable the JTAG and Serial Wire (SW) debug ports (NJTRST disabled).
+ * @brief Enable the JTAG and Serial Wire (SW) debug ports (JNRST disabled).
  *
- * @see enableSWDJTAGnoNJRST()
+ * @see enableSWDJTAGnoJNRST()
  */
-void enableSWDJTAGnoNJRST(void);
+void enableSWDJTAGnoJNRST(void);
 
 /**
  * @brief Enable the JTAG and Serial Wire (SW) debug ports.

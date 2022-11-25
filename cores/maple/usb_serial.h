@@ -49,18 +49,17 @@ public:
     void begin(unsigned long, uint8_t);
     void end(void);
 
-    virtual int available(void);// Changed to virtual
+    // Changed to virtual
+    virtual int available(void);
 
     size_t readBytes(char *buf, const size_t& len);
     uint32 read(uint8 * buf, uint32 len);
-    // uint8  read(void);
 
     // Roger Clark. added functions to support Arduino 1.0 API
     virtual int peek(void);
     virtual int read(void);
     int availableForWrite(void);
     virtual void flush(void);
-
 
     size_t write(uint8);
     size_t write(const char *str);
@@ -69,7 +68,6 @@ public:
     uint8 getRTS();
     uint8 getDTR();
     uint8 pending();
-	
 	
 	void enableBlockingTx(void);
 	void disableBlockingTx(void);
@@ -80,12 +78,6 @@ public:
      * Used for instance in cardinfo.ino.
      */
     operator bool();
-
-    /* Old libmaple way to check for serial connection.
-     *
-     * Deprecated, use the above.
-     */
-    uint8 isConnected() __attribute__((deprecated("Use !Serial instead"))) { return (bool) *this; }
 
 protected:
     static bool _hasBegun;

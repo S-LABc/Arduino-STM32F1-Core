@@ -31,7 +31,6 @@
  * General purpose I/O (GPIO) and Alternate Function I/O (AFIO).
  */
 
-
 #ifndef _LIBMAPLE_STM32F1_GPIO_H_
 #define _LIBMAPLE_STM32F1_GPIO_H_
 
@@ -136,10 +135,6 @@ typedef enum gpio_pin_mode {
     /** Input pull-up. */
     GPIO_INPUT_PU, /* (treated a special case, for ODR twiddling) */
 } gpio_pin_mode;
-
-/* Hacks for F2: */
-#define GPIO_MODE_ANALOG GPIO_INPUT_ANALOG
-#define GPIO_MODE_OUTPUT GPIO_OUTPUT_PP
 
 /*
  * AFIO register map
@@ -409,86 +404,6 @@ typedef enum afio_debug_cfg {
 static inline void afio_cfg_debug_ports(afio_debug_cfg config) {
     __IO uint32 *mapr = &AFIO_BASE->MAPR;
     *mapr = (*mapr & ~AFIO_MAPR_SWJ_CFG) | config;
-}
-
-/*
- * Deprecated bits
- */
-
-/**
- * @brief Deprecated. Use exti_cfg instead.
- *
- * In previous versions of libmaple, exti_attach_interrupt() took an
- * afio_exti_port argument; afio_exti_port was also a member of struct
- * gpio_dev. This isn't portable, so we now use exti_cfg
- * instead. This typedef (and the macros AFIO_EXTI_PA, ...,
- * AFIO_EXTI_PG) exist to preserve backwards compatibility.
- */
-typedef exti_cfg afio_exti_port;
-
-/** Deprecated. Use EXTI_PA instead. */
-#define AFIO_EXTI_PA EXTI_PA
-/** Deprecated. Use EXTI_PB instead. */
-#define AFIO_EXTI_PB EXTI_PB
-/** Deprecated. Use EXTI_PC instead. */
-#define AFIO_EXTI_PC EXTI_PC
-/** Deprecated. Use EXTI_PD instead. */
-#define AFIO_EXTI_PD EXTI_PD
-/** Deprecated. Use EXTI_PE instead. */
-#define AFIO_EXTI_PE EXTI_PE
-/** Deprecated. Use EXTI_PF instead. */
-#define AFIO_EXTI_PF EXTI_PF
-/** Deprecated. Use EXTI_PG instead. */
-#define AFIO_EXTI_PG EXTI_PG
-
-/**
- * @brief Deprecated. Use exti_num instead.
- *
- * In previous versions of libmaple, exti_attach_interrupt() took an
- * afio_exti_num argument. This isn't portable, so we use exti_num
- * instead. This typedef (and the macros AFIO_EXTI_0, ...,
- * AFIO_EXTI_15) exist to preserve backwards compatibility.
- */
-typedef exti_num afio_exti_num;
-
-/** Deprecated. Use EXTI0 instead. */
-#define AFIO_EXTI_0 EXTI0
-/** Deprecated. Use EXTI1 instead. */
-#define AFIO_EXTI_1 EXTI1
-/** Deprecated. Use EXTI2 instead. */
-#define AFIO_EXTI_2 EXTI2
-/** Deprecated. Use EXTI3 instead. */
-#define AFIO_EXTI_3 EXTI3
-/** Deprecated. Use EXTI4 instead. */
-#define AFIO_EXTI_4 EXTI4
-/** Deprecated. Use EXTI5 instead. */
-#define AFIO_EXTI_5 EXTI5
-/** Deprecated. Use EXTI6 instead. */
-#define AFIO_EXTI_6 EXTI6
-/** Deprecated. Use EXTI7 instead. */
-#define AFIO_EXTI_7 EXTI7
-/** Deprecated. Use EXTI8 instead. */
-#define AFIO_EXTI_8 EXTI8
-/** Deprecated. Use EXTI9 instead. */
-#define AFIO_EXTI_9 EXTI9
-/** Deprecated. Use EXTI10 instead. */
-#define AFIO_EXTI_10 EXTI10
-/** Deprecated. Use EXTI11 instead. */
-#define AFIO_EXTI_11 EXTI11
-/** Deprecated. Use EXTI12 instead. */
-#define AFIO_EXTI_12 EXTI12
-/** Deprecated. Use EXTI13 instead. */
-#define AFIO_EXTI_13 EXTI13
-/** Deprecated. Use EXTI14 instead. */
-#define AFIO_EXTI_14 EXTI14
-/** Deprecated. Use EXTI15 instead. */
-#define AFIO_EXTI_15 EXTI15
-
-/**
- * @brief Deprecated. Use exti_select(exti, port) instead.
- */
-inline void afio_exti_select(exti_num exti, exti_cfg port) {
-    exti_select(exti, port);
 }
 
 #ifdef __cplusplus

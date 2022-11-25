@@ -25,12 +25,11 @@
  *****************************************************************************/
 
 /**
+ * @file libmaple/stm32f1/include/series/stm32.h
  * @brief STM32F1 chip- and series-specific definitions.
+ * Modified by Roger Clark. 20141111. Wrapped #define STM32_MEDIUM_DENSITY in #ifndef 
+ * to prevent redefinition warnings as SSTM32_MEDIUM_DENSITY is defined in boards.txt as a compilor define.
  */
- /*
-  * Modified by Roger Clark. 20141111. Wrapped #define STM32_MEDIUM_DENSITY in #ifndef 
-  * to prevent redefinition warnings as SSTM32_MEDIUM_DENSITY is defined in boards.txt as a compilor define.
-  */
 
 #ifndef _LIBMAPLE_STM32F1_H_
 #define _LIBMAPLE_STM32F1_H_
@@ -41,21 +40,24 @@ extern "C" {
 
 #define STM32_MCU_SERIES                STM32_SERIES_F1
 
-/* The STM32F1 series is subdivided into "lines". libmaple currently
+/*
+ * The STM32F1 series is subdivided into "lines". libmaple currently
  * officially supports STM32F103 performance line MCUs (see the
  * MCU-specific value section below).
  *
  * You can use these F1 line defines if porting libmaple to support
- * MCUs on other lines. */
-/** STM32F1 value line (STM32F100 MCUs). */
+ * MCUs on other lines.
+ */
+
+/* STM32F1 value line (STM32F100) */
 #define STM32_F1_LINE_VALUE             0
-/** STM32F1 access line (STM32F101 MCUs). */
+/* STM32F1 access line (STM32F101) */
 #define STM32_F1_LINE_ACCESS            1
-/** STM32F1 USB access line (STM32F102 MCUs). */
+/* STM32F1 USB access line (STM32F102) */
 #define STM32_F1_LINE_USB_ACCESS        2
-/** STM32F1 performance line (STM32F103 MCUs). */
+/* STM32F1 performance line (STM32F103) */
 #define STM32_F1_LINE_PERFORMANCE       3
-/** STM32F1 connectivity line (STM32F105/F107 MCUs). */
+/* STM32F1 connectivity line (STM32F105/F107) */
 #define STM32_F1_LINE_CONNECTIVITY      5
 
 /*
@@ -67,109 +69,118 @@ extern "C" {
  * STM32F103 microcontrollers set below won't take effect.
  */
 
-#if defined(MCU_STM32F103T8)
-#   define STM32_NR_GPIO_PORTS          2
-#   define STM32_SRAM_END               ((void*)0x20005000)
-#   define NR_GPIO_PORTS                STM32_NR_GPIO_PORTS
-#   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
+/******* F100 *******/
+#if defined(MCU_STM32F100RB)
+#   define STM32_F1_LINE                STM32_F1_LINE_VALUE
+#   define STM32_NR_GPIO_PORTS          4
+#   define STM32_SRAM_END               ((void*)0x20002000)
 #   define STM32_MEDIUM_DENSITY
 
-#elif defined(MCU_STM32F103TB)
-#   define STM32_NR_GPIO_PORTS          2
-#   define STM32_SRAM_END               ((void*)0x20005000)
-#   define NR_GPIO_PORTS                STM32_NR_GPIO_PORTS
-#   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
-#   define STM32_MEDIUM_DENSITY
+/******* F101 *******/
+/* TODO */
 
-#elif defined(MCU_STM32F103C8)
+/******* F102 *******/
+/* TODO */
+
+/******* F103 *******/
+#elif defined(MCU_STM32F103T4)
+#   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
 #   define STM32_NR_GPIO_PORTS          3
-#   define STM32_SRAM_END               ((void*)0x20005000)
-#   define NR_GPIO_PORTS                STM32_NR_GPIO_PORTS
-#   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
+#   define STM32_SRAM_END               ((void*)0x20001800)
 #   define STM32_MEDIUM_DENSITY
-
-#elif defined(MCU_STM32F103C6)
+#elif defined(MCU_STM32F103T6)
+#   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
 #   define STM32_NR_GPIO_PORTS          3
 #   define STM32_SRAM_END               ((void*)0x20002800)
-#   define NR_GPIO_PORTS                STM32_NR_GPIO_PORTS
+#   define STM32_MEDIUM_DENSITY
+#elif defined(MCU_STM32F103T8) || defined(MCU_STM32F103TB)
 #   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
-#   define STM32_MEDIUM_DENSITY // this is actually a low density device, but it is very close to the C8
-
-#elif defined(MCU_STM32F103CB)
-#   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
-    /* This STM32_NR_GPIO_PORTS is not true, but only pins 0 and
-     * exist, and they're used for OSC (e.g. on LeafLabs' Maple Mini),
-     * so we'll live with this for now. */
 #   define STM32_NR_GPIO_PORTS          3
 #   define STM32_SRAM_END               ((void*)0x20005000)
 #   define STM32_MEDIUM_DENSITY
-
-#elif defined(MCU_STM32F103R8)
+#elif defined(MCU_STM32F103C4)
+#   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
+#   define STM32_NR_GPIO_PORTS          4
+#   define STM32_SRAM_END               ((void*)0x20001800)
+#   define STM32_MEDIUM_DENSITY
+#elif defined(MCU_STM32F103C6)
+#   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
+#   define STM32_NR_GPIO_PORTS          4
+#   define STM32_SRAM_END               ((void*)0x20002800)
+#   define STM32_MEDIUM_DENSITY
+#elif defined(MCU_STM32F103C8) || defined(MCU_STM32F103CB)
 #   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
 #   define STM32_NR_GPIO_PORTS          4
 #   define STM32_SRAM_END               ((void*)0x20005000)
 #   define STM32_MEDIUM_DENSITY
-
-#elif defined(MCU_STM32F103RB)
+#elif defined(MCU_STM32F103R4)
+#   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
+#   define STM32_NR_GPIO_PORTS          4
+#   define STM32_SRAM_END               ((void*)0x20001800)
+#   define STM32_MEDIUM_DENSITY
+#elif defined(MCU_STM32F103R6)
+#   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
+#   define STM32_NR_GPIO_PORTS          4
+#   define STM32_SRAM_END               ((void*)0x20002800)
+#   define STM32_MEDIUM_DENSITY
+#elif defined(MCU_STM32F103R8) || defined(MCU_STM32F103RB)
 #   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
 #   define STM32_NR_GPIO_PORTS          4
 #   define STM32_SRAM_END               ((void*)0x20005000)
 #   define STM32_MEDIUM_DENSITY
-
 #elif defined(MCU_STM32F103RC)
 #   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
 #   define STM32_NR_GPIO_PORTS          4
 #   define STM32_SRAM_END               ((void*)0x2000C000)
 #   define STM32_HIGH_DENSITY
-
 #elif defined(MCU_STM32F103RD) || defined(MCU_STM32F103RE)
 #   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
 #   define STM32_NR_GPIO_PORTS          4
 #   define STM32_SRAM_END               ((void*)0x20010000)
 #   define STM32_HIGH_DENSITY
-
-#elif defined(MCU_STM32F103V8)
+#elif defined(MCU_STM32F103RF) || defined(MCU_STM32F103RG)
+#   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
+#   define STM32_NR_GPIO_PORTS          4
+#   define STM32_SRAM_END               ((void*)0x20018000)
+#   define STM32_XL_DENSITY
+#elif defined(MCU_STM32F103V8) || defined(MCU_STM32F103VB)
 #   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
 #   define STM32_NR_GPIO_PORTS          5
 #   define STM32_SRAM_END               ((void*)0x20005000)
 #   define STM32_MEDIUM_DENSITY
-
-#elif defined(MCU_STM32F103VB)
-#   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
-#   define STM32_NR_GPIO_PORTS          5
-#   define STM32_SRAM_END               ((void*)0x20005000)
-#   define STM32_MEDIUM_DENSITY
-
 #elif defined(MCU_STM32F103VC)
 #   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
 #   define STM32_NR_GPIO_PORTS          5
 #   define STM32_SRAM_END               ((void*)0x2000C000)
 #   define STM32_HIGH_DENSITY
-
 #elif defined(MCU_STM32F103VD) || defined(MCU_STM32F103VE)
 #   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
 #   define STM32_NR_GPIO_PORTS          5
 #   define STM32_SRAM_END               ((void*)0x20010000)
 #   define STM32_HIGH_DENSITY
-
+#elif defined(MCU_STM32F103VF) || defined(MCU_STM32F103VG)
+#   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
+#   define STM32_NR_GPIO_PORTS          5
+#   define STM32_SRAM_END               ((void*)0x20018000)
+#   define STM32_XL_DENSITY
 #elif defined(MCU_STM32F103ZC)
 #   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
 #   define STM32_NR_GPIO_PORTS          7
 #   define STM32_SRAM_END               ((void*)0x2000C000)
 #   define STM32_HIGH_DENSITY
-
 #elif defined(MCU_STM32F103ZD) || defined(MCU_STM32F103ZE)
 #   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
 #   define STM32_NR_GPIO_PORTS          7
 #   define STM32_SRAM_END               ((void*)0x20010000)
 #   define STM32_HIGH_DENSITY
+#elif defined(MCU_STM32F103ZF) || defined(MCU_STM32F103ZG)
+#   define STM32_F1_LINE                STM32_F1_LINE_PERFORMANCE
+#   define STM32_NR_GPIO_PORTS          7
+#   define STM32_SRAM_END               ((void*)0x20018000)
+#   define STM32_XL_DENSITY
 
-#elif defined(MCU_STM32F100RB)
-#   define STM32_F1_LINE                STM32_F1_LINE_VALUE
-#   define STM32_NR_GPIO_PORTS          4
-#   define STM32_TIMER_MASK             0x380DE /* Timers: 1-4, 6, 7, 15-17. */
-#   define STM32_SRAM_END               ((void*)0x20002000)
-#   define STM32_MEDIUM_DENSITY
+/******* F105/F107 *******/
+/* TODO */
 
 #else
 #warning "Unsupported or unspecified STM32F1 MCU."
@@ -178,51 +189,46 @@ extern "C" {
 /*
  * Derived values.
  */
-
 #if STM32_F1_LINE == STM32_F1_LINE_PERFORMANCE
-     /* All supported performance line MCUs have a USB peripheral */
-#    define STM32_HAVE_USB              1
-
-#    ifdef STM32_MEDIUM_DENSITY
-#       define STM32_NR_INTERRUPTS      43
-#       define STM32_TIMER_MASK         0x1E /* TIMER1--TIMER4 */
-#       define STM32_HAVE_FSMC          0
-#       define STM32_HAVE_DAC           0
-#    elif defined(STM32_HIGH_DENSITY)
-#       define STM32_NR_INTERRUPTS      60
-#       define STM32_TIMER_MASK         0x1FE /* TIMER1--TIMER8 */
-#       if STM32_NR_GPIO_PORTS > 4
-#           define STM32_HAVE_FSMC      1
-#       else
-#           define STM32_HAVE_FSMC      0
-#       endif
-#       define STM32_HAVE_DAC           1
-#    elif defined(STM32_XL_DENSITY)
-#       define STM32_NR_INTERRUPTS      60
-#       define STM32_TIMER_MASK         0x7FFE /* TIMER1--TIMER14 */
-#       if STM32_NR_GPIO_PORTS > 4
-#           define STM32_HAVE_FSMC      1
-#       else
-#           define STM32_HAVE_FSMC      0
-#       endif
-#       define STM32_HAVE_DAC           1
-#    endif
+#   define STM32_HAVE_USB              1 // All supported performance line MCUs have a USB peripheral
+#   if defined(STM32_MEDIUM_DENSITY)
+#     define STM32_NR_INTERRUPTS      43
+#     define STM32_TIMER_MASK         0x1E // TIMER1--TIMER4
+#     define STM32_HAVE_FSMC          0
+#     define STM32_HAVE_DAC           0
+#   elif defined(STM32_HIGH_DENSITY)
+#     define STM32_NR_INTERRUPTS      60
+#     define STM32_TIMER_MASK         0x1FE // TIMER1--TIMER8
+#     if STM32_NR_GPIO_PORTS > 4
+#       define STM32_HAVE_FSMC        1
+#     else
+#       define STM32_HAVE_FSMC        0
+#     endif
+#     define STM32_HAVE_DAC           1
+#   elif defined(STM32_XL_DENSITY)
+#     define STM32_NR_INTERRUPTS      60
+#     define STM32_TIMER_MASK         0x7FFE // TIMER1--TIMER14
+#     if STM32_NR_GPIO_PORTS > 4
+#       define STM32_HAVE_FSMC        1
+#     else
+#       define STM32_HAVE_FSMC        0
+#     endif
+#     define STM32_HAVE_DAC           1
+#   endif
 
 #elif STM32_F1_LINE == STM32_F1_LINE_VALUE
-     /* Value line MCUs don't have USB peripherals. */
-#    define STM32_HAVE_USB              0
-
-#    ifdef STM32_MEDIUM_DENSITY
-#        define STM32_NR_INTERRUPTS     56
-#        define STM32_HAVE_FSMC         0
-#        define STM32_HAVE_DAC          1
-#    elif defined(STM32_HIGH_DENSITY)
-         /* 61 interrupts here counts the possibility for a remapped
-          * DMA2 channel 5 IRQ occurring at NVIC index 60.  */
-#        define STM32_NR_INTERRUPTS     61
-#        define STM32_HAVE_FSMC         1
-#        define STM32_HAVE_DAC          1
-#    endif
+#   define STM32_HAVE_USB              0 // Value line MCUs don't have USB peripherals.
+#   if defined(STM32_MEDIUM_DENSITY)
+#     define STM32_NR_INTERRUPTS       56
+#     define STM32_TIMER_MASK          0x380DE // Timers: 1-4, 6, 7, 15-17.
+#     define STM32_HAVE_FSMC           0
+#     define STM32_HAVE_DAC            1
+#   elif defined(STM32_HIGH_DENSITY)
+#     define STM32_NR_INTERRUPTS       61 // 61 interrupts here counts the possibility for a remapped DMA2 channel 5 IRQ occurring at NVIC index 60.
+#     define STM32_TIMER_MASK          0x380DE // Timers: 1-4, 6, 7, 15-17.
+#     define STM32_HAVE_FSMC           1
+#     define STM32_HAVE_DAC            1
+#   endif
 
 #endif
 
@@ -232,27 +238,26 @@ extern "C" {
  * You can patch these for your line, MCU, clock configuration,
  * etc. here or by setting cflags when compiling libmaple.
  */
-
 #if STM32_F1_LINE == STM32_F1_LINE_PERFORMANCE
-#    ifndef STM32_PCLK1
-#    define STM32_PCLK1                     F_CPU/2
-#    endif
-#    ifndef STM32_PCLK2
-#    define STM32_PCLK2                     F_CPU
-#    endif
-#    ifndef STM32_DELAY_US_MULT
-#		define STM32_DELAY_US_MULT 				(F_CPU / 6000000L)
-#    endif
-#elif STM32_F1_LINE == STM32_F1_LINE_VALUE        /* TODO */
-#    ifndef STM32_PCLK1
-#    define STM32_PCLK1                     12000000U
-#    endif
-#    ifndef STM32_PCLK2
-#    define STM32_PCLK2                     24000000U
-#    endif
-#    ifndef STM32_DELAY_US_MULT
-#    define STM32_DELAY_US_MULT             8 /* FIXME: value is incorrect. */
-#    endif
+#   ifndef STM32_PCLK1
+#     define STM32_PCLK1               F_CPU / 2
+#   endif
+#   ifndef STM32_PCLK2
+#     define STM32_PCLK2               F_CPU
+#   endif
+#   ifndef STM32_DELAY_US_MULT
+#		  define STM32_DELAY_US_MULT 			 (F_CPU / 6000000L)
+#   endif
+#elif STM32_F1_LINE == STM32_F1_LINE_VALUE
+#   ifndef STM32_PCLK1
+#     define STM32_PCLK1               F_CPU / 2
+#   endif
+#   ifndef STM32_PCLK2
+#     define STM32_PCLK2               F_CPU
+#   endif
+#   ifndef STM32_DELAY_US_MULT
+#     define STM32_DELAY_US_MULT       8 /* FIXME: value is incorrect. */
+#   endif
 #elif STM32_F1_LINE == STM32_F1_LINE_ACCESS       /* TODO */
 #elif STM32_F1_LINE == STM32_F1_LINE_USB_ACCESS   /* TODO */
 #elif STM32_F1_LINE == STM32_F1_LINE_CONNECTIVITY /* TODO */
@@ -262,29 +267,10 @@ extern "C" {
  * Sanity checks.
  *
  * Make sure we have the F1-specific defines we need.
- * <libmaple/stm32.h> will check that we've defined everything it needs.
  */
-
 #if !defined(STM32_F1_LINE)
 #error "Bad STM32F1 configuration. Check STM32F1 <system/libmaple/stm32f1/include/series/stm32.h> header."
 #endif
-
-/*
- * Doxygen
- */
-
-#ifdef __DOXYGEN__
-
-/**
- * @brief STM32 line value for the STM32F1 MCU being targeted.
- *
- * At time of writing, allowed values are: STM32_F1_LINE_PERFORMANCE,
- * STM32_F1_LINE_VALUE. This set of values may expand as libmaple adds
- * support for more STM32F1 lines.
- */
-#define STM32_F1_LINE
-
-#endif /* __DOXYGEN__ */
 
 #ifdef __cplusplus
 }

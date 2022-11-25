@@ -28,7 +28,6 @@
 /*
  * Arduino-compatible digital I/O implementation.
  */
-
 #include "io.h"
 
 #include <libmaple/gpio.h>
@@ -38,60 +37,61 @@
 #include "boards.h"
 
 uint32 digitalRead(uint8 pin) {
-    if (pin >= BOARD_NR_GPIO_PINS) {
-        return 0;
-    }
+  if (pin >= BOARD_NR_GPIO_PINS) {
+    return 0;
+  }
 
-    return gpio_read_bit(PIN_MAP[pin].gpio_device, PIN_MAP[pin].gpio_bit) ?
-        HIGH : LOW;
+  return gpio_read_bit(PIN_MAP[pin].gpio_device, PIN_MAP[pin].gpio_bit) ? HIGH : LOW;
 }
 
 void digitalWrite(uint8 pin, uint8 val) {
-    if (pin >= BOARD_NR_GPIO_PINS) {
-        return;
-    }
+  if (pin >= BOARD_NR_GPIO_PINS) {
+    return;
+  }
 
-    gpio_write_bit(PIN_MAP[pin].gpio_device, PIN_MAP[pin].gpio_bit, val);
+  gpio_write_bit(PIN_MAP[pin].gpio_device, PIN_MAP[pin].gpio_bit, val);
 }
 
-#if FALSE
-// Roger Clark. Deprecated these functions as they are not part of the standard Arduino API
 void togglePin(uint8 pin) {
-    if (pin >= BOARD_NR_GPIO_PINS) {
-        return;
-    }
+  if (pin >= BOARD_NR_GPIO_PINS) {
+    return;
+  }
 
-    gpio_toggle_bit(PIN_MAP[pin].gpio_device, PIN_MAP[pin].gpio_bit);
+  gpio_toggle_bit(PIN_MAP[pin].gpio_device, PIN_MAP[pin].gpio_bit);
 }
 
 #define BUTTON_DEBOUNCE_DELAY 1
 
 uint8 isButtonPressed(uint8 pin, uint32 pressedLevel) {
-    if (digitalRead(pin) == pressedLevel) {
-        delay(BUTTON_DEBOUNCE_DELAY);
-        while (digitalRead(pin) == pressedLevel)
-            ;
-        return true;
-    }
-    return false;
+  if (digitalRead(pin) == pressedLevel) {
+    delay(BUTTON_DEBOUNCE_DELAY);
+
+    while (digitalRead(pin) == pressedLevel)
+      ;
+
+    return true;
+  }
+
+  return false;
 }
 
-uint8 waitForButtonPress(uint32 timeout) {
-    uint32 start = millis();
-    uint32 time;
-    if (timeout == 0) {
-        while (!isButtonPressed())
-            ;
-        return true;
-    }
-    do {
-        time = millis();
-        /* properly handle wrap-around */
-        if ((start > time && time + (0xffffffffU - start) > timeout) ||
-            time - start > timeout) {
-            return false;
-        }
-    } while (!isButtonPressed());
+uint8 waitForButtonPress(uint8 pin, uint32 pressedLevel, uint32 timeout) {
+  uint32 start = millis();
+  uint32 time;
+
+  if (timeout == 0) {
+    while (!isButtonPressed(pin, pressedLevel))
+      ;
+
     return true;
+  }
+  do {
+    time = millis();
+
+    if ((start > time && time + (0xffffffffU - start) > timeout) || time - start > timeout) {
+      return false;
+    }
+  } while (!isButtonPressed(pin, pressedLevel));
+  
+  return true;
 }
-#endif

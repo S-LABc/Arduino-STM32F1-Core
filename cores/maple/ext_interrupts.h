@@ -25,28 +25,20 @@
  *****************************************************************************/
 
 /**
- * @file wirish/include/wirish/ext_interrupts.h
  * @brief Wiring-like external interrupt prototypes and types.
  */
-
 #ifndef _WIRISH_EXT_INTERRUPTS_H_
 #define _WIRISH_EXT_INTERRUPTS_H_
 
 #include <libmaple/libmaple_types.h>
 #include <libmaple/nvic.h>
 
-/**
- * The kind of transition on an external pin which should trigger an
- * interrupt.
- */
-typedef enum ExtIntTriggerMode {
-    RISING, /**< To trigger an interrupt when the pin transitions LOW
-                 to HIGH */
-    FALLING, /**< To trigger an interrupt when the pin transitions
-                  HIGH to LOW */
-    CHANGE /**< To trigger an interrupt when the pin transitions from
-                LOW to HIGH or HIGH to LOW (i.e., when the pin
-                changes). */
+// The kind of transition on an external pin which should trigger an interrupt.
+typedef enum ExtIntTriggerMode
+{
+  RISING,  // To trigger an interrupt when the pin transitions LOW to HIGH
+  FALLING, // To trigger an interrupt when the pin transitions HIGH to LOW
+  CHANGE   // To trigger an interrupt when the pin transitions from LOW to HIGH or HIGH to LOW (i.e., when the pin changes).
 } ExtIntTriggerMode;
 
 /**
@@ -87,8 +79,7 @@ void attachInterrupt(uint8 pin, voidFuncPtr handler, ExtIntTriggerMode mode);
  *  @sideeffect Registers a handler
  *  @see detachInterrupt()
  */
-void attachInterrupt(uint8 pin, voidArgumentFuncPtr handler, void *arg,
-                     ExtIntTriggerMode mode);
+void attachInterrupt(uint8 pin, voidArgumentFuncPtr handler, void *arg, ExtIntTriggerMode mode);
 
 /**
  * @brief Disable any registered external interrupt.
@@ -106,8 +97,9 @@ void detachInterrupt(uint8 pin);
  *
  * @see noInterrupts()
  */
-inline void interrupts() {
-    nvic_globalirq_enable();
+inline void interrupts()
+{
+  nvic_globalirq_enable();
 }
 
 /**
@@ -120,9 +112,9 @@ inline void interrupts() {
  *
  * @see interrupts()
  */
-inline void noInterrupts() {
-    nvic_globalirq_disable();
+inline void noInterrupts()
+{
+  nvic_globalirq_disable();
 }
 
 #endif
-

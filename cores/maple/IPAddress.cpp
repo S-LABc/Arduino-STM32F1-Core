@@ -57,14 +57,16 @@ bool IPAddress::fromString(const char *address)
         if (c >= '0' && c <= '9')
         {
             acc = acc * 10 + (c - '0');
-            if (acc > 255) {
+            if (acc > 255)
+            {
                 // Value out of [0..255] range
                 return false;
             }
         }
         else if (c == '.')
         {
-            if (dots == 3) {
+            if (dots == 3)
+            {
                 // Too much dots (there must be 3 dots)
                 return false;
             }
@@ -78,40 +80,44 @@ bool IPAddress::fromString(const char *address)
         }
     }
 
-    if (dots != 3) {
+    if (dots != 3)
+    {
         // Too few dots (there must be 3 dots)
         return false;
     }
     _address.bytes[3] = acc;
+
     return true;
 }
 
-IPAddress& IPAddress::operator=(const uint8_t *address)
+IPAddress &IPAddress::operator=(const uint8_t *address)
 {
     memcpy(_address.bytes, address, sizeof(_address.bytes));
     return *this;
 }
 
-IPAddress& IPAddress::operator=(uint32_t address)
+IPAddress &IPAddress::operator=(uint32_t address)
 {
     _address.dword = address;
     return *this;
 }
 
-bool IPAddress::operator==(const uint8_t* addr) const
+bool IPAddress::operator==(const uint8_t *addr) const
 {
     return memcmp(addr, _address.bytes, sizeof(_address.bytes)) == 0;
 }
 
-size_t IPAddress::printTo(Print& p) const
+size_t IPAddress::printTo(Print &p) const
 {
     size_t n = 0;
-    for (int i =0; i < 3; i++)
+
+    for (int i = 0; i < 3; i++)
     {
         n += p.print(_address.bytes[i], DEC);
         n += p.print('.');
     }
     n += p.print(_address.bytes[3], DEC);
+
     return n;
 }
 
@@ -124,6 +130,6 @@ String IPAddress::toString()
     str += String(_address.bytes[2]);
     str += ".";
     str += String(_address.bytes[3]);
+
     return str;
 }
-

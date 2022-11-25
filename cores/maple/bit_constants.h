@@ -25,10 +25,8 @@
  *****************************************************************************/
 
 /**
- * @brief BIT[n] and binary literal defines, for Arduino
- * compatibility.
+ * @brief BIT[n] and binary literal defines, for Arduino compatibility.
  */
-
 #ifndef _WIRISH_BIT_CONSTANTS_H_
 #define _WIRISH_BIT_CONSTANTS_H_
 

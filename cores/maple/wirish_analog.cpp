@@ -34,14 +34,38 @@
 #include <libmaple/adc.h>
 #include "boards.h"
 
+#define INT_TEMPERATURE_CH 16
+#define INT_VOLTAGE_CH 17
+
+const float VRefInt = 1.20; // Volts Ref Int (1.16 - 1.24)
+
+const float AverageSlope = 0.0043; // V/oC (0.004 - 0.0046)
+const float V25 = 1.43;            // Volts (1.34 - 1.52)
+
 /* Unlike Wiring and Arduino, this assumes that the pin's mode is set
  * to INPUT_ANALOG. That's faster, but it does require some extra work
  * on the user's part. Not too much, we think ;). */
-uint16 analogRead(uint8 pin) {
+uint16 analogRead(uint8 pin)
+{
     adc_dev *dev = PIN_MAP[pin].adc_device;
-    if (dev == NULL) {
+
+    if (dev == NULL)
+    {
         return 0;
     }
 
     return adc_read(dev, PIN_MAP[pin].adc_channel);
+}
+
+float internalVoltage()
+{
+    uint16_t adc = adc_read(ADC1, INT_VOLTAGE_CH);
+    return VRefInt * 4096.0 / (float)adc;
+}
+
+float internalTemperature()
+{
+    uint16_t adc = adc_read(ADC1, INT_TEMPERATURE_CH);
+    float volts = 3.3 / 4096.0 * (float)adc;
+    return ((V25 - volts) / AverageSlope) + 25.0;
 }

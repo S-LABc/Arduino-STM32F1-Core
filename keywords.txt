@@ -126,3 +126,17 @@ portInputRegister	KEYWORD2
 portSetRegister	KEYWORD2
 portClearRegister	KEYWORD2
 portConfigRegister	KEYWORD2
+
+## Debug Ports
+enableSWD	KEYWORD2
+enableSWDJTAGnoJNRST	KEYWORD2
+enableFullSWDJTAG	KEYWORD2
+
+## Extansion Digital
+togglePin	KEYWORD2
+isButtonPressed	KEYWORD2
+waitForButtonPress	KEYWORD2
+
+# Extansion Analog
+internalVoltage	KEYWORD2
+internalTemperature	KEYWORD2

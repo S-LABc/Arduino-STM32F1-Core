@@ -24,14 +24,12 @@
  * SOFTWARE.
  *****************************************************************************/
 
-
-
 #ifndef _WIRISH_PULSE_H_
 #define _WIRISH_PULSE_H_
 
 #include <libmaple/gpio.h>
 
-uint32_t pulseIn( uint32_t ulPin, uint32_t ulState, uint32_t ulTimeout = 1000000L ) ;
+uint32_t pulseIn(uint32_t ulPin, uint32_t ulState, uint32_t ulTimeout = 1000000L) ;
 
 #define pulseInLong pulseIn
 

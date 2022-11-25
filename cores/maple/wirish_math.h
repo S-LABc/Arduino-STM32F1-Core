@@ -25,10 +25,8 @@
  *****************************************************************************/
 
 /**
- * @file wirish/include/wirish/wirish_math.h
  * @brief Includes <math.h>; provides Wiring-compatible math routines.
  */
-
 #ifndef _WIRISH_WIRISH_MATH_H_
 #define _WIRISH_WIRISH_MATH_H_
 
@@ -47,7 +45,7 @@ void randomSeed(unsigned int seed);
  * @return A pseudo-random number in the range [0,max).
  * @see randomSeed()
  */
-long random(long max = __LONG_MAX__);
+long random(long max);
 
 /**
  * @brief Generate a pseudo-random number with lower and upper bounds.
@@ -80,28 +78,21 @@ long random(long min, long max);
  * @return the mapped value.
  */
  // Fix by Pito 9/2017
-  static inline int32_t map(int32_t value, int32_t fromStart, int32_t fromEnd,
-     int32_t toStart, int32_t toEnd) {
-     return ((int64_t)(value - fromStart) * (toEnd - toStart)) / (fromEnd - fromStart) +
-         toStart;
+static inline int32_t map(int32_t value, int32_t fromStart, int32_t fromEnd, int32_t toStart, int32_t toEnd) {
+    return ((int64_t)(value - fromStart) * (toEnd - toStart)) / (fromEnd - fromStart) + toStart;
  }
 
 #define PI          3.1415926535897932384626433832795
 #define HALF_PI     1.5707963267948966192313216916398
 #define TWO_PI      6.283185307179586476925286766559
 #define DEG_TO_RAD  0.017453292519943295769236907684886
-#define RAD_TO_DEG 57.295779513082320876798154814105
+#define RAD_TO_DEG  57.295779513082320876798154814105
 
-
-/*
- * Roger Clark 20141113
- *
- * Added BitOrder definition from SAM wiring_constants.h, as its needed for SPI
- * as Maple doesn't have a wiring_constants file (though it probably should have in the long term to make it more compatible with the Arduino 1.0 + API
- * also added definition for EULER and SERIAL and DISPLAY, also from the same SAM header
- */
- 
-#define EULER 2.718281828459045235360287471352
+// Roger Clark 20141113
+// Added BitOrder definition from SAM wiring_constants.h, as its needed for SPI
+// as Maple doesn't have a wiring_constants file (though it probably should have in the long term to make it more compatible with the Arduino 1.0 + API
+// also added definition for EULER and SERIAL and DISPLAY, also from the same SAM header
+#define EULER   2.718281828459045235360287471352
 #define SERIAL  0x0
 #define DISPLAY 0x1 
 
@@ -111,21 +102,21 @@ long random(long min, long max);
 #else // C
 	#include <stdlib.h>
 	#ifndef min
-		#define min(a,b) ((a)<(b)?(a):(b))
+		#define min(a,b) ((a) < (b) ? (a) : (b))
 	#endif // min
 
 	#ifndef max
-		#define max(a,b) ((a)>(b)?(a):(b))
+		#define max(a,b) ((a) > (b) ? (a) : (b))
 	#endif // max
 #endif // __cplusplus
 
-#define constrain(amt,low,high) ((amt)<(low)?(low):((amt)>(high)?(high):(amt)))
-#define round(x)                ((x)>=0?(long)((x)+0.5):(long)((x)-0.5))
-#define radians(deg)            ((deg)*DEG_TO_RAD)
-#define degrees(rad)            ((rad)*RAD_TO_DEG)
-#define sq(x)                   ((x)*(x))
+#define constrain(amt,low,high) ((amt) < (low) ? (low) : ((amt) > (high) ? (high) : (amt)))
+#define round(x)                ((x) >= 0 ? (long)((x) + 0.5) : (long)((x) - 0.5))
+#define radians(deg)            ((deg) * DEG_TO_RAD)
+#define degrees(rad)            ((rad) * RAD_TO_DEG)
+#define sq(x)                   ((x) * (x))
 
-/* undefine stdlib's abs if encountered */
+// undefine stdlib's abs if encountered
 #ifdef abs
 #undef abs
 #endif
@@ -153,30 +144,27 @@ double sin(double x);
 /**
  * Compute the tangent of an angle, in radians.
  * @param x The radian measure of the angle.
- * @return The tangent of x.  There are no limits on the return value
- * of this function.
+ * @return The tangent of x.  There are no limits on the return value of this function.
  */
 double tan(double x);
 
 /**
  * Compute the square root of a number.
- * @param x The number whose square root to find.  This value cannot
- * be negative.
+ * @param x The number whose square root to find.  This value cannot be negative.
  * @return The square root of x.  The return value is never negative.
  */
 double sqrt(double x);
 
 /**
  * Compute an exponentiation.
- * @param x the base. This value cannot be zero if y <= 0.  This value
- * cannot be negative if y is not an integral value.
+ * @param x the base. This value cannot be zero if y <= 0.  This value cannot be negative if y is not an integral value.
  * @param y the exponent.
  * @return x raised to the power y.
  */
 double pow(double x, double y);
 
-extern uint16_t makeWord( uint16_t w ) ;
-extern uint16_t makeWord( uint8_t h, uint8_t l ) ;
+extern uint16_t makeWord(uint16_t w);
+extern uint16_t makeWord(uint8_t h, uint8_t l);
 
 #define word(...) makeWord(__VA_ARGS__)
 

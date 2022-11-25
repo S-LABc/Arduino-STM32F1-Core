@@ -24,9 +24,7 @@
  * SOFTWARE.
  *****************************************************************************/
 
-/* Note: Use of this header file is deprecated.  Use bit_constants.h
-   instead. */
-
+// Note: Use of this header file is deprecated.  Use bit_constants instead.
 #ifndef _WIRISH_BITS_H_
 #define _WIRISH_BITS_H_
 

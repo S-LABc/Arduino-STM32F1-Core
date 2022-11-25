@@ -58,19 +58,25 @@ void usb_copy_from_pma(uint8 *buf, uint16 len, uint16 pma_offset) {
     }
 }
  */
-static void usb_set_ep_rx_count_common(uint32 *rxc, uint16 count) {
+static void usb_set_ep_rx_count_common(uint32 *rxc, uint16 count)
+{
     uint16 nblocks;
-    if (count > 62) {
-        /* use 32-byte memory block size */
+    if (count > 62)
+    {
+        // use 32-byte memory block size
         nblocks = count >> 5;
-        if ((count & 0x1F) == 0) {
+        if ((count & 0x1F) == 0)
+        {
             nblocks--;
         }
         *rxc = (nblocks << 10) | 0x8000 | (count & 0x3FF);
-    } else {
-        /* use 2-byte memory block size */
+    }
+    else
+    {
+        // use 2-byte memory block size
         nblocks = count >> 1;
-        if ((count & 0x1) != 0) {
+        if ((count & 0x1) != 0)
+        {
             nblocks++;
         }
         *rxc = (nblocks << 10) | (count & 0x3FF);
@@ -82,7 +88,8 @@ void usb_set_ep_rx_buf0_count(uint8 ep, uint16 count) {
     usb_set_ep_rx_count_common(rxc, count);
 }
 */
-void usb_set_ep_rx_count(uint8 ep, uint16 count) {
+void usb_set_ep_rx_count(uint8 ep, uint16 count)
+{
     uint32 *rxc = usb_ep_rx_count_ptr(ep);
     usb_set_ep_rx_count_common(rxc, count);
 }

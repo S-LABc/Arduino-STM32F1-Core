@@ -1,9 +1,14 @@
-st-link.name=ST-Link
-st-link.protocol=STLINK
-st-link.program.tool=stlink
-st-link.program.tool.default=stlink
+texanestlink.name=Texane ST-Link
+texanestlink.program.tool=texane-stlink
+texanestlink.program.tool.default=texane-stlink
 
-com-port.name=Serial
-com-port.protocol=UART
-com-port.program.tool=uart
-com-port.program.tool.default=uart
+stmstlink.name=STM ST-Link
+stmstlink.program.tool=stm-stlink
+stmstlink.program.tool.default=stm-stlink
+
+cubeprog.name=CubeProgrammer (SWD)
+cubeprog.program.tool=cube-prog
+cubeprog.program.tool.default=cube-prog
+cubeprog.program.protocol=0
+cubeprog.program.options=-g
+

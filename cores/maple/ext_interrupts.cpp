@@ -26,21 +26,19 @@
  *****************************************************************************/
 
 /**
- * @file wirish/ext_interrupts.cpp
  * @brief Wiring-like interface for external interrupts
  */
-
 #include "ext_interrupts.h"
-
 #include <libmaple/gpio.h>
 #include <libmaple/exti.h>
-
 #include "boards.h"
 
 static inline exti_trigger_mode exti_out_mode(ExtIntTriggerMode mode);
 
-void attachInterrupt(uint8 pin, voidFuncPtr handler, ExtIntTriggerMode mode) {
-    if (pin >= BOARD_NR_GPIO_PINS || !handler) {
+void attachInterrupt(uint8 pin, voidFuncPtr handler, ExtIntTriggerMode mode)
+{
+    if (pin >= BOARD_NR_GPIO_PINS || !handler)
+    {
         return;
     }
 
@@ -53,30 +51,36 @@ void attachInterrupt(uint8 pin, voidFuncPtr handler, ExtIntTriggerMode mode) {
 }
 
 void attachInterrupt(uint8 pin, voidArgumentFuncPtr handler, void *arg,
-                     ExtIntTriggerMode mode) {
-    if (pin >= BOARD_NR_GPIO_PINS || !handler) {
+                     ExtIntTriggerMode mode)
+{
+    if (pin >= BOARD_NR_GPIO_PINS || !handler)
+    {
         return;
     }
 
     exti_trigger_mode outMode = exti_out_mode(mode);
 
     exti_attach_callback((exti_num)(PIN_MAP[pin].gpio_bit),
-                          gpio_exti_port(PIN_MAP[pin].gpio_device),
-                          handler,
-                          arg,
-                          outMode);
+                         gpio_exti_port(PIN_MAP[pin].gpio_device),
+                         handler,
+                         arg,
+                         outMode);
 }
 
-void detachInterrupt(uint8 pin) {
-    if (pin >= BOARD_NR_GPIO_PINS) {
+void detachInterrupt(uint8 pin)
+{
+    if (pin >= BOARD_NR_GPIO_PINS)
+    {
         return;
     }
 
     exti_detach_interrupt((exti_num)(PIN_MAP[pin].gpio_bit));
 }
 
-static inline exti_trigger_mode exti_out_mode(ExtIntTriggerMode mode) {
-    switch (mode) {
+static inline exti_trigger_mode exti_out_mode(ExtIntTriggerMode mode)
+{
+    switch (mode)
+    {
     case RISING:
         return EXTI_RISING;
     case FALLING:

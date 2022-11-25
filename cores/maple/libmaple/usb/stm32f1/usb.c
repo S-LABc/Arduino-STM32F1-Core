@@ -50,14 +50,15 @@ static void dispatch_ctr_lp(void);
  * usb_lib/ globals
  */
 
-uint16 SaveTState;              /* caches TX status for later use */
-uint16 SaveRState;              /* caches RX status for later use */
+uint16 SaveTState; /* caches TX status for later use */
+uint16 SaveRState; /* caches RX status for later use */
 
 /*
  * Other state
  */
 
-typedef enum {
+typedef enum
+{
     RESUME_EXTERNAL,
     RESUME_INTERNAL,
     RESUME_LATER,
@@ -68,7 +69,8 @@ typedef enum {
     RESUME_ESOF
 } RESUME_STATE;
 
-struct {
+struct
+{
     volatile RESUME_STATE eState;
     volatile uint8 bESOFcnt;
 } ResumeS;
@@ -87,7 +89,8 @@ usblib_dev *USBLIB = &usblib;
 
 void usb_init_usblib(usblib_dev *dev,
                      void (**ep_int_in)(void),
-                     void (**ep_int_out)(void)) {
+                     void (**ep_int_out)(void))
+{
     rcc_clk_enable(dev->clk_id);
 
     dev->ep_int_in = ep_int_in;
@@ -105,7 +108,8 @@ void usb_init_usblib(usblib_dev *dev,
     pProperty->Init();
 }
 
-static void usb_suspend(void) {
+static void usb_suspend(void)
+{
     uint16 cntr;
 
     /* TODO decide if read/modify/write is really what we want
@@ -120,13 +124,15 @@ static void usb_suspend(void) {
     USBLIB->state = USB_SUSPENDED;
 }
 
-void usb_power_off(void) {
+void usb_power_off(void)
+{
     USB_BASE->CNTR = USB_CNTR_FRES;
     USB_BASE->ISTR = 0;
     USB_BASE->CNTR = USB_CNTR_FRES + USB_CNTR_PDWN;
 }
 
-static void usb_resume_init(void) {
+static void usb_resume_init(void)
+{
     uint16 cntr;
 
     cntr = USB_BASE->CNTR;
@@ -137,14 +143,17 @@ static void usb_resume_init(void) {
     USB_BASE->CNTR = USB_ISR_MSK;
 }
 
-static void usb_resume(RESUME_STATE eResumeSetVal) {
+static void usb_resume(RESUME_STATE eResumeSetVal)
+{
     uint16 cntr;
 
-    if (eResumeSetVal != RESUME_ESOF) {
+    if (eResumeSetVal != RESUME_ESOF)
+    {
         ResumeS.eState = eResumeSetVal;
     }
 
-    switch (ResumeS.eState) {
+    switch (ResumeS.eState)
+    {
     case RESUME_EXTERNAL:
         usb_resume_init();
         ResumeS.eState = RESUME_OFF;
@@ -160,7 +169,8 @@ static void usb_resume(RESUME_STATE eResumeSetVal) {
         break;
     case RESUME_WAIT:
         ResumeS.bESOFcnt--;
-        if (ResumeS.bESOFcnt == 0) {
+        if (ResumeS.bESOFcnt == 0)
+        {
             ResumeS.eState = RESUME_START;
         }
         break;
@@ -173,7 +183,8 @@ static void usb_resume(RESUME_STATE eResumeSetVal) {
         break;
     case RESUME_ON:
         ResumeS.bESOFcnt--;
-        if (ResumeS.bESOFcnt == 0) {
+        if (ResumeS.bESOFcnt == 0)
+        {
             cntr = USB_BASE->CNTR;
             cntr &= ~USB_CNTR_RESUME;
             USB_BASE->CNTR = cntr;
@@ -190,43 +201,52 @@ static void usb_resume(RESUME_STATE eResumeSetVal) {
 }
 
 #define SUSPEND_ENABLED 1
-__weak void __irq_usb_lp_can_rx0(void) {
+__weak void __irq_usb_lp_can_rx0(void)
+{
     uint16 istr = USB_BASE->ISTR;
 
     /* Use USB_ISR_MSK to only include code for bits we care about. */
 
 #if (USB_ISR_MSK & USB_ISTR_RESET)
-    if (istr & USB_ISTR_RESET & USBLIB->irq_mask) {
+    if (istr & USB_ISTR_RESET & USBLIB->irq_mask)
+    {
         USB_BASE->ISTR = ~USB_ISTR_RESET;
         pProperty->Reset();
     }
 #endif
 
 #if (USB_ISR_MSK & USB_ISTR_PMAOVR)
-    if (istr & ISTR_PMAOVR & USBLIB->irq_mask) {
+    if (istr & ISTR_PMAOVR & USBLIB->irq_mask)
+    {
         USB_BASE->ISTR = ~USB_ISTR_PMAOVR;
     }
 #endif
 
 #if (USB_ISR_MSK & USB_ISTR_ERR)
-    if (istr & USB_ISTR_ERR & USBLIB->irq_mask) {
+    if (istr & USB_ISTR_ERR & USBLIB->irq_mask)
+    {
         USB_BASE->ISTR = ~USB_ISTR_ERR;
     }
 #endif
 
 #if (USB_ISR_MSK & USB_ISTR_WKUP)
-    if (istr & USB_ISTR_WKUP & USBLIB->irq_mask) {
+    if (istr & USB_ISTR_WKUP & USBLIB->irq_mask)
+    {
         USB_BASE->ISTR = ~(USB_ISTR_WKUP | USB_ISTR_SUSP);
         usb_resume(RESUME_EXTERNAL);
     }
 #endif
 
 #if (USB_ISR_MSK & USB_ISTR_SUSP)
-    if (istr & USB_ISTR_SUSP & USBLIB->irq_mask) {
+    if (istr & USB_ISTR_SUSP & USBLIB->irq_mask)
+    {
         /* check if SUSPEND is possible */
-        if (SUSPEND_ENABLED) {
+        if (SUSPEND_ENABLED)
+        {
             usb_suspend();
-        } else {
+        }
+        else
+        {
             /* if not possible then resume after xx ms */
             usb_resume(RESUME_LATER);
         }
@@ -236,13 +256,15 @@ __weak void __irq_usb_lp_can_rx0(void) {
 #endif
 
 #if (USB_ISR_MSK & USB_ISTR_SOF)
-    if (istr & USB_ISTR_SOF & USBLIB->irq_mask) {
+    if (istr & USB_ISTR_SOF & USBLIB->irq_mask)
+    {
         USB_BASE->ISTR = ~USB_ISTR_SOF;
     }
 #endif
 
 #if (USB_ISR_MSK & USB_ISTR_ESOF)
-    if (istr & USB_ISTR_ESOF & USBLIB->irq_mask) {
+    if (istr & USB_ISTR_ESOF & USBLIB->irq_mask)
+    {
         USB_BASE->ISTR = ~USB_ISTR_ESOF;
         /* resume handling timing is made with ESOFs */
         usb_resume(RESUME_ESOF); /* request without change of the machine state */
@@ -254,7 +276,8 @@ __weak void __irq_usb_lp_can_rx0(void) {
      */
 
 #if (USB_ISR_MSK & USB_ISTR_CTR)
-    if (istr & USB_ISTR_CTR & USBLIB->irq_mask) {
+    if (istr & USB_ISTR_CTR & USBLIB->irq_mask)
+    {
         dispatch_ctr_lp();
     }
 #endif
@@ -272,38 +295,45 @@ static void handle_setup0(void);
 static void handle_in0(void);
 static void handle_out0(void);
 
-static void dispatch_ctr_lp() {
+static void dispatch_ctr_lp()
+{
     uint16 istr;
 
-    while (((istr = USB_BASE->ISTR) & USB_ISTR_CTR) != 0) {
+    while (((istr = USB_BASE->ISTR) & USB_ISTR_CTR) != 0)
+    {
         /* TODO WTF, figure this out: RM0008 says CTR is read-only,
          * but ST's firmware claims it's clear-only, and emphasizes
          * the importance of clearing it in more than one place. */
         USB_BASE->ISTR = ~USB_ISTR_CTR;
         uint8 ep_id = istr & USB_ISTR_EP_ID;
-        if (ep_id == 0) {
+        if (ep_id == 0)
+        {
             /* TODO figure out why it's OK to break out of the loop
              * once we're done serving endpoint zero, but not okay if
              * there are multiple nonzero endpoint transfers to
              * handle. */
-            if (dispatch_endpt_zero(istr & USB_ISTR_DIR)) {
+            if (dispatch_endpt_zero(istr & USB_ISTR_DIR))
+            {
                 return;
             }
-        } else {
+        }
+        else
+        {
             dispatch_endpt(ep_id);
         }
     }
 }
 
-
 /* FIXME Dataflow on endpoint 0 RX/TX status is based off of ST's
  * code, and is ugly/confusing in its use of SaveRState/SaveTState.
  * Fixing this requires filling in handle_in0(), handle_setup0(),
  * handle_out0(). */
-static inline uint8 dispatch_endpt_zero(uint16 istr_dir) {
+static inline uint8 dispatch_endpt_zero(uint16 istr_dir)
+{
     uint32 epr = (uint16)USB_BASE->EP[0];
 
-    if (!(epr & (USB_EP_CTR_TX | USB_EP_SETUP | USB_EP_CTR_RX))) {
+    if (!(epr & (USB_EP_CTR_TX | USB_EP_SETUP | USB_EP_CTR_RX)))
+    {
         return 0;
     }
 
@@ -316,7 +346,8 @@ static inline uint8 dispatch_endpt_zero(uint16 istr_dir) {
     /* Set actual RX/TX statuses to NAK while we're thinking */
     set_rx_tx_status0(USB_EP_STAT_RX_NAK, USB_EP_STAT_TX_NAK);
 
-    if (istr_dir == 0) {
+    if (istr_dir == 0)
+    {
         /* ST RM0008: "If DIR bit=0, CTR_TX bit is set in the USB_EPnR
          * register related to the interrupting endpoint.  The
          * interrupting transaction is of IN type (data transmitted by
@@ -324,7 +355,9 @@ static inline uint8 dispatch_endpt_zero(uint16 istr_dir) {
         ASSERT_FAULT(epr & USB_EP_CTR_TX);
         usb_clear_ctr_tx(USB_EP0);
         handle_in0();
-    } else {
+    }
+    else
+    {
         /* RM0008: "If DIR bit=1, CTR_RX bit or both CTR_TX/CTR_RX
          * are set in the USB_EPnR register related to the
          * interrupting endpoint. The interrupting transaction is of
@@ -339,16 +372,22 @@ static inline uint8 dispatch_endpt_zero(uint16 istr_dir) {
          *
          * TODO sort this mess out.
          */
-        if (epr & USB_EP_CTR_TX) {
+        if (epr & USB_EP_CTR_TX)
+        {
             usb_clear_ctr_tx(USB_EP0);
             handle_in0();
-        } else {                /* SETUP or CTR_RX */
+        }
+        else
+        { /* SETUP or CTR_RX */
             /* SETUP is held constant while CTR_RX is set, so clear it
              * either way */
             usb_clear_ctr_rx(USB_EP0);
-            if (epr & USB_EP_SETUP) {
+            if (epr & USB_EP_SETUP)
+            {
                 handle_setup0();
-            } else {            /* CTR_RX */
+            }
+            else
+            { /* CTR_RX */
                 handle_out0();
             }
         }
@@ -358,38 +397,45 @@ static inline uint8 dispatch_endpt_zero(uint16 istr_dir) {
     return 1;
 }
 
-static inline void dispatch_endpt(uint8 ep) {
+static inline void dispatch_endpt(uint8 ep)
+{
     uint32 epr = USB_BASE->EP[ep];
     /* If ISTR_CTR is set and the ISTR gave us this EP_ID to handle,
      * then presumably at least one of CTR_RX and CTR_TX is set, but
      * again, ST's control flow allows for the possibility of neither.
      *
      * TODO try to find out if neither being set is possible. */
-    if (epr & USB_EP_CTR_RX) {
+    if (epr & USB_EP_CTR_RX)
+    {
         usb_clear_ctr_rx(ep);
         (USBLIB->ep_int_out[ep - 1])();
     }
-    if (epr & USB_EP_CTR_TX) {
+    if (epr & USB_EP_CTR_TX)
+    {
         usb_clear_ctr_tx(ep);
         (USBLIB->ep_int_in[ep - 1])();
     }
 }
 
-static inline void set_rx_tx_status0(uint16 rx, uint16 tx) {
+static inline void set_rx_tx_status0(uint16 rx, uint16 tx)
+{
     usb_set_ep_rx_stat(USB_EP0, rx);
     usb_set_ep_tx_stat(USB_EP0, tx);
 }
 
 /* TODO Rip out usb_lib/ dependency from the following functions: */
 
-static void handle_setup0(void) {
+static void handle_setup0(void)
+{
     Setup0_Process();
 }
 
-static void handle_in0(void) {
+static void handle_in0(void)
+{
     In0_Process();
 }
 
-static void handle_out0(void) {
+static void handle_out0(void)
+{
     Out0_Process();
 }

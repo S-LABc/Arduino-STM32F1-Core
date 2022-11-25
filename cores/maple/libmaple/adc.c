@@ -60,6 +60,7 @@ void adc_set_extsel(adc_dev *dev, adc_extsel_event event) {
     cr2 &= ~ADC_CR2_EXTSEL;
     cr2 |= event;
     cr2 |= ADC_CR2_EXTTRIG;
+    cr2 |= ADC_CR2_TSVREFE; // internal temp and voltage
     dev->regs->CR2 = cr2;
 }
 

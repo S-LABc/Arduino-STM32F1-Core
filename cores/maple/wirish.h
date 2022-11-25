@@ -34,24 +34,17 @@
 #ifndef _WIRISH_WIRISH_H_
 #define _WIRISH_WIRISH_H_
 
-/* 
- * 20141030. Roger Clark
-   Added the block of includes up to avr/interrupt so that stdlib functions like memcpy would be included and could be used.
- */
+// 20141030. Roger Clark. Added the block of includes up to avr/interrupt so that stdlib functions like memcpy would be included and could be used.
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdint.h>
-
 #include <string.h>
-
 #include <WString.h>
 #include <avr/dtostrf.h>
 #include <avr/pgmspace.h>
 #include <avr/interrupt.h>
-
 #include <libmaple/stm32.h>
-
 #include <boards.h>
 #include <io.h>
 #include <bit_constants.h>
@@ -64,10 +57,8 @@
 #include <wirish_math.h>
 #include <wirish_constants.h>
 #include <wiring_pulse.h>
-
 #include <WCharacter.h>
 #include <tone.h>
-
 #include <HardwareSerial.h>
 #include <HardwareTimer.h>
 #include <usb_serial.h>
@@ -75,14 +66,11 @@
 
 #include <wirish_types.h>
 #include <wirish_time.h>
-
 #include <libmaple/libmaple.h>
 
 typedef unsigned int word;
-// typedef uint16 word;// definition from Arduino website, now appears to be incorrect for 32 bit devices
 
-/* Wiring macros and bit defines */
-
+// Wiring macros and bit defines
 #ifndef true
 #define true 0x1
 #define false 0x0
@@ -93,8 +81,7 @@ typedef unsigned int word;
 #define bitRead(value, bit)            (((value) >> (bit)) & 0x01)
 #define bitSet(value, bit)             ((value) |= (1UL << (bit)))
 #define bitClear(value, bit)           ((value) &= ~(1UL << (bit)))
-#define bitWrite(value, bit, bitvalue) (bitvalue ? bitSet(value, bit) : \
-                                                   bitClear(value, bit))
+#define bitWrite(value, bit, bitvalue) (bitvalue ? bitSet(value, bit) : bitClear(value, bit))
 #define bit(b)                         (1UL << (b))
 
 // Roger Clark. Added _BV macro for AVR compatibility. As requested by @sweetlilmre and @stevestrong
@@ -102,11 +89,11 @@ typedef unsigned int word;
 #define _BV(bit) (1 << (bit))
 #endif 
 
-#define clockCyclesPerMicrosecond() ( F_CPU / 1000000L )
-#define clockCyclesToMicroseconds(a) ( ((a) * 1000L) / (F_CPU / 1000L) )
-#define microsecondsToClockCycles(a) ( (a) * (F_CPU / 1000000L) )
+#define clockCyclesPerMicrosecond()  (F_CPU / 1000000L)
+#define clockCyclesToMicroseconds(a) (((a) * 1000L) / (F_CPU / 1000L))
+#define microsecondsToClockCycles(a) ((a) * (F_CPU / 1000000L))
 
-#define digitalPinToInterrupt(pin) (pin)
+#define digitalPinToInterrupt(pin)   (pin)
 
 #endif
 

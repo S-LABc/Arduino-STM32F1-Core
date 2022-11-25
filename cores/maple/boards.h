@@ -25,7 +25,6 @@
  *****************************************************************************/
 
 /**
- * @file wirish/include/wirish/boards.h
  * @author Bryan Newbold <bnewbold@leaflabs.com>,
  *         Marti Bolivar <mbolivar@leaflabs.com>
  * @brief init() and board-specific pin information.
@@ -102,10 +101,7 @@ extern void boardInit(void);
  */
 bool boardUsesPin(uint8 pin);
 
-/*
- * Derived and default board definitions
- */
-
+// Derived and default board definitions
 #define CLOCK_SPEED_MHZ                 CYCLES_PER_MICROSECOND
 #define CLOCK_SPEED_HZ                  (CLOCK_SPEED_MHZ * 1000000UL)
 
@@ -128,17 +124,17 @@ bool boardUsesPin(uint8 pin);
  */
 #define BOARD_HAVE_USART(n) (defined(BOARD_USART##n##_TX_PIN) && \
                              defined(BOARD_USART##n##_RX_PIN))
-/** Feature test: nonzero iff the board has USART1. */
+// Feature test: nonzero iff the board has USART1.
 #define BOARD_HAVE_USART1               BOARD_HAVE_USART(1)
-/** Feature test: nonzero iff the board has USART2, 0 otherwise. */
+// Feature test: nonzero iff the board has USART2, 0 otherwise.
 #define BOARD_HAVE_USART2               BOARD_HAVE_USART(2)
-/** Feature test: nonzero iff the board has USART3, 0 otherwise. */
+// Feature test: nonzero iff the board has USART3, 0 otherwise.
 #define BOARD_HAVE_USART3               BOARD_HAVE_USART(3)
-/** Feature test: nonzero iff the board has UART4, 0 otherwise. */
+// Feature test: nonzero iff the board has UART4, 0 otherwise.
 #define BOARD_HAVE_UART4                BOARD_HAVE_USART(4)
-/** Feature test: nonzero iff the board has UART5, 0 otherwise. */
+// Feature test: nonzero iff the board has UART5, 0 otherwise.
 #define BOARD_HAVE_UART5                BOARD_HAVE_USART(5)
-/** Feature test: nonzero iff the board has USART6, 0 otherwise. */
+// Feature test: nonzero iff the board has USART6, 0 otherwise.
 #define BOARD_HAVE_USART6               BOARD_HAVE_USART(6)
 
 /**
@@ -151,11 +147,11 @@ bool boardUsesPin(uint8 pin);
                            defined(BOARD_SPI##n##_SCK_PIN)  &&          \
                            defined(BOARD_SPI##n##_MISO_PIN) &&          \
                            defined(BOARD_SPI##n##_MOSI_PIN))
-/** Feature test: nonzero iff the board has SPI1. */
+// Feature test: nonzero iff the board has SPI1.
 #define BOARD_HAVE_SPI1 BOARD_HAVE_SPI(1)
-/** Feature test: nonzero iff the board has SPI2. */
+// Feature test: nonzero iff the board has SPI2.
 #define BOARD_HAVE_SPI2 BOARD_HAVE_SPI(2)
-/** Feature test: nonzero iff the board has SPI3. */
+// Feature test: nonzero iff the board has SPI3.
 #define BOARD_HAVE_SPI3 BOARD_HAVE_SPI(3)
 
 /**
@@ -163,7 +159,5 @@ bool boardUsesPin(uint8 pin);
  */
  //Roger Clark. Change so that BOARD_HAVE_SERIALUSB is always true, so that it can be controller by -DSERIAL_USB
 #define BOARD_HAVE_SERIALUSB 1
-
-/*(defined(BOARD_USB_DISC_DEV) && defined(BOARD_USB_DISC_BIT))*/
 
 #endif

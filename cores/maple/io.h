@@ -25,10 +25,8 @@
  *****************************************************************************/
 
 /**
- * @file wirish/include/wirish/io.h
  * @brief Wiring-style pin I/O interface.
  */
-
 #ifndef _WIRISH_IO_H_
 #define _WIRISH_IO_H_
 
@@ -39,65 +37,66 @@
  * Specifies a GPIO pin behavior.
  * @see pinMode()
  */
-typedef enum WiringPinMode {
-    OUTPUT, /**< Basic digital output: when the pin is HIGH, the
-               voltage is held at +3.3v (Vcc) and when it is LOW, it
-               is pulled down to ground. */
+typedef enum WiringPinMode
+{
+        OUTPUT, /**< Basic digital output: when the pin is HIGH, the
+                   voltage is held at +3.3v (Vcc) and when it is LOW, it
+                   is pulled down to ground. */
 
-    OUTPUT_OPEN_DRAIN, /**< In open drain mode, the pin indicates
-                          "low" by accepting current flow to ground
-                          and "high" by providing increased
-                          impedance. An example use would be to
-                          connect a pin to a bus line (which is pulled
-                          up to a positive voltage by a separate
-                          supply through a large resistor). When the
-                          pin is high, not much current flows through
-                          to ground and the line stays at positive
-                          voltage; when the pin is low, the bus
-                          "drains" to ground with a small amount of
-                          current constantly flowing through the large
-                          resistor from the external supply. In this
-                          mode, no current is ever actually sourced
-                          from the pin. */
+        OUTPUT_OPEN_DRAIN, /**< In open drain mode, the pin indicates
+                              "low" by accepting current flow to ground
+                              and "high" by providing increased
+                              impedance. An example use would be to
+                              connect a pin to a bus line (which is pulled
+                              up to a positive voltage by a separate
+                              supply through a large resistor). When the
+                              pin is high, not much current flows through
+                              to ground and the line stays at positive
+                              voltage; when the pin is low, the bus
+                              "drains" to ground with a small amount of
+                              current constantly flowing through the large
+                              resistor from the external supply. In this
+                              mode, no current is ever actually sourced
+                              from the pin. */
 
-    INPUT, /**< Basic digital input. The pin voltage is sampled; when
-              it is closer to 3.3v (Vcc) the pin status is high, and
-              when it is closer to 0v (ground) it is low. If no
-              external circuit is pulling the pin voltage to high or
-              low, it will tend to randomly oscillate and be very
-              sensitive to noise (e.g., a breath of air across the pin
-              might cause the state to flip). */
+        INPUT, /**< Basic digital input. The pin voltage is sampled; when
+                  it is closer to 3.3v (Vcc) the pin status is high, and
+                  when it is closer to 0v (ground) it is low. If no
+                  external circuit is pulling the pin voltage to high or
+                  low, it will tend to randomly oscillate and be very
+                  sensitive to noise (e.g., a breath of air across the pin
+                  might cause the state to flip). */
 
-    INPUT_ANALOG, /**< This is a special mode for when the pin will be
-                     used for analog (not digital) reads.  Enables ADC
-                     conversion to be performed on the voltage at the
-                     pin. */
+        INPUT_ANALOG, /**< This is a special mode for when the pin will be
+                         used for analog (not digital) reads.  Enables ADC
+                         conversion to be performed on the voltage at the
+                         pin. */
 
-    INPUT_PULLUP, /**< The state of the pin in this mode is reported
-                     the same way as with INPUT, but the pin voltage
-                     is gently "pulled up" towards +3.3v. This means
-                     the state will be high unless an external device
-                     is specifically pulling the pin down to ground,
-                     in which case the "gentle" pull up will not
-                     affect the state of the input. */
+        INPUT_PULLUP, /**< The state of the pin in this mode is reported
+                         the same way as with INPUT, but the pin voltage
+                         is gently "pulled up" towards +3.3v. This means
+                         the state will be high unless an external device
+                         is specifically pulling the pin down to ground,
+                         in which case the "gentle" pull up will not
+                         affect the state of the input. */
 
-    INPUT_PULLDOWN, /**< The state of the pin in this mode is reported
-                       the same way as with INPUT, but the pin voltage
-                       is gently "pulled down" towards 0v. This means
-                       the state will be low unless an external device
-                       is specifically pulling the pin up to 3.3v, in
-                       which case the "gentle" pull down will not
-                       affect the state of the input. */
+        INPUT_PULLDOWN, /**< The state of the pin in this mode is reported
+                           the same way as with INPUT, but the pin voltage
+                           is gently "pulled down" towards 0v. This means
+                           the state will be low unless an external device
+                           is specifically pulling the pin up to 3.3v, in
+                           which case the "gentle" pull down will not
+                           affect the state of the input. */
 
-    INPUT_FLOATING, /**< Synonym for INPUT. */
+        INPUT_FLOATING, /**< Synonym for INPUT. */
 
-    PWM, /**< This is a special mode for when the pin will be used for
-            PWM output (a special case of digital output). */
+        PWM, /**< This is a special mode for when the pin will be used for
+                PWM output (a special case of digital output). */
 
-    PWM_OPEN_DRAIN, /**< Like PWM, except that instead of alternating
-                       cycles of LOW and HIGH, the voltage on the pin
-                       consists of alternating cycles of LOW and
-                       floating (disconnected). */
+        PWM_OPEN_DRAIN, /**< Like PWM, except that instead of alternating
+                           cycles of LOW and HIGH, the voltage on the pin
+                           consists of alternating cycles of LOW and
+                           floating (disconnected). */
 } WiringPinMode;
 
 /**
@@ -110,7 +109,7 @@ typedef enum WiringPinMode {
 void pinMode(uint8 pin, WiringPinMode mode);
 
 #define HIGH 0x1
-#define LOW  0x0
+#define LOW 0x0
 
 /**
  * Writes a (digital) value to a pin.  The pin must have its
@@ -132,6 +131,12 @@ void digitalWrite(uint8 pin, uint8 value);
  */
 uint32 digitalRead(uint8 pin);
 
+void togglePin(uint8 pin);
+
+uint8 isButtonPressed(uint8 pin, uint32 pressedLevel);
+
+uint8 waitForButtonPress(uint8 pin, uint32 pressedLevel, uint32 timeout);
+
 /**
  * Read an analog value from pin.  This function blocks during ADC
  * conversion, and has 12 bits of resolution.  The pin must have its
@@ -143,6 +148,10 @@ uint32 digitalRead(uint8 pin);
  * @see pinMode()
  */
 uint16 analogRead(uint8 pin);
+
+float internalVoltage();
+
+float internalTemperature();
 
 /**
  * Shift out a byte of data, one bit at a time.
@@ -160,6 +169,6 @@ uint16 analogRead(uint8 pin);
  */
 void shiftOut(uint8 dataPin, uint8 clockPin, uint8 bitOrder, uint8 value);
 
-uint32 shiftIn( uint32 ulDataPin, uint32 ulClockPin, uint32 ulBitOrder );
+uint32 shiftIn(uint32 ulDataPin, uint32 ulClockPin, uint32 ulBitOrder);
 
 #endif

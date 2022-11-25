@@ -25,25 +25,28 @@
  *****************************************************************************/
 
 /**
- * @file core/maple/stm32f1/wirish_debug.cpp
  * @brief High level debug port configuration
  */
 
 #include <wirish_debug.h>
 #include <libmaple/gpio.h>
 
-void disableDebugPorts(void) {
+void disableDebugPorts(void)
+{
     afio_cfg_debug_ports(AFIO_DEBUG_NONE);
 }
 
-void enableSWD(void) {
+void enableSWD(void)
+{
     afio_cfg_debug_ports(AFIO_DEBUG_SW_ONLY);
 }
 
-void enableSWDJTAGnoNJRST(void) {
+void enableSWDJTAGnoJNRST(void)
+{
     afio_cfg_debug_ports(AFIO_DEBUG_FULL_SWJ_NO_NJRST);
 }
 
-void enableFullSWDJTAG(void) {
+void enableFullSWDJTAG(void)
+{
     afio_cfg_debug_ports(AFIO_DEBUG_FULL_SWJ);
 }

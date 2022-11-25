@@ -34,12 +34,12 @@
 #include <libmaple/rcc.h>
 #include <libmaple/bitband.h>
 
-static inline __IO uint32* data_register(uint8 reg);
+static inline __IO uint32 *data_register(uint8 reg);
 
 bkp_dev bkp = {
     .regs = BKP_BASE,
 };
-/** Backup device. */
+// Backup device
 const bkp_dev *BKP = &bkp;
 
 /**
@@ -48,9 +48,9 @@ const bkp_dev *BKP = &bkp;
  * Enables the power and backup interface clocks, and resets the
  * backup device.
  */
-void bkp_init(void) {
-    /* Don't call pwr_init(), or you'll reset the device.  We just
-     * need the clock. */
+void bkp_init(void)
+{
+    // Don't call pwr_init(), or you'll reset the device. We just need the clock
     rcc_clk_enable(RCC_PWR);
     rcc_clk_enable(RCC_BKP);
     rcc_reset_dev(RCC_BKP);
@@ -61,14 +61,16 @@ void bkp_init(void) {
  * be initialized for subsequent register writes to work.
  * @see bkp_init()
  */
-void bkp_enable_writes(void) {
+void bkp_enable_writes(void)
+{
     *bb_perip(&PWR_BASE->CR, PWR_CR_DBP_BIT) = 1;
 }
 
 /**
  * Disable write access to the backup registers.
  */
-void bkp_disable_writes(void) {
+void bkp_disable_writes(void)
+{
     *bb_perip(&PWR_BASE->CR, PWR_CR_DBP_BIT) = 0;
 }
 
@@ -77,10 +79,12 @@ void bkp_disable_writes(void) {
  * @param reg Data register to read, from 1 to BKP_NR_DATA_REGS (10 on
  *            medium-density devices, 42 on high-density devices).
  */
-uint16 bkp_read(uint8 reg) {
-    __IO uint32* dr = data_register(reg);
-    if (!dr) {
-        ASSERT(0);                  /* nonexistent register */
+uint16 bkp_read(uint8 reg)
+{
+    __IO uint32 *dr = data_register(reg);
+    if (!dr)
+    {
+        ASSERT(0); // nonexistent register
         return 0;
     }
     return (uint16)*dr;
@@ -96,10 +100,12 @@ uint16 bkp_read(uint8 reg) {
  * @param val Value to write into the register.
  * @see bkp_enable_writes()
  */
-void bkp_write(uint8 reg, uint16 val) {
-    __IO uint32* dr = data_register(reg);
-    if (!dr) {
-        ASSERT(0);                  /* nonexistent register */
+void bkp_write(uint8 reg, uint16 val)
+{
+    __IO uint32 *dr = data_register(reg);
+    if (!dr)
+    {
+        ASSERT(0); // nonexistent register
         return;
     }
     *dr = (uint32)val;
@@ -112,18 +118,23 @@ void bkp_write(uint8 reg, uint16 val) {
  */
 #define NR_LOW_DRS 10
 
-static inline __IO uint32* data_register(uint8 reg) {
-    if (reg < 1 || reg > BKP_NR_DATA_REGS) {
+static inline __IO uint32 *data_register(uint8 reg)
+{
+    if (reg < 1 || reg > BKP_NR_DATA_REGS)
+    {
         return 0;
     }
 
 #if BKP_NR_DATA_REGS == NR_LOW_DRS
-    return (uint32*)BKP_BASE + reg;
+    return (uint32 *)BKP_BASE + reg;
 #else
-    if (reg <= NR_LOW_DRS) {
-        return (uint32*)BKP_BASE + reg;
-    } else {
-        return (uint32*)&(BKP_BASE->DR11) + (reg - NR_LOW_DRS - 1);
+    if (reg <= NR_LOW_DRS)
+    {
+        return (uint32 *)BKP_BASE + reg;
+    }
+    else
+    {
+        return (uint32 *)&(BKP_BASE->DR11) + (reg - NR_LOW_DRS - 1);
     }
 #endif
 }
